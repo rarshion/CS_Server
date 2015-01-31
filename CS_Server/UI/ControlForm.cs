@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Diagnostics;
-using System.Media;
 using System.IO;
-
+using System.Net.Sockets;
+using System.Threading;
+using System.Windows.Forms;
 using CS_Server.Net;
 
 namespace CS_Server
 {
 
-    public partial class controlClientForm : Form
+    public partial class ControlForm : Form
     {
+        private CommunicateToClient communicateArmClient;
+        private CommunicateToClient videoClient;
+        private CommunicateToClient photoClient;
+        private CommunicateToClient heartClient;
+
         private CommunicateToClient communicateToClient;
 
         public int resolution { get; set; } //像素大小 1-6
@@ -29,13 +24,13 @@ namespace CS_Server
         public int light { get; set; } //亮度
         public int constrast { get; set; } //对比度
         public int quanlity { get; set; } //质量
-        //public int lightfrequency { get; set; }//光线频率
         public int capturemod { get; set; }//拍摄模式:0.单次抓拍 1.定时拍摄
         public int caphour { get; set; } //定时拍摄中的时间间隔小时
         public int capmin { get; set; }  //定时拍摄中的时间间隔分钟
 
 
         private ClientPoint m_clientPoint;
+        private ArmClient armClient;
 
         private bool m_isBusy = false; //判断此刻，是否在进行socket通信
         private bool m_isVideoing = false; //判断此刻，是否在进程拍照
@@ -45,7 +40,6 @@ namespace CS_Server
         private VideoNameBuff m_h264FileBuff = null;
         private VideoNameBuff m_mp4FileBuff = null;
 
-
         Bitmap srcBitmap;
         int rot = 0;  //
         private Point m_StarPoint = Point.Empty;        //for 拖动
@@ -54,14 +48,21 @@ namespace CS_Server
         Bitmap bmp;
         Point oldpoint;
 
-        public controlClientForm()
+        public ControlForm()
         {
             InitializeComponent();
             this.capture_panel.Visible = true;
             this.vedio_panel.Visible = false;
         }
 
-        public controlClientForm(ClientPoint cp)
+        public ControlForm(ArmClient client)
+        {
+            InitializeComponent();
+            armClient = client;
+            communicateArmClient = new CommunicateToClient(armClient);
+        }
+
+        public ControlForm(ClientPoint cp)
         {
             InitializeComponent();
 
@@ -79,7 +80,6 @@ namespace CS_Server
         private void controlClientForm_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false;
-
         }
 
         private void controlClientForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -285,13 +285,11 @@ namespace CS_Server
                 return;
             }
 
-
             //if (m_clientPoint.loseConnect)
             //{
             //    MessageBox.Show("连接中断,请取消对该客户端的操作");
             //    return;
             //}
-
 
             bt_stop_video.Enabled = true;
 
@@ -300,18 +298,15 @@ namespace CS_Server
             this.vedio_panel.Visible = true;
             this.capture_panel.Visible = true;
 
-
-            vedioAttribute vedio_attr = new vedioAttribute(this); //获取设定的照片属性
-
-            if (vedio_attr.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-                return; //取消拍照
-
+            //vedioAttribute vedio_attr = new vedioAttribute(this); //获取设定的照片属性
+            //if (vedio_attr.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+               // return; //取消拍照
 
             m_isBusy = true;
             m_isVideoing = true;
-
-           // ThreadPool.QueueUserWorkItem(new WaitCallback(videoing), null);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(videoing), null);
         }
+
 
 
         private void videoing(object o)
@@ -320,13 +315,18 @@ namespace CS_Server
             string fileName;
             bool flag = false;
 
+            int value = -1;
+            int[] config = null;
+            string errno = String.Empty;
+            bool state = true;
 
-            if (m_h264FileBuff == null)
-                m_h264FileBuff = new VideoNameBuff();
+            communicateArmClient.Operate(OPERATE.MODIFY_STATE, DEVICE.VEDIO, ref state, ref value, ref config, ref errno);
 
-            m_isTransformH264 = true;
+            //if (m_h264FileBuff == null)
+            //    m_h264FileBuff = new VideoNameBuff();
+            //m_isTransformH264 = true;
+            //ThreadPool.QueueUserWorkItem(new WaitCallback(transFromH264ToMp4), null);
 
-            ThreadPool.QueueUserWorkItem(new WaitCallback(transFromH264ToMp4), null);
 
             try
             {
@@ -334,32 +334,30 @@ namespace CS_Server
                 {
                     DateTime dt = DateTime.Now;
 
-                    //String path = System.Windows.Forms.Application.StartupPath; //获取当前执行文件的文件目录
-                  //  Console.WriteLine(path);
+                    String path = System.Windows.Forms.Application.StartupPath; //获取当前执行文件的文件目录
+                    Console.WriteLine(path);
+
                     fileName = "video\\";
-                    
                     fileName += "video_";
                     fileName += dt.Year.ToString() + "-";
                     fileName += dt.Month.ToString() + "-";
                     fileName += dt.Day.ToString() + "_";
-
                     fileName += dt.Hour.ToString() + "-";
                     fileName += dt.Minute.ToString() + "-";
                     fileName += dt.Second.ToString() + "--";
-
-                  //  fileName += dt.Millisecond.ToString() + ".bmp";
                     fileName += dt.Millisecond.ToString() + ".264";
 
                     //m_comToClient 会自动加上10
                     int[] videoAttr = {-10, resolution, whiteBalance, light, constrast, saturation };
 
-                    flag = communicateToClient.getVideo(fileName, videoAttr);
+                    flag = communicateArmClient.getVideo(fileName, videoAttr);
 
+                    //flag = communicateToClient.getVideo(fileName, videoAttr);
                     //flag 为 false时表明接收图片失败。
-                    if (flag)
-                    {
-                        m_h264FileBuff.pushFileName(fileName);
-                    }
+                    //if (flag)
+                    //{
+                    //    m_h264FileBuff.pushFileName(fileName);
+                    //}
                 }
 
                 communicateToClient.stopVideo();

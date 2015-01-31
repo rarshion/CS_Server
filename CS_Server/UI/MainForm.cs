@@ -37,8 +37,7 @@ namespace CS_Server
         Thread m_checkOnlineThread = null;
 
         List<ClientPoint> clients = new List<ClientPoint>();
-        Dictionary<string, DevicePoint> deviceDictonary = new Dictionary<string, DevicePoint>();
-           
+        Dictionary<string, ArmClient> armClientDictionary = new Dictionary<string, ArmClient>();
         readonly static object _sync = new object(); //用于同步
         readonly static object listSync = new object(); //用于对List容器进行操作时的同步
 
@@ -48,7 +47,6 @@ namespace CS_Server
         public MainForm()
         {
             InitializeComponent();
-  
         }
        
         private DialogResult Show(string op)
@@ -62,7 +60,6 @@ namespace CS_Server
             //保证可以多个线程访问控件
             //不然，在调试的时候会出现异常： 线程间操作无效: 从不是创建控件XXX的线程访问它
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
-            Console.WriteLine("间隔分");
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -77,6 +74,7 @@ namespace CS_Server
             }
         }
 
+        #region 开始接收连接
         private void bt_recv_conn_Click(object sender, EventArgs e)
         {
             if (controlAccept)
@@ -87,8 +85,6 @@ namespace CS_Server
 
             int maxRecvNum;
             string str = this.maxclientn.Value.ToString();
-            Console.WriteLine(str);
-
             if (str == "" || str.Trim() == "")
             {
                 MessageBox.Show("请输入最大允许连接数");
@@ -105,23 +101,22 @@ namespace CS_Server
                 return;
             }
 
-            controlServer = new ServerSocket(8989, maxRecvNum);
+            controlServer = new ServerSocket(8888, maxRecvNum);
             controlListenning = true; 
             controlAccept = true;
 
-            videoServer = new ServerSocket(8990, maxRecvNum);
+            videoServer = new ServerSocket(8889, maxRecvNum);
             videoListenning = true;
             videoAccept = true;
 
-            photoServer = new ServerSocket(8993, maxRecvNum);
+            photoServer = new ServerSocket(8890, maxRecvNum);
             photoListenning = true;
             photoAccept = true;
 
-            heartServer = new ServerSocket(8992, maxRecvNum);
+            heartServer = new ServerSocket(8891, maxRecvNum);
             heartListenning = true;
             heartAccept = true;
             
-
             controlThread = new Thread(startControlAccept);
             controlThread.IsBackground = true;
             controlThread.Start();
@@ -138,22 +133,21 @@ namespace CS_Server
             heartThread.IsBackground = true;
             heartThread.Start();
 
-
             m_checkOnlineThread = new Thread(onlineCheck);
             m_checkOnlineThread.IsBackground = true;
             m_checkOnlineThread.Start();
         }
+        #endregion 开始接收连接
 
-
+        #region 接受客户端连接
         private void startControlAccept()
         {
-
             while (controlListenning)
             {
                 Console.WriteLine("StartControlAccept");
                 Socket controlClient = controlServer.Accept(); //在等待时，可能会被强制终止
                 Console.WriteLine("控制客户端IP地址:"+controlClient.RemoteEndPoint);
-                addClient(controlClient,1); 
+                AddSocket(controlClient,1); 
             }
         }
 
@@ -165,7 +159,7 @@ namespace CS_Server
                 Console.WriteLine("StartVideoAccept");
                 Socket videoClient = videoServer.Accept(); //在等待时，可能会被强制终止
                 Console.WriteLine("视频客户端IP地址:" + videoClient.RemoteEndPoint);
-                addClient(videoClient,2); //向容器添加一个客户端
+                AddSocket(videoClient,2); //向容器添加一个客户端
             }
         }
 
@@ -177,7 +171,7 @@ namespace CS_Server
                 Console.WriteLine("StartPhotoAccept");
                 Socket photoClient = photoServer.Accept(); //在等待时，可能会被强制终止
                 Console.WriteLine("图像客户端IP地址:" + photoClient.RemoteEndPoint);
-                addClient(photoClient,3);
+                AddSocket(photoClient,3);
             }
         }
 
@@ -188,44 +182,42 @@ namespace CS_Server
                 Console.WriteLine("StartHeartAccept");
                 Socket heartClient = heartServer.Accept(); //在等待时，可能会被强制终止
                 Console.WriteLine("心跳客户端IP地址:" + heartClient.RemoteEndPoint);
-                addClient(heartClient,4);
+                AddSocket(heartClient,4);
             }
         }
+        #endregion 接受客户端连接
 
-
-        public void addClient(Socket client,int flag)
+        #region 添加客户端连接
+        /// <summary>
+        /// 添加Socket
+        /// </summary>
+        /// <param name="socket">接收到的Socket</param>
+        /// <param name="flag">该Socket类型</param>
+        public void AddSocket(Socket socket,int flag)
         {
-            FindDevicePointByIp(client, flag, ref deviceDictonary);
-            if (!HasValDevice())
+            ArmClient armClient = null;
+            TcpPort tempPort = new TcpPort(socket);
+            InstallClientPort(tempPort, flag, ref armClientDictionary);
+
+            if (!(HasValDevice(out armClient)))
                 return;
-            
 
+            if (armClient != null)
+            {
+                Console.WriteLine("ARM客户端开始接收数据");
+                TcpPort comPort = armClient.ControlPort;
+                byte[] location = new byte[200];
+                comPort.Receive(location);
+                armClient.Location = Encoding.ASCII.GetString(location);
+                Console.WriteLine("ARM客户端地址为:" + armClient.Location);
 
-
-            ClientPoint one_client = new ClientPoint();
-            byte[] localtion = new byte[200];
-            TcpPort tempClient = new TcpPort(client);
-            tempClient.Receive(localtion); //获取客户端发送来的地址信息
-            one_client.client = (Socket)client;
-            one_client.localtion = Encoding.ASCII.GetString(localtion);
-
-
-
-            //ClientPoint one_client = new ClientPoint();
-            //byte[] localtion = new byte[200];
-            //ClientSocket tempClient = new ClientSocket(client);
-            //tempClient.Receive(localtion); //获取客户端发送来的地址信息
-            //one_client.client = (Socket)client;
-            //one_client.localtion = Encoding.ASCII.GetString(localtion);
-
-
-            //byte[] data = Encoding.ASCII.GetBytes("Welcome to server");
-            //tempClient.Send(data, Kind.message);
-            //one_client.isChecking = false; //不是出于被检查在线 状态
-            //one_client.isUsing = false;//还没被使用
-            //one_client.lastAccessTime = DateTime.Now;
-            //one_client.loseConnect = false; 
-
+                byte[] data = Encoding.ASCII.GetBytes("Welcome to server");
+                comPort.Send(data, Kind.message);
+                armClient.IsChecking = false;
+                armClient.IsUsing = false;
+                armClient.LastAccessTime = DateTime.Now;
+                armClient.IsLoseConnect = false;
+            }
 
             //lock (_sync)
             //{
@@ -252,74 +244,102 @@ namespace CS_Server
             //    }
             //}
         }
+        #endregion 添加客户端连接
 
-        public bool FindDevicePointByIp(Socket client, int flag, ref Dictionary<string, DevicePoint> deviceDictonary)
+        #region 添加端口
+        /// <summary>
+        /// 添加客户端Tcp端口
+        /// </summary>
+        /// <param name="port">tcp端口</param>
+        /// <param name="flag">端口标志<1.控制 2.视频 3.图像 4.心跳></param>
+        /// <param name="deviceDictonary">客户端字典</param>
+        /// <returns></returns>
+        public bool InstallClientPort(TcpPort port, int flag, ref Dictionary<string, ArmClient> deviceDictonary)
         {
-            IPEndPoint remoteEndPoint = (IPEndPoint)client.RemoteEndPoint;
+            IPEndPoint remoteEndPoint = (IPEndPoint)port.PortSocket.RemoteEndPoint;
             IPAddress   ipaddress = IPAddress.Parse(remoteEndPoint.Address.ToString());
             string ip = ipaddress.ToString();
 
             lock (syncLock)
             {
-                DevicePoint device = null;
+                ArmClient device = null;
                 if (!deviceDictonary.TryGetValue(ip, out device))
                 {
-                    device = new DevicePoint(ip);
+                    device = new ArmClient(ip);
                     deviceDictonary.Add(ip, device);
                 }
                 if (flag == 1)
-                    device.ControlSocket = client;
+                    device.ControlPort = port;
                 else if (flag == 2)
-                    device.VideoSocket = client;
+                    device.VideoPort = port;
                 else if (flag == 3)
-                    device.PhotoSocket = client;
+                    device.PhotoPort = port;
                 else
-                    device.HeartSocket = client;
+                    device.HeartPort = port;
             }
+
             return true;
         }
+        #endregion 添加端口
 
-        public bool HasValDevice()
+        #region 查找合法的客户端
+        /// <summary>
+        /// 在字典中寻找一个合法的客户端
+        /// </summary>
+        /// <param name="armClient"></param>
+        /// <returns></returns>
+        public bool HasValDevice(out ArmClient armClient)
         {
             lock (listSync)
             {
-                foreach (var item in deviceDictonary)
+                foreach (var item in armClientDictionary)
                 {
                     Console.WriteLine(item.Key);
-                    DevicePoint dev = item.Value;
+                    ArmClient dev = item.Value;
                     if (IsValDevice(dev))
                     {
-                        Console.WriteLine("这是一个有效的设备");
+                        Console.WriteLine("找到一个有效的设备");
+                        armClient =dev;
                         return true;
                     }
                 }
             }
+            armClient = null;
             return false;
         }
+        #endregion 查找合法的客户端
 
-
-        public bool IsValDevice(DevicePoint device)
+        #region 检查客户端合法
+        /// <summary>
+        /// 判断该客户端是否为合法（具有四个端口)
+        /// </summary>
+        /// <param name="device">客户端</param>
+        /// <returns>armClient</returns>
+        public bool IsValDevice(ArmClient device)
         {
             if (device == null)
                 return false;
 
-            if (device.ControlSocket != null && device.VideoSocket != null
-                && device.PhotoSocket != null && device.HeartSocket != null)
+            if (device.ControlPort != null && device.VideoPort != null
+                && device.PhotoPort != null && device.HeartPort != null)
             {
-                Console.WriteLine("全都有了");
+                Console.WriteLine("端口齐全");
                 return true;
             }
             else
                 return false;
         }
+        #endregion  检查客户端合法
 
-        public  bool AddSocketClientToDevice(Socket client,int flag,ref DevicePoint device)
-        {
+        #region 添加客户端
 
 
-            return true;
-        }
+        #endregion 添加客户端
 
+
+        #region 移除客户端
+
+        #endregion 移除客户端
 
 
         public void ShowClientsinGrid(ClientPoint one_client)
@@ -349,17 +369,17 @@ namespace CS_Server
 
         private void stop()
         {
-            if (!controlAccept) //还没开始连接
-                return;
+            //if (!controlAccept) //还没开始连接
+            //    return;
 
-            if (!videoAccept)
-                return;
+            //if (!videoAccept)
+            //    return;
 
-            if (!photoAccept)
-                return;
+            //if (!photoAccept)
+            //    return;
 
-            if (!heartAccept)
-                return;
+            //if (!heartAccept)
+            //    return;
 
             lock (_sync)
             {
@@ -478,66 +498,80 @@ namespace CS_Server
         private void cb_SelectedIndexChanged(object sender, EventArgs e)
         {   
             int index = cb.SelectedIndex;
-
             string local = (string)cb.Items[index];
             int i = 0;
+            bool flag = false;
 
-            ClientPoint client = null;
+            ArmClient armClient = null;
             lock (listSync)
             {
-                for (i= 0; i < clients.Count; ++i)
+                foreach (var item in armClientDictionary)
                 {
-                    if (local.Equals(clients[i].localtion))
+                    ArmClient client = item.Value;
+                    if (local.Equals(client.Location))
                     {
+                        client.IsUsing = true;
+                        armClient = client;
+                        flag = true;
                         break;
                     }
                 }
-
-                if (i >= clients.Count)
-                    return;
-
-               client = clients[i];
-               client.isUsing = true;
-
             }
 
-            if (client.loseConnect)
-            {
-                MessageBox.Show("服务器已经和该客户端失去连接");
-                client.isUsing = false;
+            if (!flag)
                 return;
-            }
 
             Thread thread = new Thread(controlClient);
             thread.SetApartmentState(ApartmentState.STA);
-            thread.Start(client);
+            thread.Start(armClient);
+
+            //ClientPoint client = null;
+            //lock (listSync)
+            //{
+            //    for (i= 0; i < clients.Count; ++i)
+            //    {
+            //        if (local.Equals(clients[i].localtion))
+            //        {
+            //            break;
+            //        }
+            //    }
+
+            //    if (i >= clients.Count)
+            //        return;
+
+            //   client = clients[i];
+            //   client.isUsing = true;
+            //}
+
+            //if (client.loseConnect)
+            //{
+            //    MessageBox.Show("服务器已经和该客户端失去连接");
+            //    client.isUsing = false;
+            //    return;
+            //}
+
+            //Thread thread = new Thread(controlClient);
+            //thread.SetApartmentState(ApartmentState.STA);
+            //thread.Start(client);
             
-
-
-            /*
-            int index = cb.SelectedIndex;
-
-            if (index < 0 || index >= clients.Count) //越界
-                return;
-
-            Thread thread = new Thread(controlClient);
-
-            //不能使用下标的形式。因为有些节点可能正在处于进行在线检查。
-            thread.Start(clients[index]);
-             */
         }
+
+
 
         private void controlClient(Object client)
         {
-            ClientPoint clientPort = (ClientPoint)client;
-            controlClientForm form = new controlClientForm(clientPort);
-            Application.Run(form);
+            //ClientPoint clientPort = (ClientPoint)client;
+            //ControlForm form = new ControlForm(clientPort);
+            //Application.Run(form);
+            //if (clientPort.loseConnect) //已经和客户端失去了连接
+            //{
+            //    clients.Remove(clientPort);
+            //    lb_conn_num.Text = "" + clients.Count; //更新连接数
+            //}
 
-            if (clientPort.loseConnect) //已经和客户端失去了连接
-            {
-                clients.Remove(clientPort);
-                lb_conn_num.Text = "" + clients.Count; //更新连接数
-            }
+            ArmClient armClient = (ArmClient)client;
+            ControlForm form = new ControlForm(armClient);
+            Application.Run(form);
         }
 
 
@@ -547,20 +581,26 @@ namespace CS_Server
 
             lock (listSync)
             {
-                foreach (ClientPoint client in clients)
+                foreach (var item in armClientDictionary)
                 {
-                    //没有处于被检查状态，才可以看得见。因为处于被检查时，并不能对其进行操作
-                    //另外失去了联系的话，也是不是看见
-                    //为了防止不小心进行了操作，干脆就不显示其
-                    if( !client.isChecking)
-                        cb.Items.Add(client.localtion);
+                    ArmClient client = item.Value;
+                    if (!client.IsChecking)
+                        cb.Items.Add(client.Location);
                 }
+                //foreach (ClientPoint client in clients)
+                //{
+                //    //没有处于被检查状态，才可以看得见。因为处于被检查时，并不能对其进行操作
+                //    //另外失去了联系的话，也是不是看见
+                //    //为了防止不小心进行了操作，干脆就不显示其
+                //    if( !client.isChecking)
+                //        cb.Items.Add(client.localtion);
+                //}
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            controlClientForm form = new controlClientForm();
+            ControlForm form = new ControlForm();
             form.Show();
         }
     }

@@ -11,7 +11,7 @@ using System.Media;// axWindowsMediaPlayer1
 namespace CS_Server.Net
 {
 
-    enum Command //控制客户端的命令
+    public enum Command //控制客户端的命令
     {
         heart = 0,
 		stop,
@@ -23,7 +23,7 @@ namespace CS_Server.Net
         changeFilter
     };
 
-    enum Kind //服务器发送到客户端的信息种类。向客户端发送消息前都要添加在信息头部
+    public enum Kind //服务器发送到客户端的信息种类。向客户端发送消息前都要添加在信息头部
     {
         command = 0, //命令
         message = 1  //一些信息
@@ -32,17 +32,25 @@ namespace CS_Server.Net
     /// <summary>
     /// 服务器端每接收到一个客户端的请求后，就启动一个线程，该线程创建本对象，然后对客户端进行操作
     /// </summary>
-    class CommunicateToClient
+    public class CommunicateToClient
     {
-        private TcpPort m_client;
-        private byte[] additionalInformation; //附加信息。向客户端发送命令或者信息时，可能要添加一些附加信息
+
+        private TcpPort clientPort;
+        private ArmClient armClient;
+        private byte[] additionalInformation;
         private const bool hasAdditionalInformation = true;
         private const bool noAdditionalInformation = false;
 
         private static int RECVSIZE = 1024 * 20;
+
         public CommunicateToClient(Socket client)
         {
-            m_client = new TcpPort(client);
+            clientPort = new TcpPort(client);
+        }
+
+        public CommunicateToClient(ArmClient client)
+        {
+            armClient = client;
         }
 
         #region 发送信息
@@ -63,11 +71,11 @@ namespace CS_Server.Net
                 message = new byte[b.Length + additionalInformation.Length];
                 Array.Copy(b, 0, message, 0, b.Length);
                 Array.Copy(additionalInformation, 0, message, b.Length, additionalInformation.Length);
-                m_client.Send(message, Kind.command);
+                clientPort.Send(message, Kind.command);
             }
             else
             {
-                m_client.Send(b, Kind.command); //将命令发送到客户端
+                clientPort.Send(b, Kind.command); //将命令发送到客户端
             }
         }
         #endregion 发送信息
@@ -98,14 +106,14 @@ namespace CS_Server.Net
 
             Prepare(Command.sendImage, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
 
-            recv_num = m_client.Receive(data); //先接收发送的图片的大小。
+            recv_num = clientPort.Receive(data); //先接收发送的图片的大小。
             long fileSize = Transform.bytes2long(data, recv_num);
 
             long recvSize = 0;
             while ( fileSize != 0 )
             {
                 //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
-                recv_num = m_client.Receive(data);
+                recv_num = clientPort.Receive(data);
                 if (recv_num == 0) //接收到了客户端发来的发送完毕标志。
                     break;
 
@@ -120,50 +128,61 @@ namespace CS_Server.Net
         }
         #endregion 图片
 
+
+
+
         #region 视频
         public bool getVideo(string fileName, int[] videoAttribute)
         {
             Console.WriteLine("start getvideo\n");
 
             FileStream output = File.Create(fileName);
-
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int recv_num;
 
-            additionalInformation = new byte[videoAttribute.Length];
+            //additionalInformation = new byte[videoAttribute.Length];
+            //int i;
+            //for (i = 0; i < videoAttribute.Length; ++i)
+            //{
+            //    //因为这些值的有负值。但网络上传输负数比较麻烦，所以+=10变成正数再去传
+            //    //到时在客户端，control程序那里-=10，获得原始值
+            //    videoAttribute[i] += 10;
+            //    Console.WriteLine("getVideo"+videoAttribute[i]);
+            //    //将照片的属性(整型)转换为byte类型。并依次放到附加信息数组中去。
+            //    Array.Copy(Transform.parseMinInt(videoAttribute[i]), 0,
+            //               additionalInformation, i, 1);
+            //}
 
-            int i;
-            for (i = 0; i < videoAttribute.Length; ++i)
+            //Prepare(Command.video, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
+            //recv_num = clientPort.Receive(data); //先接收发送的图片的大小。
+
+            recv_num = armClient.VideoPort.Receive(data); //先接收发送的图片的大小。
+            if (recv_num > 0)
             {
-                //因为这些值的有负值。但网络上传输负数比较麻烦，所以+=10变成正数再去传
-                //到时在客户端，control程序那里-=10，获得原始值
-                videoAttribute[i] += 10;
-                Console.WriteLine("getVideo"+videoAttribute[i]);
-                //将照片的属性(整型)转换为byte类型。并依次放到附加信息数组中去。
-                Array.Copy(Transform.parseMinInt(videoAttribute[i]), 0,
-                           additionalInformation, i, 1);
+                Console.WriteLine("接收到" + recv_num);
+                 output.Write(data, 0, recv_num);//写文件
             }
 
-            Prepare(Command.video, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
 
-            recv_num = m_client.Receive(data); //先接收发送的图片的大小。
-            long fileSize = Transform.bytes2long(data, recv_num);
-            long recvSize = 0;
+            //long fileSize = Transform.bytes2long(data, recv_num);
 
-            while (fileSize != 0 )
-            {
-                //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
-                recv_num = m_client.Receive(data);
-                if (recv_num == 0) //接收到了客户端发来的发送完毕标志。
-                    break;
+            //long recvSize = 0;
+            //while (fileSize != 0 )
+            //{
+            //    //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
+            //    recv_num = armClient.VideoPort.Receive(data);
+            //    if (recv_num == 0) //接收到了客户端发来的发送完毕标志。
+            //        break;
+            //    Console.WriteLine("接收到" + recv_num);
+            //    recvSize += recv_num;
+            //    output.Write(data, 0, recv_num);//写文件
+            //}
 
-                recvSize += recv_num;
-                output.Write(data, 0, recv_num);//写文件
-            }
             output.Close();
+            return true;
 
             //可能客户端没有发送数据，或者由于网络不好，客户端取消了发送
-            return fileSize != 0 && fileSize == recvSize;
+           // return fileSize != 0 && fileSize == recvSize;
         }
         #endregion 视频
 
@@ -190,14 +209,14 @@ namespace CS_Server.Net
 
             Prepare(Command.timerPicture, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
 
-            recv_num = m_client.Receive(data); //先接收发送的图片的大小。
+            recv_num = clientPort.Receive(data); //先接收发送的图片的大小。
             long fileSize = Transform.bytes2long(data, recv_num);
 
             long recvSize = 0;
             while (fileSize != 0)
             {
                 //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
-                recv_num = m_client.Receive(data);
+                recv_num = clientPort.Receive(data);
                 if (recv_num == 0) //接收到了客户端发来的发送完毕标志。
                     break;
 
@@ -219,7 +238,7 @@ namespace CS_Server.Net
             byte[] data = new byte[100];
             //接收到的水分值是一些字符值。比如73，是由'7'和'3'。对应的ASCII码是
             //55， 51。所以，接收水分和温度时，不能再用Transform 来解析。而是用Encoding类
-            int recv_num = m_client.Receive(data);
+            int recv_num = clientPort.Receive(data);
             String val = Encoding.ASCII.GetString(data);
           //  int val = Transform.parseByte(data); //把字节转换为整型
             return val;
@@ -238,9 +257,9 @@ namespace CS_Server.Net
 
             byte[] data = new byte[100];
                 
-            m_client.receiveTimeout(waitTime); //接收一个数据。waitTime秒的最长等待时间。
-            int recv_num = m_client.Receive(data);
-            m_client.receiveTimeout(0); //复原
+            clientPort.receiveTimeout(waitTime); //接收一个数据。waitTime秒的最长等待时间。
+            int recv_num = clientPort.Receive(data);
+            clientPort.receiveTimeout(0); //复原
 
             String val = Encoding.ASCII.GetString(data);
             return val;
@@ -257,9 +276,9 @@ namespace CS_Server.Net
             Array.Copy(Transform.parseMinInt(choice), 0,
                     additionalInformation, 0, 1);
             Prepare(Command.changeFilter, hasAdditionalInformation);
-            m_client.receiveTimeout(waitTime); //接收一个数据。waitTime秒的最长等待时间。
-            recv_num = m_client.Receive(data);
-            m_client.receiveTimeout(0); //复原
+            clientPort.receiveTimeout(waitTime); //接收一个数据。waitTime秒的最长等待时间。
+            recv_num = clientPort.Receive(data);
+            clientPort.receiveTimeout(0); //复原
             if (recv_num > 0)
                 val = Encoding.ASCII.GetString(data);
             else
@@ -281,10 +300,10 @@ namespace CS_Server.Net
             {
                 Prepare(Command.heart, noAdditionalInformation);
                 byte[] data = new byte[100];
-                canRead = m_client.poll(second);
+                canRead = clientPort.poll(second);
                 if (canRead)
                 {
-                    int recv_num = m_client.Receive(data); //接收数据，也就是清空数据
+                    int recv_num = clientPort.Receive(data); //接收数据，也就是清空数据
                     Console.WriteLine("---------心跳检查接收到的数据 "
                         + Encoding.ASCII.GetString(data));
                 }
@@ -307,7 +326,7 @@ namespace CS_Server.Net
             Prepare(Command.video, hasAdditionalInformation);
 
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
-            int num = m_client.Receive(data);
+            int num = clientPort.Receive(data);
         }
 
         public void stopTimePicture()
@@ -319,20 +338,20 @@ namespace CS_Server.Net
             Prepare(Command.timerPicture, hasAdditionalInformation);
 
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
-            int num = m_client.Receive(data);
+            int num = clientPort.Receive(data);
         }
 
         public int SendAndAcceptMsg(RequestFormat request, ref string erro, out ResponseFormat response)
         {
             //将Socket请求信息request进行编码，发送到指定的ip地址的指定端口上，对返回的响应信息进行解码成Socket响应信息response
-
             response = new ResponseFormat();
             byte[] requestMsg;
-
             int ret = SockMsgFormat.EnRequest(request, out requestMsg);//对请求消息进行编码
+            if (requestMsg != null)
+                armClient.ControlPort.Send(requestMsg);
 
-            if(requestMsg != null)
-                m_client.Send(requestMsg);
+            //if(requestMsg != null)
+            //    clientPort.Send(requestMsg);
 
             //if (ret <= 0)
             //{

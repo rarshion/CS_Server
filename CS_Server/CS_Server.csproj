@@ -53,15 +53,15 @@
   <ItemGroup>
     <Compile Include="Net\TcpPort.cs" />
     <Compile Include="Net\CommunicateToClient.cs" />
-    <Compile Include="Net\DevicePoint.cs" />
+    <Compile Include="Net\ArmClient.cs" />
     <Compile Include="Net\SockMsgFormat.cs" />
-    <Compile Include="UI\controlClientForm.cs">
+    <Compile Include="UI\ControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\controlClientForm.Designer.cs">
-      <DependentUpon>controlClientForm.cs</DependentUpon>
+    <Compile Include="UI\ControlForm.Designer.cs">
+      <DependentUpon>ControlForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Net\DealwithSocketException.cs" />
+    <Compile Include="Net\Exception\DealwithSocketException.cs" />
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,8 +85,8 @@
       <DependentUpon>vedioAttribute.cs</DependentUpon>
     </Compile>
     <Compile Include="VideoNameBuff.cs" />
-    <EmbeddedResource Include="UI\controlClientForm.resx">
-      <DependentUpon>controlClientForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\ControlForm.resx">
+      <DependentUpon>ControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

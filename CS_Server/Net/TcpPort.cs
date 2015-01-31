@@ -8,29 +8,44 @@ using System.Windows.Forms;
 
 namespace CS_Server.Net
 {
-    class TcpPort
+    public class TcpPort
     {
-        private Socket m_client;
-        const int LENFLAG = 2;
 
-        public TcpPort(Socket client)
+        #region 1.变量属性
+
+        private Socket portSocket;
+        private const int LENFLAG = 2;
+
+        public Socket PortSocket
         {
-            m_client = client;
+            get { return portSocket; }
+            set { portSocket = value; }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="second">要等待的秒数</param>
-        /// <returns></returns>
+        #endregion 1.变量属性
+
+        #region 2.构造方法
+        public TcpPort(Socket socket)
+        {
+            portSocket = socket;
+        }
+        #endregion 2.构造方法
+
+
+        #region 3.私有方法
+
+        #endregion 3.私有方法
+
+
+
         public bool poll(int second)
         {
-            return m_client.Poll(second * 1000, SelectMode.SelectRead);
+            return portSocket.Poll(second * 1000, SelectMode.SelectRead);
         }
 
-        public void shutdown()
+        public void Close()
         {
-            m_client.Shutdown(SocketShutdown.Both);
+            portSocket.Shutdown(SocketShutdown.Both);
         }
 
         /// <summary>
@@ -43,7 +58,7 @@ namespace CS_Server.Net
             if (second < 0)
                 second = -1;
 
-            m_client.ReceiveTimeout = second ;
+            portSocket.ReceiveTimeout = second ;
         }
 
         /// <summary>
@@ -66,7 +81,7 @@ namespace CS_Server.Net
                 try
                 {
                     //位移增加
-                    recv_num = m_client.Receive(data, total, data_left, SocketFlags.None);
+                    recv_num = portSocket.Receive(data, total, data_left, SocketFlags.None);
                 }
                 catch (SocketException ex)
                 {
@@ -118,6 +133,7 @@ namespace CS_Server.Net
 
             Receive(temp, 2);//接收前面表示长度的两个字节
             int size = Transform.parseByte(temp);//得到本次要接收的字节数。
+            Console.WriteLine("在TcpPort接收的长度" + size);
 
             if (size == 0) //已经发送完毕了，本次接收到的两个字节是结束标志. 发送图片时的特殊标志
                 return 0;
@@ -135,7 +151,7 @@ namespace CS_Server.Net
             int send_num;
             while (total < size)
             {
-                send_num = m_client.Send(data, total, data_left, SocketFlags.None);
+                send_num = portSocket.Send(data, total, data_left, SocketFlags.None);
                 total += send_num;
                 data_left -= send_num;
             }
@@ -159,7 +175,7 @@ namespace CS_Server.Net
 
             while (total < size)
             {
-                send_num = m_client.Send(data, total, data_left, SocketFlags.None);
+                send_num = portSocket.Send(data, total, data_left, SocketFlags.None);
 
                 total += send_num;
                 data_left -= send_num;
@@ -225,16 +241,12 @@ namespace CS_Server.Net
             //返回的数组，最前面的两个字节是本数据的长度(不包括最前面的两个字节).然后是类型。最后才是真正的数据
             int x = (int)kind;
             byte[] temp1 = parseMinInt(x);
-
             int len = data.Length + 1;
             byte[] temp2 = parseInt(len);
-
             byte[] message = new byte[len + 2]; //存储最后要发送的数据
-
             Array.Copy(temp2, 0, message, 0, temp2.Length);
             Array.Copy(temp1, 0, message, temp2.Length, temp1.Length);
             Array.Copy(data, 0, message, temp1.Length + temp2.Length, data.Length);
-
             return message;
         }
 
@@ -253,13 +265,11 @@ namespace CS_Server.Net
         public static long bytes2long(byte[] data, int length)
         {
             long size = 0;
-
             for (int i = 0; i < length; ++i)
             {
                 int val = (int)(data[i] - '0');
                 size = size * 10 + val;
             }
-
             return size;
         }
 

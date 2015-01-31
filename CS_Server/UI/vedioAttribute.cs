@@ -11,9 +11,9 @@ namespace CS_Server
 {
     public partial class vedioAttribute : Form
     {
-        controlClientForm father;
+        ControlForm father;
 
-        public vedioAttribute(controlClientForm f)
+        public vedioAttribute(ControlForm f)
         {
             father = f;
             InitializeComponent();

@@ -12,9 +12,9 @@ namespace CS_Server
 {
     public partial class photoAttribute : Office2007Form
     {
-        controlClientForm father;
+        ControlForm father;
         int capturemode;
-        public photoAttribute(controlClientForm f,int cMod)
+        public photoAttribute(ControlForm f,int cMod)
         {       
             father = f;
             capturemode = cMod;

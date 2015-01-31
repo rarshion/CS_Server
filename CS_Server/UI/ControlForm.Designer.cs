@@ -1,6 +1,6 @@
 ﻿namespace CS_Server
 {
-    partial class controlClientForm
+    partial class ControlForm
     {
         /// <summary>
         /// Required designer variable.
