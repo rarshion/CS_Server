@@ -8,8 +8,9 @@ using System.IO;
 using System.Windows.Forms;
 using System.Media;// axWindowsMediaPlayer1
 
-namespace CS_Server
+namespace CS_Server.Net
 {
+
     enum Command //控制客户端的命令
     {
         heart = 0,
@@ -33,7 +34,7 @@ namespace CS_Server
     /// </summary>
     class CommunicateToClient
     {
-        private ClientSocket m_client;
+        private TcpPort m_client;
         private byte[] additionalInformation; //附加信息。向客户端发送命令或者信息时，可能要添加一些附加信息
         private const bool hasAdditionalInformation = true;
         private const bool noAdditionalInformation = false;
@@ -41,7 +42,7 @@ namespace CS_Server
         private static int RECVSIZE = 1024 * 20;
         public CommunicateToClient(Socket client)
         {
-            m_client = new ClientSocket(client);
+            m_client = new TcpPort(client);
         }
 
         #region 发送信息
@@ -319,6 +320,314 @@ namespace CS_Server
 
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int num = m_client.Receive(data);
+        }
+
+        public int SendAndAcceptMsg(RequestFormat request, ref string erro, out ResponseFormat response)
+        {
+            //将Socket请求信息request进行编码，发送到指定的ip地址的指定端口上，对返回的响应信息进行解码成Socket响应信息response
+
+            response = new ResponseFormat();
+            byte[] requestMsg;
+
+            int ret = SockMsgFormat.EnRequest(request, out requestMsg);//对请求消息进行编码
+
+            if(requestMsg != null)
+                m_client.Send(requestMsg);
+
+            //if (ret <= 0)
+            //{
+            //    erro += "编码出错" + ret.ToString();
+            //    return ret;
+            //}
+            //IPAddress ipadr;
+            //int port;
+            //Socket lst;
+            //IPEndPoint iped;
+            //byte[] responseMsg = new byte[200];
+            //int responseSize;
+            //try
+            //{
+            //    ipadr = IPAddress.Parse("192.168.0.115");//ip地址
+            //    port = 2312;//端口号
+            //    iped = new IPEndPoint(ipadr, port);
+            //    lst = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //}
+            //catch (Exception e)
+            //{
+            //    erro += e.Message + '0';
+            //    return 0;
+            //}
+
+            //try
+            //{
+            //    lst.Connect(iped);
+            //}
+            //catch (Exception e)
+            //{
+            //    erro += e.Message + '1';
+            //    return 1;
+            //}
+
+            //try
+            //{
+            //    lst.Send(requestMsg);//发送请求消息
+            //}
+            //catch (Exception e)
+            //{
+            //    erro += e.Message + '2';
+            //    return 2;
+            //}
+
+            //try
+            //{
+            //    responseSize = lst.Receive(responseMsg);//接受响应消息
+            //}
+            //catch (Exception e)
+            //{
+            //    erro += e.Message + '3';
+            //    return 3;
+            //}
+
+            //ret = SockMsgFormat.DeResponse(responseMsg, responseSize, out response);//对响应消息进行解码
+            //try
+            //{
+            //    lst.Shutdown(SocketShutdown.Both);
+            //    lst.Close();
+            //}
+            //catch (Exception e)
+            //{
+            //    erro += e.Message + '4';
+            //    return 4;
+            //}
+            //if (ret != 0)
+            //{
+            //    erro += "解码出错" + ret.ToString() + "!5";
+            //    return 5;
+            //}
+
+
+            return -1;//成功
+
+        }
+
+
+        //对相关设备进行相关操作
+        public  bool Operate(OPERATE Operate, DEVICE Device, ref bool State, ref int Value, ref int[] Config, ref string erro)
+        {
+            RequestFormat request = new RequestFormat();//将请求封装成Socket请求信息
+
+            int value = Value;//用于暂时存放参数Value值，Value值即可能是传进参数又可能是传出参数
+            bool state = State;//用于暂时存放参数State值，State值即可能是传进参数又可能是传出参数
+            int[] config = Config;//用于暂时存放参数Config值，Config值即可能是传进参数又可能是传出参数
+            Config = null;
+            int j;
+            request.FunCode = (byte)((int)Operate);
+            request.Device = (byte)((int)Device);
+
+            switch (Operate)//根据操作，用相应的参数对request进行封装
+            {
+                case OPERATE.MODIFY_STATE://该操作为更改开关状态操作，参数State表示请求打开还是关闭
+                    {
+                        if (Device == DEVICE.DOOR || Device == DEVICE.COOKER || Device == DEVICE.AIRCONDITION || Device == DEVICE.HUMIDIFIER || Device == DEVICE.VEDIO)
+                        {
+                            request.State = state;
+                            request.Value = value;
+                        }
+                        else
+                        {
+                            erro += "你选择的设备不能进行更改开关状态操作！";
+                            return false;
+                        }
+                        break;
+                    }
+
+                case OPERATE.QUERY_PARAM://该操作为查询操作，根据Value来判断，如何Value为0说明是查状态，如何Value为1说明是查参数，如何Value为2说明是查配置信息
+                    {
+                        request.Value = value;//需要做出是否合理的判断
+                        break;
+                    }
+
+                case OPERATE.ADJUST_PARAM://该操作为调节参数操作
+                    {
+                        if (Device == DEVICE.AIRCONDITION)//调节空调操作，参数为State
+                        {
+                            if (state == true)
+                                request.Value = 1;
+                            else
+                                request.Value = -1;
+                        }
+                        else
+                        {
+                            if (Device == DEVICE.HUMIDIFIER || Device == DEVICE.ROBOT || Device == DEVICE.VEDIO)//调节加湿器或机器人管家操作，参数为State
+                                request.Value = value;
+                            else
+                            {
+                                erro += "你选择的设备不能进行调节参数操作！";
+                                return false;
+                            }
+                        }
+                        break;
+                    }
+
+                case OPERATE.CONFIG_PARAM://该操作为配置操作
+                    {
+                        if (config == null)
+                        {
+                            erro += "配置操作时，传入参数出错！";
+                            return false;
+                        }
+                        if (Device == DEVICE.ALL)//全局配置
+                        {
+                            if (config.Length != 5)//全局配置时，传入参数只有一个
+                            {
+                                erro += "全局配置时，传入参数出错！";
+                                return false;
+                            }
+                            else
+                            {
+                                request.Config = new int[config.Length + 1];
+                                request.Config[0] = config.Length;
+                                j = 1;
+                                foreach (int i in config)
+                                {
+                                    request.Config[j] = i;
+                                    j++;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (Device == DEVICE.AIRCONDITION || Device == DEVICE.HUMIDIFIER || Device == DEVICE.ROBOT)//空调或加湿器或机器人管家配置
+                            {
+                                if (config.Length != 1)//单一配置时，传入参数只有一个
+                                {
+                                    erro += "空调或加湿器或机器人管家配置时，传入参数出错！";
+                                    return false;
+                                }
+                                else
+                                    request.Value = config[0];
+                            }
+                            else
+                            {
+                                erro += "你选择的设备不能进行配置操作！";
+                                return false;
+                            }
+                        }
+                        break;
+                    }
+
+                default:
+                    {
+                        erro += "选择的操作有误！";
+                        return false;
+                    }
+            }
+
+            ResponseFormat response;//Socket响应信息用于接受响应消息
+            int ret = SendAndAcceptMsg(request, ref erro, out response);//发送请求消息和接受响应消息
+            if (ret != -1 && ret != 4)
+            {
+                erro += "Socket传输错误！";
+                return false;//出错
+            }
+
+            return true;
+
+            //if (response.IsSucceed == true)//该操作成功
+            //{
+            //    erro = Encoding.ASCII.GetString(response.Info);
+            //    switch (Operate)
+            //    {
+            //        case OPERATE.MODIFY_STATE://该操作为更改开关状态操作
+            //            {
+            //                if (Device == DEVICE.AIRCONDITION || Device == DEVICE.HUMIDIFIER)
+            //                    Value = response.Value;
+            //                return true;
+            //            }
+            //        case OPERATE.QUERY_PARAM://该操作为查询参数操作
+            //            {
+            //                if (value == 0)//查询状态
+            //                {
+            //                    if (response.Value == 1)
+            //                        State = true;
+            //                    else
+            //                        State = false;
+            //                    return true;
+            //                }
+            //                else
+            //                {
+            //                    if (value == 1)//查询参数
+            //                    {
+            //                        Value = response.Value;
+            //                        return true;
+            //                    }
+            //                    else
+            //                    {
+
+            //                        if (value == 2)//参数配置信息
+            //                        {
+            //                            if (Device == DEVICE.ALL)//查询全局配置信息操作
+            //                            {
+            //                                if (response.Config == null || response.Config[0] != 5)//全局查询配置时，返回值有8个
+            //                                {
+            //                                    erro += "全局查询配置信息时，返回值有误！";
+            //                                    return false;
+            //                                }
+            //                                else
+            //                                {
+            //                                    Config = new int[5];
+            //                                    j = 0;
+            //                                    for (int i = 1; i < 6; i++)
+            //                                    {
+            //                                        Config[j] = response.Config[i];
+            //                                        j++;
+            //                                    }
+            //                                    return true;
+            //                                }
+            //                            }
+            //                            else
+            //                            {
+            //                                Config = new int[1];
+            //                                Config[0] = response.Value;
+            //                                return true;
+            //                            }
+            //                        }
+            //                        else
+            //                        {
+            //                            erro += "查询操作时，传出的Value标志有误！";
+            //                            return false;
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        case OPERATE.ADJUST_PARAM://该操作为调节参数操作
+            //            {
+            //                Value = response.Value;
+            //                return true;
+            //            }
+            //        case OPERATE.CONFIG_PARAM://该操作为配置操作
+            //            {
+            //                return true;
+            //            }
+            //        default:
+            //            {
+            //                erro += "!@#$%^&*()";
+            //                return false;
+            //            }
+            //    }
+            //}
+            //else
+            //{//该操不成功
+            //    if (response.Info == null)
+            //    {
+            //        erro += "板子崩毁！";
+            //    }
+            //    else
+            //    {
+            //        erro = Encoding.ASCII.GetString(response.Info);
+            //    }
+            //    return false;
+            //}
         }
 
     }

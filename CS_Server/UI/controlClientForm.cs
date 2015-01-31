@@ -12,15 +12,16 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
 using System.Media;
-using System.IO;// axWindowsMediaPlayer1
+using System.IO;
 
+using CS_Server.Net;
 
 namespace CS_Server
 {
 
     public partial class controlClientForm : Form
     {
-        private CommunicateToClient m_comToClient;
+        private CommunicateToClient communicateToClient;
 
         public int resolution { get; set; } //像素大小 1-6
         public int whiteBalance { get; set; } //白平衡
@@ -28,7 +29,7 @@ namespace CS_Server
         public int light { get; set; } //亮度
         public int constrast { get; set; } //对比度
         public int quanlity { get; set; } //质量
-        public int lightfrequency { get; set; }//光线频率
+        //public int lightfrequency { get; set; }//光线频率
         public int capturemod { get; set; }//拍摄模式:0.单次抓拍 1.定时拍摄
         public int caphour { get; set; } //定时拍摄中的时间间隔小时
         public int capmin { get; set; }  //定时拍摄中的时间间隔分钟
@@ -65,7 +66,7 @@ namespace CS_Server
             InitializeComponent();
 
             m_clientPoint = cp;
-            m_comToClient = new CommunicateToClient(cp.client);
+            communicateToClient = new CommunicateToClient(cp.client);
 
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);  //应添加到窗体然后再设置picturebox焦点
             this.Focus();
@@ -117,7 +118,7 @@ namespace CS_Server
             String val = null;
             try
             {
-                val = m_comToClient.getWater();
+                val = communicateToClient.getWater();
             }
             catch (SocketException ex)
             {
@@ -165,7 +166,7 @@ namespace CS_Server
             String val = null;
             try
             {
-                val = m_comToClient.getTemp(6); //设置一个60秒的最长等待时间
+                val = communicateToClient.getTemp(6); //设置一个60秒的最长等待时间
             }
             catch (SocketException ex)
             {
@@ -242,7 +243,7 @@ namespace CS_Server
 
             try
             {
-                flag = m_comToClient.getPicture(fileName, pictureAttribute);
+                flag = communicateToClient.getPicture(fileName, pictureAttribute);
             }
             catch (SocketException ex)
             {
@@ -352,7 +353,7 @@ namespace CS_Server
                     //m_comToClient 会自动加上10
                     int[] videoAttr = {-10, resolution, whiteBalance, light, constrast, saturation };
 
-                    flag = m_comToClient.getVideo(fileName, videoAttr);
+                    flag = communicateToClient.getVideo(fileName, videoAttr);
 
                     //flag 为 false时表明接收图片失败。
                     if (flag)
@@ -361,7 +362,7 @@ namespace CS_Server
                     }
                 }
 
-                m_comToClient.stopVideo();
+                communicateToClient.stopVideo();
                 bt_stop_video.Visible = false; //不可见
             }
             catch (SocketException ex)
@@ -440,7 +441,6 @@ namespace CS_Server
         }
 
 
-
         private void bt_stop_conn_Click(object sender, EventArgs e)
         {
             m_clientPoint.loseConnect = true;
@@ -454,7 +454,6 @@ namespace CS_Server
 
         }
 
-       
         #region 滚轮放大缩小
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -821,7 +820,7 @@ namespace CS_Server
 
                     bool flag = false;
 
-                    flag = m_comToClient.gettimePicture(fileName, pictureAttribute);
+                    flag = communicateToClient.gettimePicture(fileName, pictureAttribute);
 
                     //可能接收图片失败
                     if (flag)
@@ -842,7 +841,7 @@ namespace CS_Server
                     }
                 }
 
-                m_comToClient.stopTimePicture();
+                communicateToClient.stopTimePicture();
                 bt_stop_timecap.Visible = false; //不可见
             }
             catch (SocketException ex)
@@ -908,8 +907,18 @@ namespace CS_Server
         {
             string str = String.Empty;
             int choice = filter_trackBar.Value;
-            str =  m_comToClient.changeFilter(30, choice);
+            str =  communicateToClient.changeFilter(30, choice);
             MessageBox.Show(str);
+        }
+
+        private void test_button_Click(object sender, EventArgs e)
+        {
+            int value = -1;
+            int[] config = null;
+            bool state = false;
+            string errno = String.Empty;
+
+            communicateToClient.Operate(OPERATE.ADJUST_PARAM, DEVICE.VEDIO, ref state, ref value, ref config, ref errno);
         }
 
     }

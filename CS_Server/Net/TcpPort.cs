@@ -6,13 +6,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
 
-namespace CS_Server
+namespace CS_Server.Net
 {
-    class ClientSocket
+    class TcpPort
     {
         private Socket m_client;
+        const int LENFLAG = 2;
 
-        public ClientSocket(Socket client)
+        public TcpPort(Socket client)
         {
             m_client = client;
         }
@@ -125,6 +126,21 @@ namespace CS_Server
             return recv_num;
         }
 
+        public int Send(byte[] message)
+        {
+            byte[] data = Transform.addMsgLength(message);
+            int size = data.Length;
+            int total = 0;
+            int data_left = size;
+            int send_num;
+            while (total < size)
+            {
+                send_num = m_client.Send(data, total, data_left, SocketFlags.None);
+                total += send_num;
+                data_left -= send_num;
+            }
+            return total;
+        }
 
 
         /// <summary>
@@ -148,10 +164,8 @@ namespace CS_Server
                 total += send_num;
                 data_left -= send_num;
             }
-
             return total;
         }
-
     }
 
 
@@ -172,7 +186,6 @@ namespace CS_Server
             b[0] = (byte)k;
             return b;
         }
-
 
         /// <summary>
         /// 将一个比较大的整型转换为一个byte数组。并且规定整型的高位在数组的前面
@@ -222,10 +235,18 @@ namespace CS_Server
             Array.Copy(temp1, 0, message, temp2.Length, temp1.Length);
             Array.Copy(data, 0, message, temp1.Length + temp2.Length, data.Length);
 
-            
             return message;
         }
 
+        public static byte[] addMsgLength(byte[] data)
+        {
+            int allLen = data.Length + 2;//正文长度 +２字节的长度标识 = 整条信息长度
+            byte[] temp1 = parseInt(data.Length);//将整条信息长度转为byte数组
+            byte[] message = new byte[allLen]; //存储最后要发送的数据
+            Array.Copy(temp1, 0, message, 0, temp1.Length);
+            Array.Copy(data, 0, message, temp1.Length, data.Length);
+            return message;
+        }
 
         //这个方法只用于发送照片时，照片的大小转换。
         //客户端传来的数据是 高位在前。低位在后

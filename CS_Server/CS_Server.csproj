@@ -51,8 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Net\ClientSocket.cs" />
+    <Compile Include="Net\TcpPort.cs" />
     <Compile Include="Net\CommunicateToClient.cs" />
+    <Compile Include="Net\DevicePoint.cs" />
+    <Compile Include="Net\SockMsgFormat.cs" />
     <Compile Include="UI\controlClientForm.cs">
       <SubType>Form</SubType>
     </Compile>

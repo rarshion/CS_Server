@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 
 
-namespace CS_Server
+namespace CS_Server.Net
 {
     class DealwithSocketException
     {

@@ -82,10 +82,10 @@ namespace CS_Server
             string light = this.lightnessbar.Value.ToString();
             string constrast =this.contrastbar.Value.ToString();
             string quanlity = this.quanlitybar.Value.ToString();
-            string ligfrency = GetSelectLigFrenItem();
-       
-            //string[] str = { resolution, whiteBalance, light, constrast, saturation, quanlity };
-            string[] str = { resolution, whiteBalance, light, constrast, saturation, quanlity,ligfrency };
+            string[] str = { resolution, whiteBalance, light, constrast, saturation, quanlity };
+
+           //string ligfrency = GetSelectLigFrenItem();
+            //string[] str = { resolution, whiteBalance, light, constrast, saturation, quanlity,ligfrency };
 
             if (!check(str))
             {
@@ -114,11 +114,11 @@ namespace CS_Server
                 father.constrast = Int32.Parse(str[3]);
                 father.saturation = Int32.Parse(str[4]);
                 father.quanlity = Int32.Parse(str[5]);
-                father.lightfrequency = Int32.Parse(str[6]);
+               //father.lightfrequency = Int32.Parse(str[6]);
 
                 ok = true;
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("请输入整数");
             }
@@ -137,7 +137,6 @@ namespace CS_Server
             this.lightnessbar.Value = 0;
             this.contrastbar.Value = 0;
             this.saturationbar.Value = 0;
-
         }
 
         public void whilebalance_click(object sender, EventArgs e)

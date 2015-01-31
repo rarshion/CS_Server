@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace CS_Server
+namespace CS_Server.Net
 {
     //这个类负责进行socket通信
     class ServerSocket
@@ -16,7 +16,7 @@ namespace CS_Server
         private IPEndPoint m_ipe;
         private Socket m_server;
 
-        public ServerSocket(int port = 889, int listen = 10)
+        public ServerSocket(int port, int listen)
         {
             m_ipe = new IPEndPoint(IPAddress.Any, port);
             m_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

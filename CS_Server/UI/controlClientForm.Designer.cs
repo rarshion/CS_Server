@@ -55,14 +55,15 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.filter_button = new DevComponents.DotNetBar.ButtonX();
+            this.filter_trackBar = new System.Windows.Forms.TrackBar();
             this.buttonX5 = new DevComponents.DotNetBar.ButtonX();
             this.bt_stop_timecap = new DevComponents.DotNetBar.ButtonX();
             this.bt_start_timecap = new DevComponents.DotNetBar.ButtonX();
             this.bt_stop_video = new DevComponents.DotNetBar.ButtonX();
             this.bt_start_video = new DevComponents.DotNetBar.ButtonX();
             this.bt_photo = new DevComponents.DotNetBar.ButtonX();
-            this.filter_trackBar = new System.Windows.Forms.TrackBar();
-            this.filter_button = new DevComponents.DotNetBar.ButtonX();
+            this.test_button = new DevComponents.DotNetBar.ButtonX();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -320,6 +321,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.test_button);
             this.groupBox4.Controls.Add(this.filter_button);
             this.groupBox4.Controls.Add(this.filter_trackBar);
             this.groupBox4.Controls.Add(this.buttonX5);
@@ -335,6 +337,29 @@
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "数据采集";
+            // 
+            // filter_button
+            // 
+            this.filter_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.filter_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.filter_button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.filter_button.Location = new System.Drawing.Point(51, 384);
+            this.filter_button.Name = "filter_button";
+            this.filter_button.Size = new System.Drawing.Size(92, 34);
+            this.filter_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.filter_button.TabIndex = 29;
+            this.filter_button.Text = "滤光片转换";
+            this.filter_button.Click += new System.EventHandler(this.filter_button_Click);
+            // 
+            // filter_trackBar
+            // 
+            this.filter_trackBar.LargeChange = 1;
+            this.filter_trackBar.Location = new System.Drawing.Point(9, 333);
+            this.filter_trackBar.Maximum = 2;
+            this.filter_trackBar.Name = "filter_trackBar";
+            this.filter_trackBar.Size = new System.Drawing.Size(179, 45);
+            this.filter_trackBar.TabIndex = 1;
+            this.filter_trackBar.Tag = "0";
             // 
             // buttonX5
             // 
@@ -417,28 +442,18 @@
             this.bt_photo.Text = "单次图像采集";
             this.bt_photo.Click += new System.EventHandler(this.bt_photo_Click);
             // 
-            // filter_trackBar
+            // test_button
             // 
-            this.filter_trackBar.LargeChange = 1;
-            this.filter_trackBar.Location = new System.Drawing.Point(9, 333);
-            this.filter_trackBar.Maximum = 2;
-            this.filter_trackBar.Name = "filter_trackBar";
-            this.filter_trackBar.Size = new System.Drawing.Size(179, 45);
-            this.filter_trackBar.TabIndex = 1;
-            this.filter_trackBar.Tag = "0";
-            // 
-            // filter_button
-            // 
-            this.filter_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.filter_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.filter_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filter_button.Location = new System.Drawing.Point(51, 384);
-            this.filter_button.Name = "filter_button";
-            this.filter_button.Size = new System.Drawing.Size(92, 34);
-            this.filter_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.filter_button.TabIndex = 29;
-            this.filter_button.Text = "滤光片转换";
-            this.filter_button.Click += new System.EventHandler(this.filter_button_Click);
+            this.test_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.test_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.test_button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.test_button.Location = new System.Drawing.Point(51, 251);
+            this.test_button.Name = "test_button";
+            this.test_button.Size = new System.Drawing.Size(107, 36);
+            this.test_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.test_button.TabIndex = 30;
+            this.test_button.Text = "定时图像采集";
+            this.test_button.Click += new System.EventHandler(this.test_button_Click);
             // 
             // controlClientForm
             // 
@@ -509,5 +524,6 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TrackBar filter_trackBar;
         private DevComponents.DotNetBar.ButtonX filter_button;
+        private DevComponents.DotNetBar.ButtonX test_button;
     }
 }
