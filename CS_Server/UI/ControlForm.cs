@@ -339,17 +339,19 @@ namespace CS_Server
 
                     fileName = "video\\";
                     fileName += "video_";
-                    fileName += dt.Year.ToString() + "-";
-                    fileName += dt.Month.ToString() + "-";
-                    fileName += dt.Day.ToString() + "_";
-                    fileName += dt.Hour.ToString() + "-";
-                    fileName += dt.Minute.ToString() + "-";
-                    fileName += dt.Second.ToString() + "--";
-                    fileName += dt.Millisecond.ToString() + ".264";
+
+                    //fileName += dt.Year.ToString() + "-";
+                    //fileName += dt.Month.ToString() + "-";
+                    //fileName += dt.Day.ToString() + "_";
+                    //fileName += dt.Hour.ToString() + "-";
+                    //fileName += dt.Minute.ToString() + "-";
+                    //fileName += dt.Second.ToString() + "--";
+                    //fileName += dt.Millisecond.ToString() + ".264";
+
+                    fileName += ".264";
 
                     //m_comToClient 会自动加上10
                     int[] videoAttr = {-10, resolution, whiteBalance, light, constrast, saturation };
-
                     flag = communicateArmClient.getVideo(fileName, videoAttr);
 
                     //flag = communicateToClient.getVideo(fileName, videoAttr);
@@ -436,6 +438,13 @@ namespace CS_Server
         private void bt_stop_video_Click(object sender, EventArgs e)
         {
             m_isVideoing = false; //停止拍摄视频，停止那个线程
+
+            int value = -1;//这个用于单个属性
+            int[] config = null;//这个用于多个属性
+            string errno = String.Empty;
+            bool state = false;
+            communicateArmClient.Operate(OPERATE.MODIFY_STATE, DEVICE.VEDIO, ref state, ref value, ref config, ref errno);
+
         }
 
 
@@ -817,7 +826,6 @@ namespace CS_Server
                     Console.WriteLine(quanlity);
 
                     bool flag = false;
-
                     flag = communicateToClient.gettimePicture(fileName, pictureAttribute);
 
                     //可能接收图片失败
@@ -903,10 +911,11 @@ namespace CS_Server
 
         private void filtering(object o)
         {
-            string str = String.Empty;
-            int choice = filter_trackBar.Value;
-            str =  communicateToClient.changeFilter(30, choice);
-            MessageBox.Show(str);
+            int value = filter_trackBar.Value;
+            int[] config = null;
+            string errno = String.Empty;
+            bool state = true;
+            communicateArmClient.Operate(OPERATE.ADJUST_PARAM, DEVICE.FILTER, ref state, ref value, ref config, ref errno);
         }
 
         private void test_button_Click(object sender, EventArgs e)
@@ -915,7 +924,6 @@ namespace CS_Server
             int[] config = null;
             bool state = false;
             string errno = String.Empty;
-
             communicateToClient.Operate(OPERATE.ADJUST_PARAM, DEVICE.VEDIO, ref state, ref value, ref config, ref errno);
         }
 

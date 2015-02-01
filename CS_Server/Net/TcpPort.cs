@@ -80,7 +80,6 @@ namespace CS_Server.Net
             {
                 try
                 {
-                    //位移增加
                     recv_num = portSocket.Receive(data, total, data_left, SocketFlags.None);
                 }
                 catch (SocketException ex)
@@ -111,7 +110,6 @@ namespace CS_Server.Net
 
                     }
                 }
-
                 total += recv_num;
                 data_left -= recv_num;
             }
@@ -133,6 +131,7 @@ namespace CS_Server.Net
 
             Receive(temp, 2);//接收前面表示长度的两个字节
             int size = Transform.parseByte(temp);//得到本次要接收的字节数。
+
             Console.WriteLine("在TcpPort接收的长度" + size);
 
             if (size == 0) //已经发送完毕了，本次接收到的两个字节是结束标志. 发送图片时的特殊标志

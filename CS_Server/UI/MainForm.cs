@@ -195,28 +195,31 @@ namespace CS_Server
         /// <param name="flag">该Socket类型</param>
         public void AddSocket(Socket socket,int flag)
         {
-            ArmClient armClient = null;
-            TcpPort tempPort = new TcpPort(socket);
-            InstallClientPort(tempPort, flag, ref armClientDictionary);
-
-            if (!(HasValDevice(out armClient)))
-                return;
-
-            if (armClient != null)
+            lock (_sync)
             {
-                Console.WriteLine("ARM客户端开始接收数据");
-                TcpPort comPort = armClient.ControlPort;
-                byte[] location = new byte[200];
-                comPort.Receive(location);
-                armClient.Location = Encoding.ASCII.GetString(location);
-                Console.WriteLine("ARM客户端地址为:" + armClient.Location);
+                ArmClient armClient = null;
+                TcpPort tempPort = new TcpPort(socket);
+                InstallClientPort(tempPort, flag, ref armClientDictionary);
 
-                byte[] data = Encoding.ASCII.GetBytes("Welcome to server");
-                comPort.Send(data, Kind.message);
-                armClient.IsChecking = false;
-                armClient.IsUsing = false;
-                armClient.LastAccessTime = DateTime.Now;
-                armClient.IsLoseConnect = false;
+                if (!(HasValDevice(out armClient)))
+                    return;
+
+                if (armClient != null)
+                {
+                    Console.WriteLine("ARM客户端开始接收数据");
+                    TcpPort comPort = armClient.ControlPort;
+                    byte[] location = new byte[200];
+                    comPort.Receive(location);
+                    armClient.Location = Encoding.ASCII.GetString(location);
+                    Console.WriteLine("ARM客户端地址为:" + armClient.Location);
+
+                    byte[] data = Encoding.ASCII.GetBytes("Welcome to server");
+                    comPort.Send(data, Kind.message);
+                    armClient.IsChecking = false;
+                    armClient.IsUsing = false;
+                    armClient.LastAccessTime = DateTime.Now;
+                    armClient.IsLoseConnect = false;
+                }
             }
 
             //lock (_sync)
@@ -277,7 +280,6 @@ namespace CS_Server
                 else
                     device.HeartPort = port;
             }
-
             return true;
         }
         #endregion 添加端口
@@ -317,17 +319,20 @@ namespace CS_Server
         /// <returns>armClient</returns>
         public bool IsValDevice(ArmClient device)
         {
-            if (device == null)
-                return false;
-
-            if (device.ControlPort != null && device.VideoPort != null
-                && device.PhotoPort != null && device.HeartPort != null)
+            lock (syncLock)
             {
-                Console.WriteLine("端口齐全");
-                return true;
+                if (device == null)
+                    return false;
+
+                if (device.ControlPort != null && device.VideoPort != null
+                    && device.PhotoPort != null && device.HeartPort != null)
+                {
+                    Console.WriteLine("端口齐全");
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
-                return false;
         }
         #endregion  检查客户端合法
 
@@ -398,14 +403,14 @@ namespace CS_Server
 
             lock (listSync)
             {
-                disConn();
+                DisConnect();
             }
         }
 
         /// <summary>
         /// 断开所有的连接.
         /// </summary>
-        private void disConn()
+        private void DisConnect()
         {
             foreach (ClientPoint client in clients)
             {

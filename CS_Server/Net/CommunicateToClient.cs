@@ -40,8 +40,7 @@ namespace CS_Server.Net
         private byte[] additionalInformation;
         private const bool hasAdditionalInformation = true;
         private const bool noAdditionalInformation = false;
-
-        private static int RECVSIZE = 1024 * 20;
+        private static int RECVSIZE = 1024 * 20 * 5;//这里要申请大一点
 
         public CommunicateToClient(Socket client)
         {
@@ -128,15 +127,13 @@ namespace CS_Server.Net
         }
         #endregion 图片
 
-
-
-
         #region 视频
         public bool getVideo(string fileName, int[] videoAttribute)
         {
             Console.WriteLine("start getvideo\n");
 
-            FileStream output = File.Create(fileName);
+            FileStream output = File.Open(fileName,FileMode.Append);
+           // FileStream output = File.Create(fileName);
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int recv_num;
 
@@ -156,27 +153,29 @@ namespace CS_Server.Net
             //Prepare(Command.video, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
             //recv_num = clientPort.Receive(data); //先接收发送的图片的大小。
 
-            recv_num = armClient.VideoPort.Receive(data); //先接收发送的图片的大小。
-            if (recv_num > 0)
-            {
-                Console.WriteLine("接收到" + recv_num);
-                 output.Write(data, 0, recv_num);//写文件
-            }
-
-
-            //long fileSize = Transform.bytes2long(data, recv_num);
-
-            //long recvSize = 0;
-            //while (fileSize != 0 )
+            
+            //if (recv_num > 0)
             //{
-            //    //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
-            //    recv_num = armClient.VideoPort.Receive(data);
-            //    if (recv_num == 0) //接收到了客户端发来的发送完毕标志。
-            //        break;
             //    Console.WriteLine("接收到" + recv_num);
-            //    recvSize += recv_num;
-            //    output.Write(data, 0, recv_num);//写文件
+            //     output.Write(data, 0, recv_num);//写文件
             //}
+
+            recv_num = armClient.VideoPort.Receive(data); //先接收发送的图片的大小。
+            long fileSize = Transform.bytes2long(data, recv_num);
+            Console.WriteLine("需要接收的大小为" +fileSize);
+            long recvSize = 0;
+
+            while (fileSize != 0)
+            {
+                 //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
+                recv_num = armClient.VideoPort.Receive(data);
+                Console.WriteLine("接收到" + recv_num);
+                if (recv_num == 0) //接收到了客户端发来的发送完毕标志。
+                    break;
+                recvSize += recv_num;
+
+                output.Write(data, 0, recv_num);//写文件
+            }
 
             output.Close();
             return true;
@@ -345,13 +344,30 @@ namespace CS_Server.Net
         {
             //将Socket请求信息request进行编码，发送到指定的ip地址的指定端口上，对返回的响应信息进行解码成Socket响应信息response
             response = new ResponseFormat();
+            int ret;
+            int recvnum;
             byte[] requestMsg;
-            int ret = SockMsgFormat.EnRequest(request, out requestMsg);//对请求消息进行编码
+            byte[] responseMsg = new byte[200];
+
+            ret = SockMsgFormat.EnRequest(request, out requestMsg);//对请求消息进行编码
+
+            if (ret <= 0)
+            {
+                erro += "编码出错" + ret.ToString();
+                return ret;
+            }
+
             if (requestMsg != null)
                 armClient.ControlPort.Send(requestMsg);
 
-            //if(requestMsg != null)
-            //    clientPort.Send(requestMsg);
+            recvnum = armClient.ControlPort.Receive(responseMsg);
+            ret = SockMsgFormat.DeResponse(responseMsg, recvnum, out response);//对响应消息进行解码
+
+            if (ret != 0)
+            {
+                erro += "解码出错" + ret.ToString() + "!5";
+                return 5;
+            }
 
             //if (ret <= 0)
             //{
@@ -406,7 +422,6 @@ namespace CS_Server.Net
             //    erro += e.Message + '3';
             //    return 3;
             //}
-
             //ret = SockMsgFormat.DeResponse(responseMsg, responseSize, out response);//对响应消息进行解码
             //try
             //{
@@ -424,7 +439,6 @@ namespace CS_Server.Net
             //    return 5;
             //}
 
-
             return -1;//成功
 
         }
@@ -440,6 +454,7 @@ namespace CS_Server.Net
             int[] config = Config;//用于暂时存放参数Config值，Config值即可能是传进参数又可能是传出参数
             Config = null;
             int j;
+
             request.FunCode = (byte)((int)Operate);
             request.Device = (byte)((int)Device);
 
@@ -447,7 +462,7 @@ namespace CS_Server.Net
             {
                 case OPERATE.MODIFY_STATE://该操作为更改开关状态操作，参数State表示请求打开还是关闭
                     {
-                        if (Device == DEVICE.DOOR || Device == DEVICE.COOKER || Device == DEVICE.AIRCONDITION || Device == DEVICE.HUMIDIFIER || Device == DEVICE.VEDIO)
+                        if (Device == DEVICE.VEDIO)
                         {
                             request.State = state;
                             request.Value = value;
@@ -468,16 +483,16 @@ namespace CS_Server.Net
 
                 case OPERATE.ADJUST_PARAM://该操作为调节参数操作
                     {
-                        if (Device == DEVICE.AIRCONDITION)//调节空调操作，参数为State
+                        if (Device == DEVICE.FILTER)//调节空调操作，参数为State
                         {
                             if (state == true)
-                                request.Value = 1;
+                                request.Value = value;
                             else
                                 request.Value = -1;
                         }
                         else
                         {
-                            if (Device == DEVICE.HUMIDIFIER || Device == DEVICE.ROBOT || Device == DEVICE.VEDIO)//调节加湿器或机器人管家操作，参数为State
+                            if (Device == DEVICE.FILTER|| Device == DEVICE.VEDIO)//调节加湿器或机器人管家操作，参数为State
                                 request.Value = value;
                             else
                             {
@@ -516,7 +531,7 @@ namespace CS_Server.Net
                         }
                         else
                         {
-                            if (Device == DEVICE.AIRCONDITION || Device == DEVICE.HUMIDIFIER || Device == DEVICE.ROBOT)//空调或加湿器或机器人管家配置
+                            if (Device == DEVICE.VEDIO || Device == DEVICE.FILTER)//空调或加湿器或机器人管家配置
                             {
                                 if (config.Length != 1)//单一配置时，传入参数只有一个
                                 {
@@ -549,9 +564,14 @@ namespace CS_Server.Net
                 erro += "Socket传输错误！";
                 return false;//出错
             }
+            if (response.IsSucceed == true)
+            {
+                erro = Encoding.ASCII.GetString(response.Info);
+            }
+
+            erro = Encoding.ASCII.GetString(response.Info);
 
             return true;
-
             //if (response.IsSucceed == true)//该操作成功
             //{
             //    erro = Encoding.ASCII.GetString(response.Info);

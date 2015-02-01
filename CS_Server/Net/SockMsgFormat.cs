@@ -7,13 +7,8 @@ namespace CS_Server.Net
 {
         public enum DEVICE             //模拟设备
         {
-            ALL,                       //所有电器，针对配置操作
-            DOOR,                      //门
-            COOKER,                    //电饭锅
-            AIRCONDITION,              //空调
-            HUMIDIFIER,                //湿度调节器
+            ALL,                          //所有设备，针对配置操作
             VEDIO,                     //视频
-            ROBOT,                     //机器管家
             FILTER                     //滤片转换装置
         };
 
@@ -43,7 +38,6 @@ namespace CS_Server.Net
             public int InfoSize;        //Info数组的长度信息
             public int[] Config;
         }
-
 
         public class SockMsgFormat
         {
@@ -103,7 +97,6 @@ namespace CS_Server.Net
                 {
                     MsgFormat[i] = (byte)(MsgFormat[i] & (byte)0);
                 }
-
 
                 MsgFormat[0] = (byte)(MsgFormat[0] | (byte)(funCode << 5));
                 MsgFormat[0] = (byte)(MsgFormat[0] | (byte)(deviceCode << 1));

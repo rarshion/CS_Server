@@ -55,6 +55,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.test_button = new DevComponents.DotNetBar.ButtonX();
             this.filter_button = new DevComponents.DotNetBar.ButtonX();
             this.filter_trackBar = new System.Windows.Forms.TrackBar();
             this.buttonX5 = new DevComponents.DotNetBar.ButtonX();
@@ -63,7 +64,6 @@
             this.bt_stop_video = new DevComponents.DotNetBar.ButtonX();
             this.bt_start_video = new DevComponents.DotNetBar.ButtonX();
             this.bt_photo = new DevComponents.DotNetBar.ButtonX();
-            this.test_button = new DevComponents.DotNetBar.ButtonX();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -95,16 +95,16 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(664, 476);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(785, 509);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.tableLayoutPanel2);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Location = new System.Drawing.Point(217, 3);
+            this.groupBox5.Location = new System.Drawing.Point(255, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(444, 470);
+            this.groupBox5.Size = new System.Drawing.Size(527, 503);
             this.groupBox5.TabIndex = 14;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "采集的图像数据";
@@ -122,7 +122,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.94736F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.05263F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(438, 450);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(521, 483);
             this.tableLayoutPanel2.TabIndex = 29;
             // 
             // groupBox6
@@ -136,9 +136,9 @@
             this.groupBox6.Controls.Add(this.textBox1);
             this.groupBox6.Controls.Add(this.label1);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox6.Location = new System.Drawing.Point(3, 358);
+            this.groupBox6.Location = new System.Drawing.Point(3, 384);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(432, 89);
+            this.groupBox6.Size = new System.Drawing.Size(515, 96);
             this.groupBox6.TabIndex = 20;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "存储";
@@ -218,7 +218,7 @@
             this.capture_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.capture_panel.Location = new System.Drawing.Point(3, 3);
             this.capture_panel.Name = "capture_panel";
-            this.capture_panel.Size = new System.Drawing.Size(432, 349);
+            this.capture_panel.Size = new System.Drawing.Size(515, 375);
             this.capture_panel.TabIndex = 18;
             // 
             // panel1
@@ -228,7 +228,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(432, 313);
+            this.panel1.Size = new System.Drawing.Size(515, 339);
             this.panel1.TabIndex = 15;
             // 
             // vedio_panel
@@ -238,7 +238,7 @@
             this.vedio_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vedio_panel.Location = new System.Drawing.Point(0, 0);
             this.vedio_panel.Name = "vedio_panel";
-            this.vedio_panel.Size = new System.Drawing.Size(432, 313);
+            this.vedio_panel.Size = new System.Drawing.Size(515, 339);
             this.vedio_panel.TabIndex = 17;
             // 
             // axMediaPlayer1
@@ -246,7 +246,7 @@
             this.axMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.axMediaPlayer1.Location = new System.Drawing.Point(0, 0);
             this.axMediaPlayer1.Name = "axMediaPlayer1";
-            this.axMediaPlayer1.Size = new System.Drawing.Size(432, 313);
+            this.axMediaPlayer1.Size = new System.Drawing.Size(515, 339);
             this.axMediaPlayer1.TabIndex = 14;
             // 
             // pb
@@ -255,7 +255,7 @@
             this.pb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pb.Location = new System.Drawing.Point(0, 0);
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(432, 313);
+            this.pb.Size = new System.Drawing.Size(515, 339);
             this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb.TabIndex = 8;
             this.pb.TabStop = false;
@@ -268,9 +268,9 @@
             this.groupBox7.Controls.Add(this.button3);
             this.groupBox7.Controls.Add(this.button7);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox7.Location = new System.Drawing.Point(0, 313);
+            this.groupBox7.Location = new System.Drawing.Point(0, 339);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(432, 36);
+            this.groupBox7.Size = new System.Drawing.Size(515, 36);
             this.groupBox7.TabIndex = 16;
             this.groupBox7.TabStop = false;
             // 
@@ -333,114 +333,10 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(208, 470);
+            this.groupBox4.Size = new System.Drawing.Size(246, 503);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "数据采集";
-            // 
-            // filter_button
-            // 
-            this.filter_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.filter_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.filter_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filter_button.Location = new System.Drawing.Point(51, 384);
-            this.filter_button.Name = "filter_button";
-            this.filter_button.Size = new System.Drawing.Size(92, 34);
-            this.filter_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.filter_button.TabIndex = 29;
-            this.filter_button.Text = "滤光片转换";
-            this.filter_button.Click += new System.EventHandler(this.filter_button_Click);
-            // 
-            // filter_trackBar
-            // 
-            this.filter_trackBar.LargeChange = 1;
-            this.filter_trackBar.Location = new System.Drawing.Point(9, 333);
-            this.filter_trackBar.Maximum = 2;
-            this.filter_trackBar.Name = "filter_trackBar";
-            this.filter_trackBar.Size = new System.Drawing.Size(179, 45);
-            this.filter_trackBar.TabIndex = 1;
-            this.filter_trackBar.Tag = "0";
-            // 
-            // buttonX5
-            // 
-            this.buttonX5.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX5.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonX5.Enabled = false;
-            this.buttonX5.Location = new System.Drawing.Point(112, 58);
-            this.buttonX5.Name = "buttonX5";
-            this.buttonX5.Size = new System.Drawing.Size(92, 34);
-            this.buttonX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX5.TabIndex = 28;
-            this.buttonX5.Text = "终止任务";
-            this.buttonX5.Click += new System.EventHandler(this.bt_stop_conn_Click);
-            // 
-            // bt_stop_timecap
-            // 
-            this.bt_stop_timecap.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.bt_stop_timecap.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.bt_stop_timecap.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bt_stop_timecap.Enabled = false;
-            this.bt_stop_timecap.Location = new System.Drawing.Point(112, 152);
-            this.bt_stop_timecap.Name = "bt_stop_timecap";
-            this.bt_stop_timecap.Size = new System.Drawing.Size(92, 34);
-            this.bt_stop_timecap.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.bt_stop_timecap.TabIndex = 27;
-            this.bt_stop_timecap.Text = "结束定时采集";
-            this.bt_stop_timecap.Click += new System.EventHandler(this.stop_timecap_Click);
-            // 
-            // bt_start_timecap
-            // 
-            this.bt_start_timecap.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.bt_start_timecap.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.bt_start_timecap.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bt_start_timecap.Location = new System.Drawing.Point(1, 151);
-            this.bt_start_timecap.Name = "bt_start_timecap";
-            this.bt_start_timecap.Size = new System.Drawing.Size(107, 34);
-            this.bt_start_timecap.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.bt_start_timecap.TabIndex = 26;
-            this.bt_start_timecap.Text = "定时图像采集";
-            this.bt_start_timecap.Click += new System.EventHandler(this.time_capture_Click);
-            // 
-            // bt_stop_video
-            // 
-            this.bt_stop_video.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.bt_stop_video.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.bt_stop_video.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bt_stop_video.Enabled = false;
-            this.bt_stop_video.Location = new System.Drawing.Point(112, 101);
-            this.bt_stop_video.Name = "bt_stop_video";
-            this.bt_stop_video.Size = new System.Drawing.Size(92, 34);
-            this.bt_stop_video.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.bt_stop_video.TabIndex = 25;
-            this.bt_stop_video.Text = "结束视频采集";
-            this.bt_stop_video.Click += new System.EventHandler(this.bt_stop_video_Click);
-            // 
-            // bt_start_video
-            // 
-            this.bt_start_video.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.bt_start_video.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.bt_start_video.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bt_start_video.Location = new System.Drawing.Point(6, 101);
-            this.bt_start_video.Name = "bt_start_video";
-            this.bt_start_video.Size = new System.Drawing.Size(100, 34);
-            this.bt_start_video.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.bt_start_video.TabIndex = 24;
-            this.bt_start_video.Text = "开始视频采集";
-            this.bt_start_video.Click += new System.EventHandler(this.bt_video_Click);
-            // 
-            // bt_photo
-            // 
-            this.bt_photo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.bt_photo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.bt_photo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bt_photo.Location = new System.Drawing.Point(6, 57);
-            this.bt_photo.Name = "bt_photo";
-            this.bt_photo.Size = new System.Drawing.Size(100, 34);
-            this.bt_photo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.bt_photo.TabIndex = 23;
-            this.bt_photo.Text = "单次图像采集";
-            this.bt_photo.Click += new System.EventHandler(this.bt_photo_Click);
             // 
             // test_button
             // 
@@ -455,14 +351,118 @@
             this.test_button.Text = "定时图像采集";
             this.test_button.Click += new System.EventHandler(this.test_button_Click);
             // 
-            // controlClientForm
+            // filter_button
+            // 
+            this.filter_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.filter_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.filter_button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.filter_button.Location = new System.Drawing.Point(51, 406);
+            this.filter_button.Name = "filter_button";
+            this.filter_button.Size = new System.Drawing.Size(92, 34);
+            this.filter_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.filter_button.TabIndex = 29;
+            this.filter_button.Text = "滤光片转换";
+            this.filter_button.Click += new System.EventHandler(this.filter_button_Click);
+            // 
+            // filter_trackBar
+            // 
+            this.filter_trackBar.LargeChange = 1;
+            this.filter_trackBar.Location = new System.Drawing.Point(9, 355);
+            this.filter_trackBar.Maximum = 2;
+            this.filter_trackBar.Name = "filter_trackBar";
+            this.filter_trackBar.Size = new System.Drawing.Size(179, 45);
+            this.filter_trackBar.TabIndex = 1;
+            this.filter_trackBar.Tag = "0";
+            // 
+            // buttonX5
+            // 
+            this.buttonX5.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX5.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonX5.Enabled = false;
+            this.buttonX5.Location = new System.Drawing.Point(115, 36);
+            this.buttonX5.Name = "buttonX5";
+            this.buttonX5.Size = new System.Drawing.Size(92, 34);
+            this.buttonX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX5.TabIndex = 28;
+            this.buttonX5.Text = "终止任务";
+            this.buttonX5.Click += new System.EventHandler(this.bt_stop_conn_Click);
+            // 
+            // bt_stop_timecap
+            // 
+            this.bt_stop_timecap.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.bt_stop_timecap.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.bt_stop_timecap.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bt_stop_timecap.Enabled = false;
+            this.bt_stop_timecap.Location = new System.Drawing.Point(113, 136);
+            this.bt_stop_timecap.Name = "bt_stop_timecap";
+            this.bt_stop_timecap.Size = new System.Drawing.Size(92, 34);
+            this.bt_stop_timecap.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.bt_stop_timecap.TabIndex = 27;
+            this.bt_stop_timecap.Text = "结束定时采集";
+            this.bt_stop_timecap.Click += new System.EventHandler(this.stop_timecap_Click);
+            // 
+            // bt_start_timecap
+            // 
+            this.bt_start_timecap.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.bt_start_timecap.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.bt_start_timecap.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bt_start_timecap.Location = new System.Drawing.Point(2, 136);
+            this.bt_start_timecap.Name = "bt_start_timecap";
+            this.bt_start_timecap.Size = new System.Drawing.Size(107, 34);
+            this.bt_start_timecap.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.bt_start_timecap.TabIndex = 26;
+            this.bt_start_timecap.Text = "定时图像采集";
+            this.bt_start_timecap.Click += new System.EventHandler(this.time_capture_Click);
+            // 
+            // bt_stop_video
+            // 
+            this.bt_stop_video.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.bt_stop_video.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.bt_stop_video.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bt_stop_video.Enabled = false;
+            this.bt_stop_video.Location = new System.Drawing.Point(113, 85);
+            this.bt_stop_video.Name = "bt_stop_video";
+            this.bt_stop_video.Size = new System.Drawing.Size(92, 34);
+            this.bt_stop_video.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.bt_stop_video.TabIndex = 25;
+            this.bt_stop_video.Text = "结束视频采集";
+            this.bt_stop_video.Click += new System.EventHandler(this.bt_stop_video_Click);
+            // 
+            // bt_start_video
+            // 
+            this.bt_start_video.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.bt_start_video.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.bt_start_video.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bt_start_video.Location = new System.Drawing.Point(6, 85);
+            this.bt_start_video.Name = "bt_start_video";
+            this.bt_start_video.Size = new System.Drawing.Size(100, 34);
+            this.bt_start_video.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.bt_start_video.TabIndex = 24;
+            this.bt_start_video.Text = "开始视频采集";
+            this.bt_start_video.Click += new System.EventHandler(this.bt_video_Click);
+            // 
+            // bt_photo
+            // 
+            this.bt_photo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.bt_photo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.bt_photo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bt_photo.Location = new System.Drawing.Point(9, 36);
+            this.bt_photo.Name = "bt_photo";
+            this.bt_photo.Size = new System.Drawing.Size(100, 34);
+            this.bt_photo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.bt_photo.TabIndex = 23;
+            this.bt_photo.Text = "单次图像采集";
+            this.bt_photo.Click += new System.EventHandler(this.bt_photo_Click);
+            // 
+            // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 476);
+            this.ClientSize = new System.Drawing.Size(785, 509);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
-            this.Name = "controlClientForm";
+            this.Name = "ControlForm";
             this.Text = "基于ARM平台的多光谱图像采集系统";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.controlClientForm_FormClosing);
             this.Load += new System.EventHandler(this.controlClientForm_Load);
