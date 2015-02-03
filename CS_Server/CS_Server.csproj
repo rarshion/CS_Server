@@ -51,10 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Net\TcpPort.cs" />
-    <Compile Include="Net\CommunicateToClient.cs" />
-    <Compile Include="Net\ArmClient.cs" />
-    <Compile Include="Net\SockMsgFormat.cs" />
+    <Compile Include="Net\Model\TcpPort.cs" />
+    <Compile Include="Net\Control\CommunicateToClient.cs" />
+    <Compile Include="Net\Model\ArmClient.cs" />
+    <Compile Include="Net\Model\SockMsgFormat.cs" />
     <Compile Include="UI\ControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,7 +76,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Net\ServerSocket.cs" />
+    <Compile Include="Net\Model\ServerSocket.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="UI\vedioAttribute.cs">
       <SubType>Form</SubType>
@@ -170,6 +170,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\UserControls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

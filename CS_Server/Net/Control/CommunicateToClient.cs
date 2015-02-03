@@ -34,7 +34,6 @@ namespace CS_Server.Net
     /// </summary>
     public class CommunicateToClient
     {
-
         private TcpPort clientPort;
         private ArmClient armClient;
         private byte[] additionalInformation;
@@ -80,49 +79,39 @@ namespace CS_Server.Net
         #endregion 发送信息
 
         #region 图片
-        //在进行实际的数据传输前，必须先调用Prepare()方法，通知客户端接下来要做的
-        //调用完后，就可以开始接收数据或者发送数据了
-        //对于接收数据的方法，收到数据后，还要发送确认。发送数据的方法则不用
-        public bool getPicture(string fileName, int[] photoAttribute)
+        public bool GetPicture(string fileName, int[] photoAttribute)
         {
             FileStream output = File.Create(fileName);
-
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int recv_num;
-
             additionalInformation = new byte[photoAttribute.Length];
             
-            int i;
-            for(i = 0; i < photoAttribute.Length; ++i)
-            {
-				//因为这些值的有负值。但网络上传输负数比较麻烦，所以+=10变成正数再去传
-				//到时在客户端，control程序那里-=10，获得原始值
-				photoAttribute[i] += 10;
-                //将照片的属性(整型)转换为byte类型。并依次放到附加信息数组中去。
-                Array.Copy(Transform.parseMinInt(photoAttribute[i]), 0, 
-                           additionalInformation, i, 1);
-            }
+            //int i;
+            //for(i = 0; i < photoAttribute.Length; ++i)
+            //{
+            //    //因为这些值的有负值。但网络上传输负数比较麻烦，所以+=10变成正数再去传
+            //    //到时在客户端，control程序那里-=10，获得原始值
+            //    photoAttribute[i] += 10;
+            //    //将照片的属性(整型)转换为byte类型。并依次放到附加信息数组中去。
+            //    Array.Copy(Transform.parseMinInt(photoAttribute[i]), 0, 
+            //               additionalInformation, i, 1);
+            //}
+            //Prepare(Command.sendImage, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
+            //recv_num = clientPort.Receive(data); //先接收发送的图片的大小。
 
-            Prepare(Command.sendImage, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
-
-            recv_num = clientPort.Receive(data); //先接收发送的图片的大小。
+            recv_num = armClient.PhotoPort.Receive(data);
             long fileSize = Transform.bytes2long(data, recv_num);
-
+            Console.WriteLine("图片大小为" + fileSize);
             long recvSize = 0;
             while ( fileSize != 0 )
             {
-                //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
-                recv_num = clientPort.Receive(data);
-                if (recv_num == 0) //接收到了客户端发来的发送完毕标志。
+                recv_num = armClient.PhotoPort.Receive(data);
+                if (recv_num == 0)
                     break;
-
                 recvSize += recv_num;
                 output.Write(data, 0, recv_num);//写文件
             }
-
             output.Close();
-
-            //可能客户端没有发送数据，或者由于网络不好，客户端取消了发送
             return fileSize != 0 && recvSize == fileSize;
         }
         #endregion 图片
@@ -342,105 +331,32 @@ namespace CS_Server.Net
 
         public int SendAndAcceptMsg(RequestFormat request, ref string erro, out ResponseFormat response)
         {
-            //将Socket请求信息request进行编码，发送到指定的ip地址的指定端口上，对返回的响应信息进行解码成Socket响应信息response
             response = new ResponseFormat();
             int ret;
             int recvnum;
             byte[] requestMsg;
             byte[] responseMsg = new byte[200];
-
             ret = SockMsgFormat.EnRequest(request, out requestMsg);//对请求消息进行编码
-
             if (ret <= 0)
             {
                 erro += "编码出错" + ret.ToString();
                 return ret;
             }
-
             if (requestMsg != null)
                 armClient.ControlPort.Send(requestMsg);
-
             recvnum = armClient.ControlPort.Receive(responseMsg);
             ret = SockMsgFormat.DeResponse(responseMsg, recvnum, out response);//对响应消息进行解码
-
             if (ret != 0)
             {
                 erro += "解码出错" + ret.ToString() + "!5";
                 return 5;
             }
-
-            //if (ret <= 0)
-            //{
-            //    erro += "编码出错" + ret.ToString();
-            //    return ret;
-            //}
-            //IPAddress ipadr;
-            //int port;
-            //Socket lst;
-            //IPEndPoint iped;
-            //byte[] responseMsg = new byte[200];
-            //int responseSize;
-            //try
-            //{
-            //    ipadr = IPAddress.Parse("192.168.0.115");//ip地址
-            //    port = 2312;//端口号
-            //    iped = new IPEndPoint(ipadr, port);
-            //    lst = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            //}
-            //catch (Exception e)
-            //{
-            //    erro += e.Message + '0';
-            //    return 0;
-            //}
-
-            //try
-            //{
-            //    lst.Connect(iped);
-            //}
-            //catch (Exception e)
-            //{
-            //    erro += e.Message + '1';
-            //    return 1;
-            //}
-
-            //try
-            //{
-            //    lst.Send(requestMsg);//发送请求消息
-            //}
-            //catch (Exception e)
-            //{
-            //    erro += e.Message + '2';
-            //    return 2;
-            //}
-
-            //try
-            //{
-            //    responseSize = lst.Receive(responseMsg);//接受响应消息
-            //}
-            //catch (Exception e)
-            //{
-            //    erro += e.Message + '3';
-            //    return 3;
-            //}
-            //ret = SockMsgFormat.DeResponse(responseMsg, responseSize, out response);//对响应消息进行解码
-            //try
-            //{
-            //    lst.Shutdown(SocketShutdown.Both);
-            //    lst.Close();
-            //}
-            //catch (Exception e)
-            //{
-            //    erro += e.Message + '4';
-            //    return 4;
-            //}
-            //if (ret != 0)
-            //{
-            //    erro += "解码出错" + ret.ToString() + "!5";
-            //    return 5;
-            //}
-
+            if (ret <= 0)
+            {
+                erro += "编码出错" + ret.ToString();
+                return ret;
+            }
             return -1;//成功
-
         }
 
 
@@ -467,6 +383,19 @@ namespace CS_Server.Net
                             request.State = state;
                             request.Value = value;
                         }
+                        else if (Device == DEVICE.CAMERA)
+                        {
+                            request.State = state;
+                            request.Value = value;
+                            request.Config = new int[config.Length + 1];
+                            request.Config[0] = config.Length;
+                            j = 1;
+                            foreach (int i in config)
+                            {
+                                request.Config[j] = i;
+                                j++;
+                            }
+                        }
                         else
                         {
                             erro += "你选择的设备不能进行更改开关状态操作！";
@@ -482,26 +411,26 @@ namespace CS_Server.Net
                     }
 
                 case OPERATE.ADJUST_PARAM://该操作为调节参数操作
+                {
+                    if (Device == DEVICE.FILTER)//调节空调操作，参数为State
                     {
-                        if (Device == DEVICE.FILTER)//调节空调操作，参数为State
-                        {
-                            if (state == true)
-                                request.Value = value;
-                            else
-                                request.Value = -1;
-                        }
+                        if (state == true)
+                            request.Value = value;
+                        else
+                            request.Value = -1;
+                    }
+                    else
+                    {
+                        if (Device == DEVICE.FILTER|| Device == DEVICE.VEDIO)//调节加湿器或机器人管家操作，参数为State
+                            request.Value = value;
                         else
                         {
-                            if (Device == DEVICE.FILTER|| Device == DEVICE.VEDIO)//调节加湿器或机器人管家操作，参数为State
-                                request.Value = value;
-                            else
-                            {
-                                erro += "你选择的设备不能进行调节参数操作！";
-                                return false;
-                            }
+                            erro += "你选择的设备不能进行调节参数操作！";
+                            return false;
                         }
-                        break;
                     }
+                    break;
+                }
 
                 case OPERATE.CONFIG_PARAM://该操作为配置操作
                     {
@@ -564,12 +493,13 @@ namespace CS_Server.Net
                 erro += "Socket传输错误！";
                 return false;//出错
             }
-            if (response.IsSucceed == true)
-            {
-                erro = Encoding.ASCII.GetString(response.Info);
-            }
 
-            erro = Encoding.ASCII.GetString(response.Info);
+            //if (response.IsSucceed == true)
+            //{
+            //    erro = Encoding.ASCII.GetString(response.Info);
+            //}
+
+            //erro = Encoding.ASCII.GetString(response.Info);
 
             return true;
             //if (response.IsSucceed == true)//该操作成功

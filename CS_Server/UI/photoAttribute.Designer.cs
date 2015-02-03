@@ -56,6 +56,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.bt_photo = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.LightFrequencty_groupBox = new System.Windows.Forms.GroupBox();
@@ -80,7 +81,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lightnessbar = new System.Windows.Forms.TrackBar();
             this.label8 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.TimeCapture_groupBox.SuspendLayout();
@@ -312,8 +312,7 @@
             this.resolutionbar.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.resolutionbar.LargeChange = 1;
             this.resolutionbar.Location = new System.Drawing.Point(45, 18);
-            this.resolutionbar.Maximum = 6;
-            this.resolutionbar.Minimum = 1;
+            this.resolutionbar.Maximum = 5;
             this.resolutionbar.Name = "resolutionbar";
             this.resolutionbar.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.resolutionbar.Size = new System.Drawing.Size(45, 78);
@@ -396,6 +395,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(374, 78);
             this.panel1.TabIndex = 0;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(282, 26);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(73, 28);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "取消";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // bt_photo
             // 
@@ -665,15 +673,6 @@
             this.label8.Size = new System.Drawing.Size(71, 12);
             this.label8.TabIndex = 17;
             this.label8.Text = "(-4 -0- +4)";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(282, 26);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(73, 28);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // photoAttribute
             // 

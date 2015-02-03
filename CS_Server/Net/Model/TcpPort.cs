@@ -31,12 +31,9 @@ namespace CS_Server.Net
         }
         #endregion 2.构造方法
 
-
         #region 3.私有方法
 
         #endregion 3.私有方法
-
-
 
         public bool poll(int second)
         {
@@ -57,7 +54,6 @@ namespace CS_Server.Net
             second *= 1000; //从秒变成毫秒
             if (second < 0)
                 second = -1;
-
             portSocket.ReceiveTimeout = second ;
         }
 
@@ -117,7 +113,6 @@ namespace CS_Server.Net
             return total;
         }
 
-
         /// <summary>
         /// 从客户端接收数据. 
         /// 并且规定 如果是传输图片客户端发送完所有数据后，
@@ -128,15 +123,11 @@ namespace CS_Server.Net
         public int Receive(byte[] data)
         {
             byte[] temp = new byte[3];
-
             Receive(temp, 2);//接收前面表示长度的两个字节
             int size = Transform.parseByte(temp);//得到本次要接收的字节数。
-
             Console.WriteLine("在TcpPort接收的长度" + size);
-
             if (size == 0) //已经发送完毕了，本次接收到的两个字节是结束标志. 发送图片时的特殊标志
                 return 0;
-
             int recv_num = Receive(data, size); //接收真正的数据
             return recv_num;
         }
@@ -156,7 +147,6 @@ namespace CS_Server.Net
             }
             return total;
         }
-
 
         /// <summary>
         /// 发送信息，方法内部会自动添加信息头部

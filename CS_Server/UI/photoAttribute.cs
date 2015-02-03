@@ -84,9 +84,6 @@ namespace CS_Server
             string quanlity = this.quanlitybar.Value.ToString();
             string[] str = { resolution, whiteBalance, light, constrast, saturation, quanlity };
 
-           //string ligfrency = GetSelectLigFrenItem();
-            //string[] str = { resolution, whiteBalance, light, constrast, saturation, quanlity,ligfrency };
-
             if (!check(str))
             {
                 MessageBox.Show("请输入所有属性");

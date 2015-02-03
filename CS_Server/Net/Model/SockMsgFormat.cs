@@ -5,11 +5,42 @@ using System.Text;
 
 namespace CS_Server.Net
 {
+    public enum FILTER
+    {
+        first,
+        second,
+        third
+    };
+
+    public enum RESOLUTION
+    {
+        UHXGA,
+        QXGA,
+        UXGA,
+        XGA,
+        SVGA,
+        VGA
+    };
+
+    public enum BRLEVEL
+    {
+        f4 = -4,
+        f3 = -3,
+        f2 = -2,
+        f1 = -1,
+        nor = 0,
+        z1 = 1,
+        z2 = 2,
+        z3 = 3,
+        z4 = 4
+    };
+
         public enum DEVICE             //模拟设备
         {
             ALL,                          //所有设备，针对配置操作
             VEDIO,                     //视频
-            FILTER                     //滤片转换装置
+            FILTER,                     //滤片转换装置
+            CAMERA                 //抓拍
         };
 
         public enum OPERATE            //请求操作类型
@@ -63,9 +94,9 @@ namespace CS_Server.Net
             //根据输入参数对Socket请求的消息进行编码，存放在msgFormat数组中，返回编码后的消息长度（字节数）
             static public int EnRequest(byte FunCode, byte Device, bool State, int Value, int[] Config, out byte[] MsgFormat)
             {
-
                 MsgFormat = null;
                 byte funCode = (byte)(FunCode & 0x07);
+
                 //请求操作类型编码：0x00表示开关设备操作，0x01表示查询参数操作，0x02表示调节控制操作，0x03表示设备配置操作
                 if (funCode > 0x07)
                 {
@@ -80,8 +111,11 @@ namespace CS_Server.Net
                 }
 
                 int MsgLength = MIN_REQUEST_MSGSIZE;//5
-                if (funCode == 0x03 && deviceCode == 0x00)//检查配置操作是否为全局配置
-                {//定义可选数组的长度，并确定总的消息长度
+
+                if ( (funCode == 0x03 && deviceCode == 0x00) 
+                        ||  (funCode == 0x00 && deviceCode == 0x03) )//检查全局配置 或者打开抓拍设备
+                { 
+                    //定义可选数组的长度，并确定总的消息长度
                     if (Config == null || Config[0] == 0)
                         return FUNCODE_INVALID;
                     else
@@ -101,8 +135,14 @@ namespace CS_Server.Net
                 MsgFormat[0] = (byte)(MsgFormat[0] | (byte)(funCode << 5));
                 MsgFormat[0] = (byte)(MsgFormat[0] | (byte)(deviceCode << 1));
 
-                if (funCode == 0x03 && deviceCode == 0x00)//配置所有设备时，对可选项进行编码
+                if ((funCode == 0x03 && deviceCode == 0x00)
+                     || (funCode == 0x00 && deviceCode == 0x03))//配置所有设备时，对可选项进行编码
                 {
+                    if (State)//对二值参数进行编码
+                    {
+                        MsgFormat[0] = (byte)(MsgFormat[0] | 0x01);
+                    }
+
                     for (i = 5, j = 0; j < Config.Length; i = i + 4, j++)
                     {
                         temp = BitConverter.GetBytes(Config[j]);
@@ -111,6 +151,7 @@ namespace CS_Server.Net
                         MsgFormat[i + 2] = temp[2];
                         MsgFormat[i + 3] = temp[3];
                     }
+
                     return MsgFormat.Length;
                 }
                 else//对固定长度（5字节）中的参数进行编码

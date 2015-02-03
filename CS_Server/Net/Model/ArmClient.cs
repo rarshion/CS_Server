@@ -65,8 +65,20 @@ namespace CS_Server.Net
 
         public bool IsLoseConnect
         {
-            get { return isLoseConnect; }
-            set { isLoseConnect = value; }
+            get
+            {
+                if (controlPort != null && controlPort.PortSocket.Connected
+                    && videoPort != null && videoPort.PortSocket.Connected
+                    && photoPort != null && photoPort.PortSocket.Connected
+                    && heartPort != null && heartPort.PortSocket.Connected)
+                    return true;
+                else
+                    return false;
+            }
+            set 
+            { 
+                isLoseConnect = value; 
+            }
         }
 
         public string Ipaddress
@@ -89,23 +101,41 @@ namespace CS_Server.Net
 
         #endregion 1.变量属性
 
-
+        #region 2.构造方法
         public ArmClient(string ip)
         {
             ipaddress = ip;
         }
+        #endregion 2.构造方法
 
+        #region 3.私有方法
+
+        #endregion 3.私有方法
+
+        #region 4.公有方法
         public void ShutDown()
         {
             if (ControlPort != null)
+            {
                 ControlPort.Close();
+                ControlPort = null;
+            }
             if (PhotoPort != null)
+            {
                 PhotoPort.Close();
+                PhotoPort = null;
+            }
             if (VideoPort != null)
+            {
                 VideoPort.Close();
+                VideoPort = null;
+            }
             if (HeartPort != null)
+            {
                 HeartPort.Close();
+                HeartPort = null;
+            }
         }
+        #endregion 4.公有方法
     }
-
 }

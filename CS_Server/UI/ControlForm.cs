@@ -12,10 +12,6 @@ namespace CS_Server
     public partial class ControlForm : Form
     {
         private CommunicateToClient communicateArmClient;
-        private CommunicateToClient videoClient;
-        private CommunicateToClient photoClient;
-        private CommunicateToClient heartClient;
-
         private CommunicateToClient communicateToClient;
 
         public int resolution { get; set; } //像素大小 1-6
@@ -27,7 +23,6 @@ namespace CS_Server
         public int capturemod { get; set; }//拍摄模式:0.单次抓拍 1.定时拍摄
         public int caphour { get; set; } //定时拍摄中的时间间隔小时
         public int capmin { get; set; }  //定时拍摄中的时间间隔分钟
-
 
         private ClientPoint m_clientPoint;
         private ArmClient armClient;
@@ -60,19 +55,19 @@ namespace CS_Server
             InitializeComponent();
             armClient = client;
             communicateArmClient = new CommunicateToClient(armClient);
+            this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);  //应添加到窗体然后再设置picturebox焦点
+            this.Focus();
+            this.capture_panel.Visible = false;
+            this.vedio_panel.Visible = false;
         }
 
         public ControlForm(ClientPoint cp)
         {
             InitializeComponent();
-
             m_clientPoint = cp;
             communicateToClient = new CommunicateToClient(cp.client);
-
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);  //应添加到窗体然后再设置picturebox焦点
             this.Focus();
-
-            //刚开始加载不显示这两个panel
             this.capture_panel.Visible = false;
             this.vedio_panel.Visible = false;
         }
@@ -89,11 +84,10 @@ namespace CS_Server
                 MessageBox.Show("还有任务正在进行中");
                 return;
             }
-
             if (pb.Image != null)
                 pb.Image.Dispose();
-            m_clientPoint.lastAccessTime = DateTime.Now; //更新最后的访问时间
-            m_clientPoint.isUsing = false;
+            armClient.LastAccessTime = DateTime.Now;
+            armClient.IsUsing = false;
         }
 
         private void bt_water_Click(object sender, EventArgs e)
@@ -189,17 +183,17 @@ namespace CS_Server
 
         private void bt_photo_Click(object sender, EventArgs e)
         {
-            if (m_isBusy)
-            {
-                MessageBox.Show("等待前一个任务完成，再进行下一个任务");
-                return;
-            }
+            //if (m_isBusy)
+            //{
+            //    MessageBox.Show("等待前一个任务完成，再进行下一个任务");
+            //    return;
+            //}
 
-            if (m_clientPoint.loseConnect)
-            {
-                MessageBox.Show("连接中断,请取消对该客户端的操作");
-                return;
-            }
+            //if (m_clientPoint.loseConnect)
+            //{
+            //    MessageBox.Show("连接中断,请取消对该客户端的操作");
+            //    return;
+            //}
 
             capturemod = 0;
             this.capture_panel.Visible = true;
@@ -207,50 +201,42 @@ namespace CS_Server
 
             photoAttribute photo = new photoAttribute(this, capturemod); //获取设定的照片属性
             if (photo.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-              return; 
-
-            m_isBusy = true;
-
+                return; 
+            //m_isBusy = true;
             ThreadPool.QueueUserWorkItem(new WaitCallback(photoing), null);
         }
 
 
         private void photoing(object o)
         {
+            int value = -1;
+            string errno = String.Empty;
+            bool state = true;
             DateTime dt = DateTime.Now;
+            int[] pictureAttribute = { resolution, whiteBalance, light, constrast, saturation, quanlity };
 
             String path = System.Windows.Forms.Application.StartupPath; //获取当前执行文件的文件目录
-            Console.WriteLine(path);
             string fileName = path+"\\capture\\";
-
             fileName += dt.Year.ToString() + "-";
             fileName += dt.Month.ToString() + "-";
-            fileName += dt.Day.ToString() + " ";
-
-          //  fileName += "-";
+            fileName += dt.Day.ToString() + " _";
             fileName += dt.Hour.ToString() + "-";
             fileName += dt.Minute.ToString() + "-";
             fileName += dt.Second.ToString() + ".jpg";
-
-            //照片属性已经获取了。
-            //下面数组的每一个元素的顺序不能乱，要和客户端的一致。
-            int[] pictureAttribute = {resolution, whiteBalance, light, constrast, saturation, quanlity };
-           // int[] pictureAttribute = { resolution, whiteBalance, light, constrast, saturation, quanlity,lightfrequency };
-           // int[] pictureAttribute = { resolution, whiteBalance, light, constrast, saturation, quanlity, lightfrequency };
-
+            //int[] config = {0,0,0,0,8,9};
+            communicateArmClient.Operate(OPERATE.MODIFY_STATE, DEVICE.CAMERA, ref state, ref value, ref pictureAttribute, ref errno);
 
             bool flag = false;
-
             try
             {
-                flag = communicateToClient.getPicture(fileName, pictureAttribute);
+                flag = communicateArmClient.GetPicture(fileName, pictureAttribute);
             }
             catch (SocketException ex)
             {
                 DealwithSocketException dealEx = new DealwithSocketException(ex);
                 MessageBox.Show(dealEx.errorMessage);
                 if (ex.SocketErrorCode == SocketError.ConnectionAborted)
-                    m_clientPoint.loseConnect = true; //和客户端失去了联系
+                    armClient.IsLoseConnect = true;
                 return;
             }
             finally
@@ -258,17 +244,11 @@ namespace CS_Server
                 m_isBusy = false;
             }
 
-            //可能接收图片失败
             if (flag)
             {
                 if (pb.Image != null) //先清除上一次的图片
                     pb.Image.Dispose();
-
                 pb.Image = Image.FromFile(fileName);
-
-                Console.WriteLine("photoing finish\n");
-                Console.WriteLine(fileName);
-
                 if (fileName != null)
                 {
                     Show(fileName);
@@ -279,11 +259,11 @@ namespace CS_Server
 
         private void bt_video_Click(object sender, EventArgs e)
         {
-            if( m_isBusy )
-            {
-                MessageBox.Show("等待前一个任务完成，再进行下一个任务");
-                return;
-            }
+            //if( m_isBusy )
+            //{
+            //    MessageBox.Show("等待前一个任务完成，再进行下一个任务");
+            //    return;
+            //}
 
             //if (m_clientPoint.loseConnect)
             //{
