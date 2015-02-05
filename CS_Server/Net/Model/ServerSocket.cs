@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace CS_Server.Net
+namespace MultiSpel.Net
 {
     //这个类负责进行socket通信
     class ServerSocket

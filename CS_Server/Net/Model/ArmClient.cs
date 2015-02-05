@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 
-namespace CS_Server.Net
+namespace MultiSpel.Net
 {
     public class ArmClient
     {

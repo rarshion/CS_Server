@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-using CS_Server.Net;
+using MultiSpel.Net;
 using System.Net;
 
-namespace CS_Server
+namespace MultiSpel
 {
 
     public partial class MainForm : Form
@@ -340,7 +340,6 @@ namespace CS_Server
 
 
         #endregion 添加客户端
-
 
         #region 移除客户端
 

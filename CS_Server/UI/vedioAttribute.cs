@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace CS_Server
+namespace MultiSpel
 {
     public partial class vedioAttribute : Form
     {
@@ -64,11 +64,11 @@ namespace CS_Server
             bool ok = false;
             try
             {
-                father.resolution = Int32.Parse(str[0]);
-                father.whiteBalance = Int32.Parse(str[1]);
-                father.light = Int32.Parse(str[2]);
-                father.constrast = Int32.Parse(str[3]);
-                father.saturation = Int32.Parse(str[4]);
+                father.Resolution = Int32.Parse(str[0]);
+                father.Whitebalance = Int32.Parse(str[1]);
+                father.Bright = Int32.Parse(str[2]);
+                father.Contrast = Int32.Parse(str[3]);
+                father.Saturation = Int32.Parse(str[4]);
             
                 /*
                 Console.WriteLine("vedio attr" + father.resolution);

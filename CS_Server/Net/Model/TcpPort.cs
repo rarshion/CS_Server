@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
 
-namespace CS_Server.Net
+namespace MultiSpel.Net
 {
     public class TcpPort
     {
@@ -80,8 +80,7 @@ namespace CS_Server.Net
                 }
                 catch (SocketException ex)
                 {
-                    MessageBox.Show(ex.ToString());
-
+                    //MessageBox.Show(ex.ToString());
                     //这个try catch 只捕抓 超时异常
                     if (ex.SocketErrorCode != SocketError.TimedOut)
                     {

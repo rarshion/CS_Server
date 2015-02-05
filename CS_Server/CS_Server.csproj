@@ -8,7 +8,7 @@
     <ProjectGuid>{BE656179-3C61-45DA-88B1-DBD916FE0BF8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CS_Server</RootNamespace>
+    <RootNamespace>MultiSpel</RootNamespace>
     <AssemblyName>CS_Server</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -77,6 +78,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Net\Model\ServerSocket.cs" />
+    <Compile Include="UI\UserControls\Event\ImageConfigEventArgs.cs" />
+    <Compile Include="UI\UserControls\VideoPixelConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\VideoPixelConfig.designer.cs">
+      <DependentUpon>VideoPixelConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utility.cs" />
     <Compile Include="UI\vedioAttribute.cs">
       <SubType>Form</SubType>
@@ -104,6 +112,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\UserControls\VideoPixelConfig.resx">
+      <DependentUpon>VideoPixelConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\vedioAttribute.resx">
       <DependentUpon>vedioAttribute.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,7 +183,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UI\UserControls\" />
+    <Folder Include="Net\Event\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

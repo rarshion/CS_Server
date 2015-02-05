@@ -1,4 +1,4 @@
-﻿namespace CS_Server
+﻿namespace MultiSpel
 {
     partial class vedioAttribute
     {

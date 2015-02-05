@@ -1,4 +1,4 @@
-﻿namespace CS_Server
+﻿namespace MultiSpel
 {
     partial class photoAttribute
     {
@@ -58,7 +58,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.bt_photo = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.reset_button = new System.Windows.Forms.Button();
             this.LightFrequencty_groupBox = new System.Windows.Forms.GroupBox();
             this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.radioButton9 = new System.Windows.Forms.RadioButton();
@@ -389,7 +389,7 @@
             // 
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.bt_photo);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.reset_button);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(347, 359);
             this.panel1.Name = "panel1";
@@ -415,15 +415,15 @@
             this.bt_photo.UseVisualStyleBackColor = true;
             this.bt_photo.Click += new System.EventHandler(this.bt_photo_Click);
             // 
-            // button1
+            // reset_button
             // 
-            this.button1.Location = new System.Drawing.Point(203, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(73, 28);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "重置";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.reset_button.Location = new System.Drawing.Point(203, 25);
+            this.reset_button.Name = "reset_button";
+            this.reset_button.Size = new System.Drawing.Size(73, 28);
+            this.reset_button.TabIndex = 14;
+            this.reset_button.Text = "重置";
+            this.reset_button.UseVisualStyleBackColor = true;
+            this.reset_button.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // LightFrequencty_groupBox
             // 
@@ -744,7 +744,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button bt_photo;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button reset_button;
         private System.Windows.Forms.GroupBox LightFrequencty_groupBox;
         private System.Windows.Forms.RadioButton radioButton10;
         private System.Windows.Forms.RadioButton radioButton9;

@@ -4,39 +4,49 @@ using System.IO;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
-using CS_Server.Net;
 
-namespace CS_Server
+using MultiSpel.Net;
+using MultiSpel.UserControls.Event;
+using DevComponents.DotNetBar;
+
+namespace MultiSpel
 {
 
     public partial class ControlForm : Form
     {
         private CommunicateToClient communicateArmClient;
         private CommunicateToClient communicateToClient;
+        private ClientPoint m_clientPoint;
+        private ArmClient armClient;
 
-        public int resolution { get; set; } //像素大小 1-6
-        public int whiteBalance { get; set; } //白平衡
-        public int saturation { get; set; } //饱和度
-        public int light { get; set; } //亮度
-        public int constrast { get; set; } //对比度
-        public int quanlity { get; set; } //质量
+        private const int HEARTTIMEOUT = 5;
+
+        private string videoSavePath = "System.Windows.Forms.Application.StartupPath";
+        private string imageSavePath = "System.Windows.Forms.Application.StartupPath";
+
+        public int Resolution { get; set; } //像素大小 1-6
+        public int Whitebalance { get; set; } //白平衡
+        public int Saturation { get; set; } //饱和度
+        public int Bright { get; set; } //亮度
+        public int Contrast { get; set; } //对比度
+        public int Quanlity { get; set; } //质量
         public int capturemod { get; set; }//拍摄模式:0.单次抓拍 1.定时拍摄
         public int caphour { get; set; } //定时拍摄中的时间间隔小时
         public int capmin { get; set; }  //定时拍摄中的时间间隔分钟
 
-        private ClientPoint m_clientPoint;
-        private ArmClient armClient;
+        private bool isImageCpature = false;//判断是否在图像采集
+        private bool isVideoCapture = false;//判断是否在视频采集
 
-        private bool m_isBusy = false; //判断此刻，是否在进行socket通信
-        private bool m_isVideoing = false; //判断此刻，是否在进程拍照
-        private bool m_isTimePictrue = false; //定时拍摄
+        private bool isBusy = false; //判断此刻，是否在进行socket通信
+        private bool isVideoing = false; //判断此刻，是否在进程拍照
+        private bool isTimePictrue = false; //定时拍摄
         private bool m_isTransformH264 = false; //是否进行从H264到mp4的转换
 
         private VideoNameBuff m_h264FileBuff = null;
         private VideoNameBuff m_mp4FileBuff = null;
 
         Bitmap srcBitmap;
-        int rot = 0;  //
+        int rot = 0;
         private Point m_StarPoint = Point.Empty;        //for 拖动
         private Point m_ViewPoint = Point.Empty;
         private bool m_StarMove = false;
@@ -59,6 +69,8 @@ namespace CS_Server
             this.Focus();
             this.capture_panel.Visible = false;
             this.vedio_panel.Visible = false;
+
+            videoPixelConfig.ImageConfig +=new ImageConfigEventHandler(VideoPixelConfig);
         }
 
         public ControlForm(ClientPoint cp)
@@ -79,7 +91,7 @@ namespace CS_Server
 
         private void controlClientForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (m_isBusy)
+            if (isBusy)
             {
                 MessageBox.Show("还有任务正在进行中");
                 return;
@@ -90,9 +102,10 @@ namespace CS_Server
             armClient.IsUsing = false;
         }
 
+        #region 获取水分
         private void bt_water_Click(object sender, EventArgs e)
         {
-            if (m_isBusy)
+            if (isBusy)
             {
                 MessageBox.Show("等待前一个任务完成，再进行下一个任务");
                 return;
@@ -102,7 +115,7 @@ namespace CS_Server
                 MessageBox.Show("连接中断,请取消对该客户端的操作");
                 return;
             }
-            m_isBusy = true;
+            isBusy = true;
             ThreadPool.QueueUserWorkItem(new WaitCallback(watering), null);
         }
 
@@ -118,26 +131,24 @@ namespace CS_Server
             {
                 DealwithSocketException dealEx = new DealwithSocketException(ex);
                 MessageBox.Show(dealEx.errorMessage);
-
                 if (ex.SocketErrorCode == SocketError.ConnectionAborted)
                     m_clientPoint.loseConnect = true; //和客户端失去了联系
-
                 return;
             }
             finally
             {
-                m_isBusy = false;
+                isBusy = false;
             }
 
           //  lb_water.Text = "水分值为: " + val;
 
         }
+        #endregion 获取水分
 
-
-
+        #region 获取温度
         private void bt_temp_Click(object sender, EventArgs e)
         {
-            if (m_isBusy)
+            if (isBusy)
             {
                 MessageBox.Show("等待前一个任务完成，再进行下一个任务");
                 return;
@@ -149,7 +160,7 @@ namespace CS_Server
                 return;
             }
 
-            m_isBusy = true;
+            isBusy = true;
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(temping), null);
         }
@@ -175,12 +186,14 @@ namespace CS_Server
             finally
             {
             //    m_clientPoint.loseConnect = true; //和客户端失去了联系
-                m_isBusy = false;
+                isBusy = false;
             }
 
           //  lb_temp.Text = "温度值为: " + val;
         }
+        #endregion 获取温度
 
+        #region 获取图片
         private void bt_photo_Click(object sender, EventArgs e)
         {
             //if (m_isBusy)
@@ -203,17 +216,20 @@ namespace CS_Server
             if (photo.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                 return; 
             //m_isBusy = true;
-            ThreadPool.QueueUserWorkItem(new WaitCallback(photoing), null);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(Photoing), null);
         }
 
-
-        private void photoing(object o)
+        private void Photoing(object o)
         {
-            int value = -1;
-            string errno = String.Empty;
-            bool state = true;
             DateTime dt = DateTime.Now;
-            int[] pictureAttribute = { resolution, whiteBalance, light, constrast, saturation, quanlity };
+
+            int[] pictureAttribute = new int[6];
+            pictureAttribute[0] = Resolution;
+            pictureAttribute[1] = Whitebalance;
+            pictureAttribute[2] = Bright;
+            pictureAttribute[3] = Contrast;
+            pictureAttribute[4] = Saturation;
+            pictureAttribute[5] = Quanlity;
 
             String path = System.Windows.Forms.Application.StartupPath; //获取当前执行文件的文件目录
             string fileName = path+"\\capture\\";
@@ -223,8 +239,8 @@ namespace CS_Server
             fileName += dt.Hour.ToString() + "-";
             fileName += dt.Minute.ToString() + "-";
             fileName += dt.Second.ToString() + ".jpg";
-            //int[] config = {0,0,0,0,8,9};
-            communicateArmClient.Operate(OPERATE.MODIFY_STATE, DEVICE.CAMERA, ref state, ref value, ref pictureAttribute, ref errno);
+
+            ThreadPool.QueueUserWorkItem(new WaitCallback(OperateImageCapture), pictureAttribute);
 
             bool flag = false;
             try
@@ -241,7 +257,7 @@ namespace CS_Server
             }
             finally
             {
-                m_isBusy = false;
+                isBusy = false;
             }
 
             if (flag)
@@ -257,6 +273,23 @@ namespace CS_Server
             }
         }
 
+        private void OperateImageCapture(object o)
+        {
+            int[] photoAtr = (int[])o;
+            int value = -1;
+            string errno = String.Empty;
+            bool state = true;
+            int[] config = new int[6];
+            for (int i = 0; i < photoAtr.Length; i++)
+            {
+                config[i] = photoAtr[i];
+            }
+            communicateArmClient.Operate(OPERATE.MODIFY_STATE, DEVICE.CAMERA, ref state, ref value, ref config, ref errno);
+        }
+        #endregion 获取图片
+
+
+        #region 视频操作
         private void bt_video_Click(object sender, EventArgs e)
         {
             //if( m_isBusy )
@@ -272,9 +305,6 @@ namespace CS_Server
             //}
 
             bt_stop_video.Enabled = true;
-
-            //拍照与采视频用的界面不一样
-
             this.vedio_panel.Visible = true;
             this.capture_panel.Visible = true;
 
@@ -282,8 +312,8 @@ namespace CS_Server
             //if (vedio_attr.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                // return; //取消拍照
 
-            m_isBusy = true;
-            m_isVideoing = true;
+            isBusy = true;
+            isVideoing = true;
             ThreadPool.QueueUserWorkItem(new WaitCallback(videoing), null);
         }
 
@@ -310,7 +340,7 @@ namespace CS_Server
 
             try
             {
-                while (m_isVideoing)
+                while (isVideoing)
                 {
                     DateTime dt = DateTime.Now;
 
@@ -331,7 +361,7 @@ namespace CS_Server
                     fileName += ".264";
 
                     //m_comToClient 会自动加上10
-                    int[] videoAttr = {-10, resolution, whiteBalance, light, constrast, saturation };
+                    int[] videoAttr = {-10, Resolution, Whitebalance, Bright, Contrast, Saturation };
                     flag = communicateArmClient.getVideo(fileName, videoAttr);
 
                     //flag = communicateToClient.getVideo(fileName, videoAttr);
@@ -359,7 +389,7 @@ namespace CS_Server
             {
                 m_isTransformH264 = false;
                 m_h264FileBuff.clear(); //清除残余文件
-                m_isBusy = false;
+                isBusy = false;
             }
         }
 
@@ -393,7 +423,6 @@ namespace CS_Server
             }
         }
 
-
         private void controlPlayVideo(object o)
         {
             string fileName;
@@ -414,18 +443,33 @@ namespace CS_Server
             }
         }
 
-
         private void bt_stop_video_Click(object sender, EventArgs e)
         {
-            m_isVideoing = false; //停止拍摄视频，停止那个线程
+            isVideoing = false; //停止拍摄视频，停止那个线程
 
             int value = -1;//这个用于单个属性
             int[] config = null;//这个用于多个属性
             string errno = String.Empty;
             bool state = false;
             communicateArmClient.Operate(OPERATE.MODIFY_STATE, DEVICE.VEDIO, ref state, ref value, ref config, ref errno);
-
         }
+
+        #region 视频像素调节
+        private void VideoPixelConfig(object sender, ImageConfigEventArgs e)
+        {
+            int value = -1;
+            bool state = false;
+            string errno = String.Empty;
+            int[] config = new int[4];
+            config[0] = e.Whitebalance;
+            config[1] = e.Brightness;
+            config[2] = e.Contrast;
+            config[3] = e.Saturability;
+            communicateToClient.Operate(OPERATE.ADJUST_PARAM, DEVICE.VEDIO, ref state, ref value, ref config, ref errno);
+        }
+        #endregion 视频像素调节
+
+        #endregion 视频操作
 
 
         private void bt_stop_conn_Click(object sender, EventArgs e)
@@ -771,7 +815,7 @@ namespace CS_Server
 
             try
             {
-                while (m_isTimePictrue)
+                while (isTimePictrue)
                 {
                     DateTime dt = DateTime.Now;
 
@@ -792,18 +836,18 @@ namespace CS_Server
                     //照片属性已经获取了。
                     //下面数组的每一个元素的顺序不能乱，要和客户端的一致。
 
-                    int[] pictureAttribute = { -10, caphour, capmin, resolution, whiteBalance, light, constrast, saturation, quanlity };
+                    int[] pictureAttribute = { -10, caphour, capmin, Resolution, Whitebalance, Bright, Contrast, Saturation, Quanlity };
 
                     Console.WriteLine("拍摄模式" + capturemod);
                     Console.WriteLine("间隔钟" + caphour);
                     Console.WriteLine("间隔分" + capmin);
 
-                    Console.WriteLine(resolution);
-                    Console.WriteLine(whiteBalance);
-                    Console.WriteLine(light);
-                    Console.WriteLine(constrast);
-                    Console.WriteLine(saturation);
-                    Console.WriteLine(quanlity);
+                    Console.WriteLine(Resolution);
+                    Console.WriteLine(Whitebalance);
+                    Console.WriteLine(Bright);
+                    Console.WriteLine(Contrast);
+                    Console.WriteLine(Saturation);
+                    Console.WriteLine(Quanlity);
 
                     bool flag = false;
                     flag = communicateToClient.gettimePicture(fileName, pictureAttribute);
@@ -842,7 +886,7 @@ namespace CS_Server
             }
             finally
             {
-                m_isBusy = false;
+                isBusy = false;
             }
         }
 
@@ -850,7 +894,7 @@ namespace CS_Server
         private void time_capture_Click(object sender, EventArgs e)
         {
 
-            if (m_isBusy)
+            if (isBusy)
             {
                 MessageBox.Show("等待前一个任务完成，再进行下一个任务");
                 return;
@@ -873,15 +917,15 @@ namespace CS_Server
             if (photo.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                 return; //取消拍照
 
-            m_isBusy = true;
-            m_isTimePictrue = true;
+            isBusy = true;
+            isTimePictrue = true;
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(timephotoing), null);
         }
 
         private void stop_timecap_Click(object sender, EventArgs e)
         {
-            m_isTimePictrue = false;
+            isTimePictrue = false;
         }
 
         private void filter_button_Click(object sender, EventArgs e)
@@ -900,11 +944,47 @@ namespace CS_Server
 
         private void test_button_Click(object sender, EventArgs e)
         {
-            int value = -1;
-            int[] config = null;
-            bool state = false;
-            string errno = String.Empty;
-            communicateToClient.Operate(OPERATE.ADJUST_PARAM, DEVICE.VEDIO, ref state, ref value, ref config, ref errno);
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #region 测试心跳
+        private void heartTest_button_Click(object sender, EventArgs e)
+        {
+            if (communicateArmClient.heartCheck(HEARTTIMEOUT))
+            {
+                ShowControlWarnInMessageBox(true, "宝贝还在呢");
+            }
+            else
+                ShowControlWarnInMessageBox(false, "宝贝失去连接了");
+        }
+        #endregion 
+
+        private void ShowControlWarnInMessageBox(bool controlSuccess, string warnMessage)
+        {
+            BeginInvoke(new MethodInvoker(delegate()
+            {
+                if (controlSuccess)
+                {
+                    MessageBoxEx.Show(this,
+                        warnMessage,
+                         "操作成功",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBoxEx.Show(this,
+                          warnMessage,
+                           "操作失败",
+                           MessageBoxButtons.OK,
+                           MessageBoxIcon.Error);
+                }
+            }));
         }
 
     }

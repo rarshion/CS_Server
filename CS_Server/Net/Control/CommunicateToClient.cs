@@ -8,7 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Media;// axWindowsMediaPlayer1
 
-namespace CS_Server.Net
+namespace MultiSpel.Net
 {
 
     public enum Command //控制客户端的命令
@@ -81,11 +81,14 @@ namespace CS_Server.Net
         #region 图片
         public bool GetPicture(string fileName, int[] photoAttribute)
         {
-            FileStream output = File.Create(fileName);
-            byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int recv_num;
-            additionalInformation = new byte[photoAttribute.Length];
-            
+            long fileSize = 0;//图像文件大小
+            long recvSize = 0;//单次接收缓冲区大小
+
+            FileStream output = File.Create(fileName);
+            byte[] data = new byte[RECVSIZE];
+
+            //additionalInformation = new byte[photoAttribute.Length];
             //int i;
             //for(i = 0; i < photoAttribute.Length; ++i)
             //{
@@ -99,19 +102,29 @@ namespace CS_Server.Net
             //Prepare(Command.sendImage, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
             //recv_num = clientPort.Receive(data); //先接收发送的图片的大小。
 
-            recv_num = armClient.PhotoPort.Receive(data);
-            long fileSize = Transform.bytes2long(data, recv_num);
-            Console.WriteLine("图片大小为" + fileSize);
-            long recvSize = 0;
-            while ( fileSize != 0 )
+            try
             {
                 recv_num = armClient.PhotoPort.Receive(data);
-                if (recv_num == 0)
-                    break;
-                recvSize += recv_num;
-                output.Write(data, 0, recv_num);//写文件
+                fileSize = Transform.bytes2long(data, recv_num);
+                Console.WriteLine("图片大小为" + fileSize);
+                while (fileSize != 0)
+                {
+                    recv_num = armClient.PhotoPort.Receive(data);
+                    if (recv_num == 0)
+                        break;
+                    recvSize += recv_num;
+                    output.Write(data, 0, recv_num);//写文件
+                }
             }
-            output.Close();
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                output.Close();
+            }
+
             return fileSize != 0 && recvSize == fileSize;
         }
         #endregion 图片
@@ -172,6 +185,14 @@ namespace CS_Server.Net
             //可能客户端没有发送数据，或者由于网络不好，客户端取消了发送
            // return fileSize != 0 && fileSize == recvSize;
         }
+
+
+        #region 调节视频像素效果
+
+
+        #endregion 调节视频像素效果
+
+
         #endregion 视频
 
         #region 定时采集
@@ -275,7 +296,7 @@ namespace CS_Server.Net
         }
         #endregion 控制滤光片转换
 
-        #region 心跳连接
+        #region 测试心跳连接
         /// <summary>
         /// 如果在规定的时间内没有收到客户端的信息，就说明客户端掉线了，返回false
         /// </summary>
@@ -286,12 +307,14 @@ namespace CS_Server.Net
             bool canRead = false;
             try
             {
-                Prepare(Command.heart, noAdditionalInformation);
                 byte[] data = new byte[100];
-                canRead = clientPort.poll(second);
+                string message = "Are you there ?";
+                byte[] buffer = Encoding.ASCII.GetBytes(message);
+                armClient.HeartPort.Send(buffer);
+                canRead = armClient.HeartPort.poll(second);
                 if (canRead)
                 {
-                    int recv_num = clientPort.Receive(data); //接收数据，也就是清空数据
+                    int recv_num = armClient.HeartPort.Receive(data); //接收数据，也就是清空数据
                     Console.WriteLine("---------心跳检查接收到的数据 "
                         + Encoding.ASCII.GetString(data));
                 }
@@ -300,10 +323,9 @@ namespace CS_Server.Net
             {
                 canRead = false;
             }
-
             return canRead;
         }
-        #endregion 心跳连接
+        #endregion 测试心跳连接
 
         public void stopVideo()
         {
@@ -329,32 +351,48 @@ namespace CS_Server.Net
             int num = clientPort.Receive(data);
         }
 
-        public int SendAndAcceptMsg(RequestFormat request, ref string erro, out ResponseFormat response)
+        public int SendAnAcceptControlMsg(RequestFormat request, ref string erro, out ResponseFormat response)
         {
             response = new ResponseFormat();
             int ret;
             int recvnum;
             byte[] requestMsg;
-            byte[] responseMsg = new byte[200];
+            byte[] responseMsg = new byte[RECVSIZE];
             ret = SockMsgFormat.EnRequest(request, out requestMsg);//对请求消息进行编码
             if (ret <= 0)
             {
                 erro += "编码出错" + ret.ToString();
                 return ret;
             }
-            if (requestMsg != null)
-                armClient.ControlPort.Send(requestMsg);
-            recvnum = armClient.ControlPort.Receive(responseMsg);
-            ret = SockMsgFormat.DeResponse(responseMsg, recvnum, out response);//对响应消息进行解码
-            if (ret != 0)
+
+            try
             {
-                erro += "解码出错" + ret.ToString() + "!5";
-                return 5;
+                if (requestMsg != null)
+                    armClient.ControlPort.Send(requestMsg);
             }
-            if (ret <= 0)
+            catch (Exception ex)
             {
-                erro += "编码出错" + ret.ToString();
-                return ret;
+
+            }
+
+            try
+            {
+                recvnum = armClient.ControlPort.Receive(responseMsg);
+                ret = SockMsgFormat.DeResponse(responseMsg, recvnum, out response);//对响应消息进行解码
+                if (ret != 0)
+                {
+                    erro += "解码出错" + ret.ToString() + "!5";
+                    return 5;
+                }
+                if (ret <= 0)
+                {
+                    erro += "编码出错" + ret.ToString();
+                    return ret;
+                }
+            }
+            catch(Exception ex)
+            {
+                
             }
             return -1;//成功
         }
@@ -369,7 +407,7 @@ namespace CS_Server.Net
             bool state = State;//用于暂时存放参数State值，State值即可能是传进参数又可能是传出参数
             int[] config = Config;//用于暂时存放参数Config值，Config值即可能是传进参数又可能是传出参数
             Config = null;
-            int j;
+
 
             request.FunCode = (byte)((int)Operate);
             request.Device = (byte)((int)Device);
@@ -389,7 +427,7 @@ namespace CS_Server.Net
                             request.Value = value;
                             request.Config = new int[config.Length + 1];
                             request.Config[0] = config.Length;
-                            j = 1;
+                            int  j = 1;
                             foreach (int i in config)
                             {
                                 request.Config[j] = i;
@@ -419,15 +457,23 @@ namespace CS_Server.Net
                         else
                             request.Value = -1;
                     }
+                    else if(Device == DEVICE.VEDIO)
+                    {
+                        request.State = state;
+                        request.Value = value;
+                        request.Config = new int[config.Length + 1];
+                        request.Config[0] = config.Length;
+                        int j = 1;
+                        foreach (int i in config)
+                        {
+                            request.Config[j] = i;
+                            j++;
+                        }
+                    }
                     else
                     {
-                        if (Device == DEVICE.FILTER|| Device == DEVICE.VEDIO)//调节加湿器或机器人管家操作，参数为State
-                            request.Value = value;
-                        else
-                        {
-                            erro += "你选择的设备不能进行调节参数操作！";
-                            return false;
-                        }
+                        erro += "你选择的设备不能进行调节参数操作！";
+                        return false;
                     }
                     break;
                 }
@@ -450,7 +496,7 @@ namespace CS_Server.Net
                             {
                                 request.Config = new int[config.Length + 1];
                                 request.Config[0] = config.Length;
-                                j = 1;
+                               int j = 1;
                                 foreach (int i in config)
                                 {
                                     request.Config[j] = i;
@@ -487,7 +533,7 @@ namespace CS_Server.Net
             }
 
             ResponseFormat response;//Socket响应信息用于接受响应消息
-            int ret = SendAndAcceptMsg(request, ref erro, out response);//发送请求消息和接受响应消息
+            int ret = SendAnAcceptControlMsg(request, ref erro, out response);//发送请求消息和接受响应消息
             if (ret != -1 && ret != 4)
             {
                 erro += "Socket传输错误！";

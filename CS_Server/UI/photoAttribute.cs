@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 
-namespace CS_Server
+namespace MultiSpel
 {
     public partial class photoAttribute : Office2007Form
     {
@@ -105,14 +105,13 @@ namespace CS_Server
                     father.capmin = Int32.Parse(this.capmin.Value.ToString());
                 }
 
-                father.resolution = Int32.Parse(str[0]);
-                father.whiteBalance = Int32.Parse(str[1]);
-                father.light = Int32.Parse(str[2]);
-                father.constrast = Int32.Parse(str[3]);
-                father.saturation = Int32.Parse(str[4]);
-                father.quanlity = Int32.Parse(str[5]);
+                father.Resolution = Int32.Parse(str[0]);
+                father.Whitebalance = Int32.Parse(str[1]);
+                father.Bright = Int32.Parse(str[2]);
+                father.Contrast = Int32.Parse(str[3]);
+                father.Saturation = Int32.Parse(str[4]);
+                father.Quanlity = Int32.Parse(str[5]);
                //father.lightfrequency = Int32.Parse(str[6]);
-
                 ok = true;
             }
             catch
@@ -127,7 +126,7 @@ namespace CS_Server
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void resetButton_Click(object sender, EventArgs e)
         {
             this.resolutionbar.Value = 1;
             this.whitebalancebar.Value = 1;

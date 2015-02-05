@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 
-namespace CS_Server
+namespace MultiSpel
 {
     class Utility
     {
