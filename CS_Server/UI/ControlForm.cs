@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using MultiSpel.Net;
 using MultiSpel.UserControls.Event;
 using DevComponents.DotNetBar;
+using MultiSpel.DataBaseModule.Model;
+using MultiSpel.DataBaseModule.BLL;
 
 namespace MultiSpel
 {
@@ -18,11 +20,12 @@ namespace MultiSpel
         private CommunicateToClient communicateToClient;
         private ClientPoint m_clientPoint;
         private ArmClient armClient;
+        private NodeData nodeData;
 
         private const int HEARTTIMEOUT = 5;
 
-        private string videoSavePath = "System.Windows.Forms.Application.StartupPath";
-        private string imageSavePath = "System.Windows.Forms.Application.StartupPath";
+        private string videoSavePath = System.Windows.Forms.Application.StartupPath;
+        private string imageSavePath = System.Windows.Forms.Application.StartupPath;
 
         public int Resolution { get; set; } //像素大小 1-6
         public int Whitebalance { get; set; } //白平衡
@@ -69,9 +72,24 @@ namespace MultiSpel
             this.Focus();
             this.capture_panel.Visible = false;
             this.vedio_panel.Visible = false;
-
             videoPixelConfig.ImageConfig +=new ImageConfigEventHandler(VideoPixelConfig);
         }
+
+
+        public ControlForm(ArmClient client,NodeData node)
+        {
+            InitializeComponent();
+            this.nodeData = node;
+            this.armClient = client;
+            communicateArmClient = new CommunicateToClient(armClient);
+            this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);  //应添加到窗体然后再设置picturebox焦点
+            this.Focus();
+            this.capture_panel.Visible = false;
+            this.vedio_panel.Visible = false;
+            videoPixelConfig.ImageConfig += new ImageConfigEventHandler(VideoPixelConfig);
+        }
+
+
 
         public ControlForm(ClientPoint cp)
         {
@@ -231,21 +249,20 @@ namespace MultiSpel
             pictureAttribute[4] = Saturation;
             pictureAttribute[5] = Quanlity;
 
-            String path = System.Windows.Forms.Application.StartupPath; //获取当前执行文件的文件目录
-            string fileName = path+"\\capture\\";
-            fileName += dt.Year.ToString() + "-";
+            string savePath = imageSavePath + "\\capture\\";
+             string fileName = dt.Year.ToString() + "-";
             fileName += dt.Month.ToString() + "-";
             fileName += dt.Day.ToString() + " _";
             fileName += dt.Hour.ToString() + "-";
             fileName += dt.Minute.ToString() + "-";
             fileName += dt.Second.ToString() + ".jpg";
+            string fileFullPath = savePath + fileName;
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(OperateImageCapture), pictureAttribute);
-
             bool flag = false;
             try
             {
-                flag = communicateArmClient.GetPicture(fileName, pictureAttribute);
+                flag = communicateArmClient.GetPicture(fileFullPath, pictureAttribute);
             }
             catch (SocketException ex)
             {
@@ -264,11 +281,23 @@ namespace MultiSpel
             {
                 if (pb.Image != null) //先清除上一次的图片
                     pb.Image.Dispose();
-                pb.Image = Image.FromFile(fileName);
-                if (fileName != null)
+                pb.Image = Image.FromFile(fileFullPath);
+                if (fileFullPath != null)
                 {
-                    Show(fileName);
-                    srcBitmap = (Bitmap)Bitmap.FromFile(fileName, true);
+                    //Show(fileFullPath);
+                    //srcBitmap = (Bitmap)Bitmap.FromFile(fileFullPath, true);
+                    ImageBLL imageBll = new ImageBLL();
+                    ImageData imageData = new ImageData();
+                    imageData.nodeid = nodeData.id;
+                    imageData.datetime = DateTime.Now;
+                    imageData.path = savePath;
+                    imageData.fullpath = fileFullPath;
+                    imageData.fileName = fileName;
+                    imageData.status = 1;
+                    if (imageBll.Insert(imageData))
+                        ShowControlWarnInMessageBox(true, "插入图像记录成功");
+                    else
+                        ShowControlWarnInMessageBox(false, "插入图像记录失败");
                 }
             }
         }
@@ -287,7 +316,6 @@ namespace MultiSpel
             communicateArmClient.Operate(OPERATE.MODIFY_STATE, DEVICE.CAMERA, ref state, ref value, ref config, ref errno);
         }
         #endregion 获取图片
-
 
         #region 视频操作
         private void bt_video_Click(object sender, EventArgs e)
@@ -955,6 +983,11 @@ namespace MultiSpel
         #region 测试心跳
         private void heartTest_button_Click(object sender, EventArgs e)
         {
+             ThreadPool.QueueUserWorkItem(new WaitCallback(heartChecking), null);
+        }
+
+        private void heartChecking(object o)
+        {
             if (communicateArmClient.heartCheck(HEARTTIMEOUT))
             {
                 ShowControlWarnInMessageBox(true, "宝贝还在呢");
@@ -964,6 +997,7 @@ namespace MultiSpel
         }
         #endregion 
 
+        #region 显示操作信息
         private void ShowControlWarnInMessageBox(bool controlSuccess, string warnMessage)
         {
             BeginInvoke(new MethodInvoker(delegate()
@@ -986,6 +1020,7 @@ namespace MultiSpel
                 }
             }));
         }
+        #endregion 显示操作信息
 
     }
 }

@@ -213,6 +213,7 @@ namespace MultiSpel
                     armClient.Location = Encoding.ASCII.GetString(location);
                     Console.WriteLine("ARM客户端地址为:" + armClient.Location);
 
+
                     byte[] data = Encoding.ASCII.GetBytes("Welcome to server");
                     comPort.Send(data, Kind.message);
                     armClient.IsChecking = false;

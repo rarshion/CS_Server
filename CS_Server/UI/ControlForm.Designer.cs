@@ -138,7 +138,7 @@
             this.heartTest_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.heartTest_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.heartTest_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.heartTest_button.Location = new System.Drawing.Point(16, 450);
+            this.heartTest_button.Location = new System.Drawing.Point(61, 53);
             this.heartTest_button.Name = "heartTest_button";
             this.heartTest_button.Size = new System.Drawing.Size(107, 36);
             this.heartTest_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -152,9 +152,9 @@
             this.buttonX5.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonX5.Enabled = false;
-            this.buttonX5.Location = new System.Drawing.Point(129, 450);
+            this.buttonX5.Location = new System.Drawing.Point(61, 99);
             this.buttonX5.Name = "buttonX5";
-            this.buttonX5.Size = new System.Drawing.Size(92, 34);
+            this.buttonX5.Size = new System.Drawing.Size(107, 37);
             this.buttonX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX5.TabIndex = 28;
             this.buttonX5.Text = "终止任务";
@@ -204,7 +204,7 @@
             // filter_trackBar
             // 
             this.filter_trackBar.LargeChange = 1;
-            this.filter_trackBar.Location = new System.Drawing.Point(26, 347);
+            this.filter_trackBar.Location = new System.Drawing.Point(25, 165);
             this.filter_trackBar.Maximum = 2;
             this.filter_trackBar.Name = "filter_trackBar";
             this.filter_trackBar.Size = new System.Drawing.Size(179, 45);
@@ -230,7 +230,7 @@
             this.filter_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.filter_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.filter_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filter_button.Location = new System.Drawing.Point(61, 398);
+            this.filter_button.Location = new System.Drawing.Point(61, 229);
             this.filter_button.Name = "filter_button";
             this.filter_button.Size = new System.Drawing.Size(92, 34);
             this.filter_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -543,8 +543,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ControlForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "基于ARM平台的多光谱图像采集系统";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.controlClientForm_FormClosing);
             this.Load += new System.EventHandler(this.controlClientForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

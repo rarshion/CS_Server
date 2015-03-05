@@ -280,15 +280,14 @@ namespace MultiSpel.Net
         {
             string val = string.Empty;
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
-            int recv_num;
+            int recvNum;
             additionalInformation = new byte[1];
-            Array.Copy(Transform.parseMinInt(choice), 0,
-                    additionalInformation, 0, 1);
+            Array.Copy(Transform.parseMinInt(choice), 0,additionalInformation, 0, 1);
             Prepare(Command.changeFilter, hasAdditionalInformation);
             clientPort.receiveTimeout(waitTime); //接收一个数据。waitTime秒的最长等待时间。
-            recv_num = clientPort.Receive(data);
+            recvNum = clientPort.Receive(data);
             clientPort.receiveTimeout(0); //复原
-            if (recv_num > 0)
+            if (recvNum > 0)
                 val = Encoding.ASCII.GetString(data);
             else
                 val = "接收数据超时";

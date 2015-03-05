@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using MultiSpel.UI;
 
 namespace MultiSpel
 {
@@ -16,7 +17,8 @@ namespace MultiSpel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            //Application.Run(new MainForm());
+            Application.Run(new NewMainForm());
         }
     }
 }
