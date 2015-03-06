@@ -44,13 +44,11 @@ namespace MultiSpel
             {
                 if (str[i] == "")
                     return false;
-
                 str[i] = str[i].Trim();
                 if (str[i] == "")
                     return false;
             }
             return true;
-
         }
 
         private bool check_time(String[] str)

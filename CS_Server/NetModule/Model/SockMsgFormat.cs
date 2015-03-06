@@ -51,6 +51,13 @@ namespace MultiSpel.Net
             CONFIG_PARAM,              //配置操作
         };
 
+        public enum QUERY_TYPE
+        {
+            DEVICE_STATE,
+            CURRRENT_PARAM,
+            CURRRENT_CONFIG,
+        };
+
         public struct RequestFormat     //Socket请求信息
         {
             public byte FunCode;        //请求操作类型码

@@ -89,8 +89,6 @@ namespace MultiSpel
             videoPixelConfig.ImageConfig += new ImageConfigEventHandler(VideoPixelConfig);
         }
 
-
-
         public ControlForm(ClientPoint cp)
         {
             InitializeComponent();
@@ -927,27 +925,20 @@ namespace MultiSpel
                 MessageBox.Show("等待前一个任务完成，再进行下一个任务");
                 return;
             }
-
             //if (m_clientPoint.loseConnect)
             //{
             //    MessageBox.Show("连接中断,请取消对该客户端的操作");
             //    return;
             //}
-
             capturemod = 1;
-
             this.bt_stop_timecap.Visible = true;
               this.capture_panel.Visible = true;
               this.vedio_panel.Visible = false;
-
             photoAttribute photo = new photoAttribute(this, capturemod); //获取设定的照片属性
-
             if (photo.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                 return; //取消拍照
-
             isBusy = true;
             isTimePictrue = true;
-
             ThreadPool.QueueUserWorkItem(new WaitCallback(timephotoing), null);
         }
 
@@ -969,6 +960,69 @@ namespace MultiSpel
             bool state = true;
             communicateArmClient.Operate(OPERATE.ADJUST_PARAM, DEVICE.FILTER, ref state, ref value, ref config, ref errno);
         }
+
+
+        #region 获取节点配置
+        private void GetNodeConfig_Button_Click(object sender, EventArgs e)
+        {
+            int value = 2;
+            //int value = 2;
+            int[] config = null;
+            string errno = String.Empty;
+            bool state = true;
+            //communicateArmClient.Operate(OPERATE.QUERY_PARAM, DEVICE.FILTER, ref state, ref value, ref config, ref errno);
+            communicateArmClient.Operate(OPERATE.QUERY_PARAM, DEVICE.ALL, ref state, ref value, ref config, ref errno);
+            //communicateArmClient.Operate(OPERATE.QUERY_PARAM, DEVICE.ALL, ref state, ref value, ref config, ref errno);
+
+            if (config != null)
+            {
+                for (int i = 0; i < config.Length; i++)
+                {
+                    Console.Write(config[i] + " ");
+                }
+            }
+        }
+        #endregion 获取节点配置
+
+        #region 设定节点配置
+        private void SetNodeConfig_button_Click(object sender, EventArgs e)
+        {
+            
+            string filter = this.filter_textBox.ToString();
+            string cRes = this.c_res_textBox.ToString();
+            string cWhite = this.c_white_textBox.ToString();
+            string cBright = this.c_bright_textBox.ToString();
+            string cContrast = this.c_contrast_textBox.ToString();
+            string cSaturation = this.c_saturation_textBox.ToString();
+            string cCyc = this.c_cyc_textBox.ToString();
+            string vRes = this.v_res_textBox.ToString();
+            string vFrame = this.v_framerate_textBox.ToString();
+            string vGop = this.v_gopnum_textBox.ToString();
+            string vCyc = this.v_cyc_textBox.ToString();
+            string vLength = this.v_length_textBox.ToString();
+
+            string[] str = { filter, cRes, cWhite, cBright, cContrast, cSaturation };
+
+        }
+
+
+        private bool CheckConfigParam(string[] str)
+        {
+            for (int i = 0; i < str.Length; ++i)
+            {
+                if (str[i] == "")
+                    return false;
+                str[i] = str[i].Trim();
+                if (str[i] == "")
+                    return false;
+            }
+            return true;
+        }
+
+        #endregion 设定节点配置
+
+
+
 
         private void test_button_Click(object sender, EventArgs e)
         {

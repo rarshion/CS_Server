@@ -14,12 +14,12 @@ namespace MultiSpel.Net
     public enum Command //控制客户端的命令
     {
         heart = 0,
-		stop,
-        sendImage  ,
+        stop,
+        sendImage,
         getWater,
         getTemp, //温度
-		video, //视频
-		timerPicture, //定时拍摄
+        video, //视频
+        timerPicture, //定时拍摄
         changeFilter
     };
 
@@ -116,7 +116,7 @@ namespace MultiSpel.Net
                     output.Write(data, 0, recv_num);//写文件
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -134,8 +134,8 @@ namespace MultiSpel.Net
         {
             Console.WriteLine("start getvideo\n");
 
-            FileStream output = File.Open(fileName,FileMode.Append);
-           // FileStream output = File.Create(fileName);
+            FileStream output = File.Open(fileName, FileMode.Append);
+            // FileStream output = File.Create(fileName);
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int recv_num;
 
@@ -155,7 +155,7 @@ namespace MultiSpel.Net
             //Prepare(Command.video, hasAdditionalInformation); //告诉客户端做好发送图片的准备。
             //recv_num = clientPort.Receive(data); //先接收发送的图片的大小。
 
-            
+
             //if (recv_num > 0)
             //{
             //    Console.WriteLine("接收到" + recv_num);
@@ -164,12 +164,12 @@ namespace MultiSpel.Net
 
             recv_num = armClient.VideoPort.Receive(data); //先接收发送的图片的大小。
             long fileSize = Transform.bytes2long(data, recv_num);
-            Console.WriteLine("需要接收的大小为" +fileSize);
+            Console.WriteLine("需要接收的大小为" + fileSize);
             long recvSize = 0;
 
             while (fileSize != 0)
             {
-                 //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
+                //函数返回的是本次接收的字节数。不包括最前面的表示信息长度的两个字节
                 recv_num = armClient.VideoPort.Receive(data);
                 Console.WriteLine("接收到" + recv_num);
                 if (recv_num == 0) //接收到了客户端发来的发送完毕标志。
@@ -183,7 +183,7 @@ namespace MultiSpel.Net
             return true;
 
             //可能客户端没有发送数据，或者由于网络不好，客户端取消了发送
-           // return fileSize != 0 && fileSize == recvSize;
+            // return fileSize != 0 && fileSize == recvSize;
         }
 
 
@@ -249,7 +249,7 @@ namespace MultiSpel.Net
             //55， 51。所以，接收水分和温度时，不能再用Transform 来解析。而是用Encoding类
             int recv_num = clientPort.Receive(data);
             String val = Encoding.ASCII.GetString(data);
-          //  int val = Transform.parseByte(data); //把字节转换为整型
+            //  int val = Transform.parseByte(data); //把字节转换为整型
             return val;
         }
         #endregion 获取水分
@@ -265,7 +265,7 @@ namespace MultiSpel.Net
             Prepare(Command.getTemp, noAdditionalInformation);
 
             byte[] data = new byte[100];
-                
+
             clientPort.receiveTimeout(waitTime); //接收一个数据。waitTime秒的最长等待时间。
             int recv_num = clientPort.Receive(data);
             clientPort.receiveTimeout(0); //复原
@@ -276,13 +276,13 @@ namespace MultiSpel.Net
         #endregion 获取温度
 
         #region 控制滤光片转换
-        public string changeFilter(int waitTime,int choice)
+        public string ChangeFilter(int waitTime, int choice)
         {
             string val = string.Empty;
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int recvNum;
             additionalInformation = new byte[1];
-            Array.Copy(Transform.parseMinInt(choice), 0,additionalInformation, 0, 1);
+            Array.Copy(Transform.parseMinInt(choice), 0, additionalInformation, 0, 1);
             Prepare(Command.changeFilter, hasAdditionalInformation);
             clientPort.receiveTimeout(waitTime); //接收一个数据。waitTime秒的最长等待时间。
             recvNum = clientPort.Receive(data);
@@ -330,10 +330,7 @@ namespace MultiSpel.Net
         {
             additionalInformation = new byte[1];
             Array.Copy(Transform.parseMinInt(1), 0, additionalInformation, 0, 1);
-
-            //just to tell the client to stop 
             Prepare(Command.video, hasAdditionalInformation);
-
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int num = clientPort.Receive(data);
         }
@@ -342,10 +339,7 @@ namespace MultiSpel.Net
         {
             additionalInformation = new byte[1];
             Array.Copy(Transform.parseMinInt(1), 0, additionalInformation, 0, 1);
-
-            //just to tell the client to stop 
             Prepare(Command.timerPicture, hasAdditionalInformation);
-
             byte[] data = new byte[RECVSIZE]; //new byte[1024];
             int num = clientPort.Receive(data);
         }
@@ -383,31 +377,26 @@ namespace MultiSpel.Net
                     erro += "解码出错" + ret.ToString() + "!5";
                     return 5;
                 }
-                if (ret <= 0)
-                {
-                    erro += "编码出错" + ret.ToString();
-                    return ret;
-                }
+                else
+                    return 0;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
             }
-            return -1;//成功
+            return 0;//成功
         }
 
 
         //对相关设备进行相关操作
-        public  bool Operate(OPERATE Operate, DEVICE Device, ref bool State, ref int Value, ref int[] Config, ref string erro)
+        public bool Operate(OPERATE Operate, DEVICE Device, ref bool State, ref int Value, ref int[] Config, ref string erro)
         {
             RequestFormat request = new RequestFormat();//将请求封装成Socket请求信息
-
+            ResponseFormat response;//Socket响应信息用于接受响应消息
             int value = Value;//用于暂时存放参数Value值，Value值即可能是传进参数又可能是传出参数
             bool state = State;//用于暂时存放参数State值，State值即可能是传进参数又可能是传出参数
             int[] config = Config;//用于暂时存放参数Config值，Config值即可能是传进参数又可能是传出参数
             Config = null;
-
-
             request.FunCode = (byte)((int)Operate);
             request.Device = (byte)((int)Device);
 
@@ -426,7 +415,7 @@ namespace MultiSpel.Net
                             request.Value = value;
                             request.Config = new int[config.Length + 1];
                             request.Config[0] = config.Length;
-                            int  j = 1;
+                            int j = 1;
                             foreach (int i in config)
                             {
                                 request.Config[j] = i;
@@ -440,43 +429,40 @@ namespace MultiSpel.Net
                         }
                         break;
                     }
-
                 case OPERATE.QUERY_PARAM://该操作为查询操作，根据Value来判断，如何Value为0说明是查状态，如何Value为1说明是查参数，如何Value为2说明是查配置信息
                     {
                         request.Value = value;//需要做出是否合理的判断
                         break;
                     }
-
                 case OPERATE.ADJUST_PARAM://该操作为调节参数操作
-                {
-                    if (Device == DEVICE.FILTER)//调节空调操作，参数为State
                     {
-                        if (state == true)
-                            request.Value = value;
-                        else
-                            request.Value = -1;
-                    }
-                    else if(Device == DEVICE.VEDIO)
-                    {
-                        request.State = state;
-                        request.Value = value;
-                        request.Config = new int[config.Length + 1];
-                        request.Config[0] = config.Length;
-                        int j = 1;
-                        foreach (int i in config)
+                        if (Device == DEVICE.FILTER)//调节空调操作，参数为State
                         {
-                            request.Config[j] = i;
-                            j++;
+                            if (state == true)
+                                request.Value = value;
+                            else
+                                request.Value = -1;
                         }
+                        else if (Device == DEVICE.VEDIO)
+                        {
+                            request.State = state;
+                            request.Value = value;
+                            request.Config = new int[config.Length + 1];
+                            request.Config[0] = config.Length;
+                            int j = 1;
+                            foreach (int i in config)
+                            {
+                                request.Config[j] = i;
+                                j++;
+                            }
+                        }
+                        else
+                        {
+                            erro += "你选择的设备不能进行调节参数操作！";
+                            return false;
+                        }
+                        break;
                     }
-                    else
-                    {
-                        erro += "你选择的设备不能进行调节参数操作！";
-                        return false;
-                    }
-                    break;
-                }
-
                 case OPERATE.CONFIG_PARAM://该操作为配置操作
                     {
                         if (config == null)
@@ -495,7 +481,7 @@ namespace MultiSpel.Net
                             {
                                 request.Config = new int[config.Length + 1];
                                 request.Config[0] = config.Length;
-                               int j = 1;
+                                int j = 1;
                                 foreach (int i in config)
                                 {
                                     request.Config[j] = i;
@@ -505,11 +491,11 @@ namespace MultiSpel.Net
                         }
                         else
                         {
-                            if (Device == DEVICE.VEDIO || Device == DEVICE.FILTER)//空调或加湿器或机器人管家配置
+                            if (Device == DEVICE.VEDIO || Device == DEVICE.FILTER)
                             {
                                 if (config.Length != 1)//单一配置时，传入参数只有一个
                                 {
-                                    erro += "空调或加湿器或机器人管家配置时，传入参数出错！";
+                                    erro += "视频与滤片配置，传入参数出错！";
                                     return false;
                                 }
                                 else
@@ -523,7 +509,6 @@ namespace MultiSpel.Net
                         }
                         break;
                     }
-
                 default:
                     {
                         erro += "选择的操作有误！";
@@ -531,122 +516,144 @@ namespace MultiSpel.Net
                     }
             }
 
-            ResponseFormat response;//Socket响应信息用于接受响应消息
             int ret = SendAnAcceptControlMsg(request, ref erro, out response);//发送请求消息和接受响应消息
-            if (ret != -1 && ret != 4)
+            if (ret == -1 && ret == 4)
             {
                 erro += "Socket传输错误！";
                 return false;//出错
             }
-
-            //if (response.IsSucceed == true)
-            //{
-            //    erro = Encoding.ASCII.GetString(response.Info);
-            //}
-
-            //erro = Encoding.ASCII.GetString(response.Info);
-
-            return true;
-            //if (response.IsSucceed == true)//该操作成功
-            //{
-            //    erro = Encoding.ASCII.GetString(response.Info);
-            //    switch (Operate)
-            //    {
-            //        case OPERATE.MODIFY_STATE://该操作为更改开关状态操作
-            //            {
-            //                if (Device == DEVICE.AIRCONDITION || Device == DEVICE.HUMIDIFIER)
-            //                    Value = response.Value;
-            //                return true;
-            //            }
-            //        case OPERATE.QUERY_PARAM://该操作为查询参数操作
-            //            {
-            //                if (value == 0)//查询状态
-            //                {
-            //                    if (response.Value == 1)
-            //                        State = true;
-            //                    else
-            //                        State = false;
-            //                    return true;
-            //                }
-            //                else
-            //                {
-            //                    if (value == 1)//查询参数
-            //                    {
-            //                        Value = response.Value;
-            //                        return true;
-            //                    }
-            //                    else
-            //                    {
-
-            //                        if (value == 2)//参数配置信息
-            //                        {
-            //                            if (Device == DEVICE.ALL)//查询全局配置信息操作
-            //                            {
-            //                                if (response.Config == null || response.Config[0] != 5)//全局查询配置时，返回值有8个
-            //                                {
-            //                                    erro += "全局查询配置信息时，返回值有误！";
-            //                                    return false;
-            //                                }
-            //                                else
-            //                                {
-            //                                    Config = new int[5];
-            //                                    j = 0;
-            //                                    for (int i = 1; i < 6; i++)
-            //                                    {
-            //                                        Config[j] = response.Config[i];
-            //                                        j++;
-            //                                    }
-            //                                    return true;
-            //                                }
-            //                            }
-            //                            else
-            //                            {
-            //                                Config = new int[1];
-            //                                Config[0] = response.Value;
-            //                                return true;
-            //                            }
-            //                        }
-            //                        else
-            //                        {
-            //                            erro += "查询操作时，传出的Value标志有误！";
-            //                            return false;
-            //                        }
-            //                    }
-            //                }
-            //            }
-            //        case OPERATE.ADJUST_PARAM://该操作为调节参数操作
-            //            {
-            //                Value = response.Value;
-            //                return true;
-            //            }
-            //        case OPERATE.CONFIG_PARAM://该操作为配置操作
-            //            {
-            //                return true;
-            //            }
-            //        default:
-            //            {
-            //                erro += "!@#$%^&*()";
-            //                return false;
-            //            }
-            //    }
-            //}
-            //else
-            //{//该操不成功
-            //    if (response.Info == null)
-            //    {
-            //        erro += "板子崩毁！";
-            //    }
-            //    else
-            //    {
-            //        erro = Encoding.ASCII.GetString(response.Info);
-            //    }
-            //    return false;
-            //}
+            else
+            {
+                if (response.IsSucceed == true)//该操作成功
+                {
+                    erro = Encoding.ASCII.GetString(response.Info);
+                    switch (Operate)
+                    {
+                        case OPERATE.MODIFY_STATE://该操作为更改开关状态操作
+                        {
+                            if (Device == DEVICE.CAMERA || Device == DEVICE.VEDIO)
+                                Value = response.Value;
+                            return true;
+                        }
+                        case OPERATE.QUERY_PARAM://该操作为查询参数操作
+                            {
+                                if (value == 0)//查询设备状态
+                                {
+                                    if (response.Value == 1)
+                                        State = true;
+                                    else
+                                        State = false;
+                                    return true;
+                                }
+                                else if (value == 1)//查询设备参数
+                                {
+                                    if (Device == DEVICE.CAMERA)
+                                    {
+                                        if (response.Config == null || response.Config[0] != 6)//全局查询配置时，返回值有8个
+                                        {
+                                            erro += "查询图像采集配置时，返回值有误！";
+                                            return false;
+                                        }
+                                        else
+                                        {
+                                            Config = new int[6];
+                                            int j = 0;
+                                            for (int i = 1; i < 6; i++)
+                                            {
+                                                Config[j] = response.Config[i];
+                                                j++;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                    else if (Device == DEVICE.VEDIO)
+                                    {
+                                        if (response.Config == null || response.Config[0] != 6)//全局查询配置时，返回值有8个
+                                        {
+                                            erro += "查询视频采集配置时，返回值有误！";
+                                            return false;
+                                        }
+                                        else
+                                        {
+                                            Config = new int[6];
+                                            int j = 0;
+                                            for (int i = 1; i < 6; i++)
+                                            {
+                                                Config[j] = response.Config[i];
+                                                j++;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                    else if (Device == DEVICE.FILTER)
+                                    {
+                                        Value = response.Value;
+                                    }
+                                    return true;
+                                }
+                                else if (value == 2)//查询全局配置信息操作
+                                {
+                                    if (Device == DEVICE.ALL)
+                                    {
+                                        if (response.Config == null || response.Config[0] != 14)//全局查询配置时，返回值有8个
+                                        {
+                                            erro += "全局查询配置信息时，返回值有误！";
+                                            return false;
+                                        }
+                                        else
+                                        {
+                                            Config = new int[14];
+                                            int j = 0;
+                                            for (int i = 1; i < 14; i++)
+                                            {
+                                                Config[j] = response.Config[i];
+                                                j++;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Config = new int[1];
+                                        Config[0] = response.Value;
+                                        return true;
+                                    }
+                                }
+                                else
+                                {
+                                    erro += "查询操作时，传出的Value标志有误！";
+                                    return false;
+                                }
+                            }
+                        case OPERATE.ADJUST_PARAM://该操作为调节参数操作
+                            {
+                                Value = response.Value;
+                                return true;
+                            }
+                        case OPERATE.CONFIG_PARAM://该操作为配置操作
+                            {
+                                return true;
+                            }
+                        default:
+                            {
+                                erro += "!@#$%^&*()";
+                                return false;
+                            }
+                    }
+                }
+                else//该操不成功
+                {
+                    if (response.Info == null)
+                    {
+                        erro += "板子崩毁！";
+                    }
+                    else
+                    {
+                        erro = Encoding.ASCII.GetString(response.Info);
+                    }
+                    return false;
+                }
+            }
         }
-
-    }
-
-
-
- 
+        }
 }

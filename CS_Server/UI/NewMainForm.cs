@@ -130,7 +130,6 @@ namespace MultiSpel.UI
 
         }
 
-
         #region 服务器初始化
         private void RealVideoImage_ServerInit_button_Click(object sender, EventArgs e)
         {
