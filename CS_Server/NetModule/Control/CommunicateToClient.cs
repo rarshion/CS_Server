@@ -399,7 +399,6 @@ namespace MultiSpel.Net
             Config = null;
             request.FunCode = (byte)((int)Operate);
             request.Device = (byte)((int)Device);
-
             switch (Operate)//根据操作，用相应的参数对request进行封装
             {
                 case OPERATE.MODIFY_STATE://该操作为更改开关状态操作，参数State表示请求打开还是关闭
@@ -595,16 +594,16 @@ namespace MultiSpel.Net
                                 {
                                     if (Device == DEVICE.ALL)
                                     {
-                                        if (response.Config == null || response.Config[0] != 14)//全局查询配置时，返回值有8个
+                                        if (response.Config == null || response.Config[0] != 16)//全局查询配置时，返回值有8个
                                         {
                                             erro += "全局查询配置信息时，返回值有误！";
                                             return false;
                                         }
                                         else
                                         {
-                                            Config = new int[14];
+                                            Config = new int[16];
                                             int j = 0;
-                                            for (int i = 1; i < 14; i++)
+                                            for (int i = 1; i < 16; i++)
                                             {
                                                 Config[j] = response.Config[i];
                                                 j++;

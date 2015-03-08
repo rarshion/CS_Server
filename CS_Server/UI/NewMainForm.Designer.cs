@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewMainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainUIMetroShell = new DevComponents.DotNetBar.Metro.MetroShell();
             this.VideoTeachView_panel = new DevComponents.DotNetBar.Metro.MetroTabPanel();
             this.barRightDockSite = new DevComponents.DotNetBar.DockSite();
@@ -108,14 +108,6 @@
             this.ColumnHeader_Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RealVideoImage_ServerUnInit_button = new DevComponents.DotNetBar.ButtonX();
             this.RealVideoImage_ServerInit_button = new DevComponents.DotNetBar.ButtonX();
-            this.metroTabPanel3 = new DevComponents.DotNetBar.Metro.MetroTabPanel();
-            this.panelEx_ControlPanel = new DevComponents.DotNetBar.PanelEx();
-            this.ControlPanel_SystemConfig_Label = new DevComponents.DotNetBar.LabelX();
-            this.ControlPanel_LogSearch_Label = new DevComponents.DotNetBar.LabelX();
-            this.ControlPanel_PlayBack_Label = new DevComponents.DotNetBar.LabelX();
-            this.ControlPanel_VideoTeach_Label = new DevComponents.DotNetBar.LabelX();
-            this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.labelX_OperateAndControl = new DevComponents.DotNetBar.LabelX();
             this.PlayBack_Panel = new DevComponents.DotNetBar.Metro.MetroTabPanel();
             this.PlayBack_PlayViewControl_panel = new System.Windows.Forms.Panel();
             this.PlayBack_PlayerControl_panel = new System.Windows.Forms.Panel();
@@ -249,6 +241,14 @@
             this.USER = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CONTENT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ABOUT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metroTabPanel3 = new DevComponents.DotNetBar.Metro.MetroTabPanel();
+            this.panelEx_ControlPanel = new DevComponents.DotNetBar.PanelEx();
+            this.ControlPanel_SystemConfig_Label = new DevComponents.DotNetBar.LabelX();
+            this.ControlPanel_LogSearch_Label = new DevComponents.DotNetBar.LabelX();
+            this.ControlPanel_PlayBack_Label = new DevComponents.DotNetBar.LabelX();
+            this.ControlPanel_VideoTeach_Label = new DevComponents.DotNetBar.LabelX();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
+            this.labelX_OperateAndControl = new DevComponents.DotNetBar.LabelX();
             this.metroTabPanel2 = new DevComponents.DotNetBar.Metro.MetroTabPanel();
             this.metroAppButton_Setting = new DevComponents.DotNetBar.Metro.MetroAppButton();
             this.metroTabItem_ControlPanel = new DevComponents.DotNetBar.Metro.MetroTabItem();
@@ -280,8 +280,6 @@
             this.VideoTeach_EquipmentControl_PtzControl_Panel.SuspendLayout();
             this.VideoTeach_EquipmentControl_NvrInfo_Panel.SuspendLayout();
             this.panelEx_NVRList.SuspendLayout();
-            this.metroTabPanel3.SuspendLayout();
-            this.panelEx_ControlPanel.SuspendLayout();
             this.PlayBack_Panel.SuspendLayout();
             this.PlayBack_PlayViewControl_panel.SuspendLayout();
             this.PlayBack_PlayerControl_panel.SuspendLayout();
@@ -317,6 +315,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput_Log_StartTime)).BeginInit();
             this.panelEx_LogView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Logs)).BeginInit();
+            this.metroTabPanel3.SuspendLayout();
+            this.panelEx_ControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainUIMetroShell
@@ -336,8 +336,8 @@
             this.mainUIMetroShell.Controls.Add(this.VideoTeachView_panel);
             this.mainUIMetroShell.Controls.Add(this.PlayBack_Panel);
             this.mainUIMetroShell.Controls.Add(this.metroTabPanel1);
-            this.mainUIMetroShell.Controls.Add(this.metroTabPanel2);
             this.mainUIMetroShell.Controls.Add(this.metroTabPanel3);
+            this.mainUIMetroShell.Controls.Add(this.metroTabPanel2);
             this.mainUIMetroShell.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainUIMetroShell.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.mainUIMetroShell.ForeColor = System.Drawing.Color.Black;
@@ -579,7 +579,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(636, 528);
+            this.tabPage2.Size = new System.Drawing.Size(679, 561);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "图像数据";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -589,7 +589,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(636, 528);
+            this.tabPage3.Size = new System.Drawing.Size(679, 561);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "视频数据";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1225,167 +1225,6 @@
             this.RealVideoImage_ServerInit_button.Text = "登 录 设 备";
             this.RealVideoImage_ServerInit_button.Click += new System.EventHandler(this.RealVideoImage_ServerInit_button_Click);
             // 
-            // metroTabPanel3
-            // 
-            this.metroTabPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.metroTabPanel3.Controls.Add(this.panelEx_ControlPanel);
-            this.metroTabPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroTabPanel3.Location = new System.Drawing.Point(0, 149);
-            this.metroTabPanel3.Name = "metroTabPanel3";
-            this.metroTabPanel3.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.metroTabPanel3.Size = new System.Drawing.Size(984, 627);
-            // 
-            // 
-            // 
-            this.metroTabPanel3.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.metroTabPanel3.Style.PaddingTop = 100;
-            // 
-            // 
-            // 
-            this.metroTabPanel3.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.metroTabPanel3.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.metroTabPanel3.TabIndex = 4;
-            this.metroTabPanel3.Visible = false;
-            // 
-            // panelEx_ControlPanel
-            // 
-            this.panelEx_ControlPanel.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelEx_ControlPanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_SystemConfig_Label);
-            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_LogSearch_Label);
-            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_PlayBack_Label);
-            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_VideoTeach_Label);
-            this.panelEx_ControlPanel.Controls.Add(this.labelX3);
-            this.panelEx_ControlPanel.Controls.Add(this.labelX_OperateAndControl);
-            this.panelEx_ControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEx_ControlPanel.Location = new System.Drawing.Point(3, 0);
-            this.panelEx_ControlPanel.Name = "panelEx_ControlPanel";
-            this.panelEx_ControlPanel.Size = new System.Drawing.Size(978, 624);
-            this.panelEx_ControlPanel.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelEx_ControlPanel.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelEx_ControlPanel.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelEx_ControlPanel.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelEx_ControlPanel.Style.GradientAngle = 90;
-            this.panelEx_ControlPanel.TabIndex = 0;
-            // 
-            // ControlPanel_SystemConfig_Label
-            // 
-            this.ControlPanel_SystemConfig_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlPanel_SystemConfig_Label.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.ControlPanel_SystemConfig_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ControlPanel_SystemConfig_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ControlPanel_SystemConfig_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_SystemConfig_Label.Image")));
-            this.ControlPanel_SystemConfig_Label.Location = new System.Drawing.Point(640, 343);
-            this.ControlPanel_SystemConfig_Label.Name = "ControlPanel_SystemConfig_Label";
-            this.ControlPanel_SystemConfig_Label.Size = new System.Drawing.Size(209, 74);
-            this.ControlPanel_SystemConfig_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.ControlPanel_SystemConfig_Label.TabIndex = 4;
-            this.ControlPanel_SystemConfig_Label.Tag = "Config";
-            this.ControlPanel_SystemConfig_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>系统配置</b></font>\r\n<br>配置客户端常用参数。</br>";
-            this.ControlPanel_SystemConfig_Label.WordWrap = true;
-            // 
-            // ControlPanel_LogSearch_Label
-            // 
-            this.ControlPanel_LogSearch_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlPanel_LogSearch_Label.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.ControlPanel_LogSearch_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ControlPanel_LogSearch_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ControlPanel_LogSearch_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_LogSearch_Label.Image")));
-            this.ControlPanel_LogSearch_Label.Location = new System.Drawing.Point(158, 347);
-            this.ControlPanel_LogSearch_Label.Name = "ControlPanel_LogSearch_Label";
-            this.ControlPanel_LogSearch_Label.Size = new System.Drawing.Size(5, 70);
-            this.ControlPanel_LogSearch_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.ControlPanel_LogSearch_Label.TabIndex = 3;
-            this.ControlPanel_LogSearch_Label.Tag = "Log";
-            this.ControlPanel_LogSearch_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>日志搜索</b></font>\r\n<br>搜索，查看，备份本地和远程日志。</br>";
-            this.ControlPanel_LogSearch_Label.WordWrap = true;
-            // 
-            // ControlPanel_PlayBack_Label
-            // 
-            this.ControlPanel_PlayBack_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlPanel_PlayBack_Label.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.ControlPanel_PlayBack_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ControlPanel_PlayBack_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ControlPanel_PlayBack_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_PlayBack_Label.Image")));
-            this.ControlPanel_PlayBack_Label.Location = new System.Drawing.Point(640, 193);
-            this.ControlPanel_PlayBack_Label.Name = "ControlPanel_PlayBack_Label";
-            this.ControlPanel_PlayBack_Label.Size = new System.Drawing.Size(135, 80);
-            this.ControlPanel_PlayBack_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.ControlPanel_PlayBack_Label.TabIndex = 2;
-            this.ControlPanel_PlayBack_Label.Tag = "PlayBack";
-            this.ControlPanel_PlayBack_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>远程回放</b></font>\r\n<br>搜索并回放远程视频点的录像文件，回放相关操作功" +
-                "能。</br>";
-            this.ControlPanel_PlayBack_Label.WordWrap = true;
-            // 
-            // ControlPanel_VideoTeach_Label
-            // 
-            this.ControlPanel_VideoTeach_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlPanel_VideoTeach_Label.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.ControlPanel_VideoTeach_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ControlPanel_VideoTeach_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ControlPanel_VideoTeach_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_VideoTeach_Label.Image")));
-            this.ControlPanel_VideoTeach_Label.Location = new System.Drawing.Point(158, 193);
-            this.ControlPanel_VideoTeach_Label.Name = "ControlPanel_VideoTeach_Label";
-            this.ControlPanel_VideoTeach_Label.Size = new System.Drawing.Size(45, 80);
-            this.ControlPanel_VideoTeach_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.ControlPanel_VideoTeach_Label.TabIndex = 1;
-            this.ControlPanel_VideoTeach_Label.Tag = "VideoPlay";
-            this.ControlPanel_VideoTeach_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>视频教学</b></font>\r\n<br>显示视频教学的预览或回放画面</br>";
-            this.ControlPanel_VideoTeach_Label.WordWrap = true;
-            // 
-            // labelX3
-            // 
-            this.labelX3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelX3.BackColor = System.Drawing.Color.DarkGray;
-            // 
-            // 
-            // 
-            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelX3.Location = new System.Drawing.Point(158, 299);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(688, 42);
-            this.labelX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.labelX3.TabIndex = 0;
-            this.labelX3.Text = "维护与管理";
-            // 
-            // labelX_OperateAndControl
-            // 
-            this.labelX_OperateAndControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelX_OperateAndControl.BackColor = System.Drawing.Color.DarkGray;
-            // 
-            // 
-            // 
-            this.labelX_OperateAndControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX_OperateAndControl.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelX_OperateAndControl.Location = new System.Drawing.Point(158, 148);
-            this.labelX_OperateAndControl.Name = "labelX_OperateAndControl";
-            this.labelX_OperateAndControl.Size = new System.Drawing.Size(688, 42);
-            this.labelX_OperateAndControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.labelX_OperateAndControl.TabIndex = 0;
-            this.labelX_OperateAndControl.Text = "操作与控制";
-            // 
             // PlayBack_Panel
             // 
             this.PlayBack_Panel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1448,7 +1287,7 @@
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnCount = 3;
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.789976F));
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 98.21002F));
-            this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_playerControl_videoFileControl_splitter, 2, 0);
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_equimentControl_playerControl_splitter, 0, 0);
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_PlayerScreensControl_tableLayoutPanel, 1, 0);
@@ -2204,7 +2043,7 @@
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 92F));
-            this.PlayBack_PlayerScreensControl_tableLayoutPanel.Size = new System.Drawing.Size(376, 618);
+            this.PlayBack_PlayerScreensControl_tableLayoutPanel.Size = new System.Drawing.Size(374, 618);
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.TabIndex = 16;
             // 
             // PlayBack_PlayerControl_playControl_panel
@@ -2216,7 +2055,7 @@
             this.PlayBack_PlayerControl_playControl_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerControl_playControl_panel.Location = new System.Drawing.Point(3, 529);
             this.PlayBack_PlayerControl_playControl_panel.Name = "PlayBack_PlayerControl_playControl_panel";
-            this.PlayBack_PlayerControl_playControl_panel.Size = new System.Drawing.Size(370, 86);
+            this.PlayBack_PlayerControl_playControl_panel.Size = new System.Drawing.Size(368, 86);
             this.PlayBack_PlayerControl_playControl_panel.TabIndex = 16;
             // 
             // PlayBack_PlayerControl_playControl_tableLayoutPanel
@@ -2231,7 +2070,7 @@
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowCount = 2;
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.42424F));
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.57576F));
-            this.PlayBack_PlayerControl_playControl_tableLayoutPanel.Size = new System.Drawing.Size(370, 86);
+            this.PlayBack_PlayerControl_playControl_tableLayoutPanel.Size = new System.Drawing.Size(368, 86);
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.TabIndex = 0;
             // 
             // PlayBack_PlayerScreensControl_PlayerControl_Panel
@@ -2242,7 +2081,7 @@
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Location = new System.Drawing.Point(3, 39);
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Name = "PlayBack_PlayerScreensControl_PlayerControl_Panel";
-            this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Size = new System.Drawing.Size(364, 44);
+            this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Size = new System.Drawing.Size(362, 44);
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.TabIndex = 1;
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Visible = false;
             // 
@@ -2352,7 +2191,7 @@
             this.PlayBack_PlayerControl_BubbleBar.Name = "PlayBack_PlayerControl_BubbleBar";
             this.PlayBack_PlayerControl_BubbleBar.SelectedTab = this.bubbleBarTab5;
             this.PlayBack_PlayerControl_BubbleBar.SelectedTabColors.BorderColor = System.Drawing.Color.Black;
-            this.PlayBack_PlayerControl_BubbleBar.Size = new System.Drawing.Size(364, 44);
+            this.PlayBack_PlayerControl_BubbleBar.Size = new System.Drawing.Size(362, 44);
             this.PlayBack_PlayerControl_BubbleBar.TabIndex = 76;
             this.PlayBack_PlayerControl_BubbleBar.Tabs.Add(this.bubbleBarTab5);
             this.PlayBack_PlayerControl_BubbleBar.Tabs.Add(this.bubbleBarTab6);
@@ -2492,7 +2331,7 @@
             this.PlayBack_PlayerVideoLengthControl_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerVideoLengthControl_Panel.Location = new System.Drawing.Point(3, 3);
             this.PlayBack_PlayerVideoLengthControl_Panel.Name = "PlayBack_PlayerVideoLengthControl_Panel";
-            this.PlayBack_PlayerVideoLengthControl_Panel.Size = new System.Drawing.Size(364, 30);
+            this.PlayBack_PlayerVideoLengthControl_Panel.Size = new System.Drawing.Size(362, 30);
             this.PlayBack_PlayerVideoLengthControl_Panel.TabIndex = 0;
             this.PlayBack_PlayerVideoLengthControl_Panel.Visible = false;
             // 
@@ -2502,7 +2341,7 @@
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Location = new System.Drawing.Point(0, 0);
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Maximum = 100;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Name = "PlayBack_PlayerVideoLengthControl_TrackBar";
-            this.PlayBack_PlayerVideoLengthControl_TrackBar.Size = new System.Drawing.Size(364, 30);
+            this.PlayBack_PlayerVideoLengthControl_TrackBar.Size = new System.Drawing.Size(362, 30);
             this.PlayBack_PlayerVideoLengthControl_TrackBar.SmallChange = 5;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.TabIndex = 71;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
@@ -2531,7 +2370,7 @@
             this.PlayBack_PlayScreenView_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayScreenView_panel.Location = new System.Drawing.Point(3, 3);
             this.PlayBack_PlayScreenView_panel.Name = "PlayBack_PlayScreenView_panel";
-            this.PlayBack_PlayScreenView_panel.Size = new System.Drawing.Size(370, 505);
+            this.PlayBack_PlayScreenView_panel.Size = new System.Drawing.Size(368, 505);
             this.PlayBack_PlayScreenView_panel.TabIndex = 15;
             // 
             // panel3
@@ -2540,7 +2379,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 514);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(370, 9);
+            this.panel3.Size = new System.Drawing.Size(368, 9);
             this.panel3.TabIndex = 17;
             // 
             // PlayBack_PlayerControl__PlayerControlPanel_splitter
@@ -2576,7 +2415,7 @@
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.HotGripLightColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Location = new System.Drawing.Point(0, -1);
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Name = "PlayBack_PlayerControl__PlayerControlPanel_splitter";
-            this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Size = new System.Drawing.Size(370, 10);
+            this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Size = new System.Drawing.Size(368, 10);
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Style = DevComponents.DotNetBar.eSplitterStyle.Office2007;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.TabIndex = 43;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.TabStop = false;
@@ -2960,19 +2799,19 @@
             // 
             this.dataGridView_Logs.AllowUserToAddRows = false;
             this.dataGridView_Logs.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridView_Logs.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridView_Logs.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_Logs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_Logs.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView_Logs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Logs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Logs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_Logs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Logs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TYPE,
@@ -2982,26 +2821,26 @@
             this.USER,
             this.CONTENT,
             this.ABOUT});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_Logs.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_Logs.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_Logs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Logs.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_Logs.Name = "dataGridView_Logs";
             this.dataGridView_Logs.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Logs.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Logs.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_Logs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView_Logs.RowTemplate.Height = 23;
             this.dataGridView_Logs.Size = new System.Drawing.Size(871, 624);
@@ -3063,6 +2902,167 @@
             this.ABOUT.HeaderText = "备注";
             this.ABOUT.Name = "ABOUT";
             this.ABOUT.ReadOnly = true;
+            // 
+            // metroTabPanel3
+            // 
+            this.metroTabPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.metroTabPanel3.Controls.Add(this.panelEx_ControlPanel);
+            this.metroTabPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroTabPanel3.Location = new System.Drawing.Point(0, 149);
+            this.metroTabPanel3.Name = "metroTabPanel3";
+            this.metroTabPanel3.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.metroTabPanel3.Size = new System.Drawing.Size(984, 627);
+            // 
+            // 
+            // 
+            this.metroTabPanel3.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.metroTabPanel3.Style.PaddingTop = 100;
+            // 
+            // 
+            // 
+            this.metroTabPanel3.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.metroTabPanel3.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.metroTabPanel3.TabIndex = 4;
+            this.metroTabPanel3.Visible = false;
+            // 
+            // panelEx_ControlPanel
+            // 
+            this.panelEx_ControlPanel.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelEx_ControlPanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_SystemConfig_Label);
+            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_LogSearch_Label);
+            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_PlayBack_Label);
+            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_VideoTeach_Label);
+            this.panelEx_ControlPanel.Controls.Add(this.labelX3);
+            this.panelEx_ControlPanel.Controls.Add(this.labelX_OperateAndControl);
+            this.panelEx_ControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEx_ControlPanel.Location = new System.Drawing.Point(3, 0);
+            this.panelEx_ControlPanel.Name = "panelEx_ControlPanel";
+            this.panelEx_ControlPanel.Size = new System.Drawing.Size(978, 624);
+            this.panelEx_ControlPanel.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelEx_ControlPanel.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelEx_ControlPanel.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelEx_ControlPanel.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelEx_ControlPanel.Style.GradientAngle = 90;
+            this.panelEx_ControlPanel.TabIndex = 0;
+            // 
+            // ControlPanel_SystemConfig_Label
+            // 
+            this.ControlPanel_SystemConfig_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ControlPanel_SystemConfig_Label.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.ControlPanel_SystemConfig_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ControlPanel_SystemConfig_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ControlPanel_SystemConfig_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_SystemConfig_Label.Image")));
+            this.ControlPanel_SystemConfig_Label.Location = new System.Drawing.Point(640, 343);
+            this.ControlPanel_SystemConfig_Label.Name = "ControlPanel_SystemConfig_Label";
+            this.ControlPanel_SystemConfig_Label.Size = new System.Drawing.Size(209, 74);
+            this.ControlPanel_SystemConfig_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.ControlPanel_SystemConfig_Label.TabIndex = 4;
+            this.ControlPanel_SystemConfig_Label.Tag = "Config";
+            this.ControlPanel_SystemConfig_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>系统配置</b></font>\r\n<br>配置客户端常用参数。</br>";
+            this.ControlPanel_SystemConfig_Label.WordWrap = true;
+            // 
+            // ControlPanel_LogSearch_Label
+            // 
+            this.ControlPanel_LogSearch_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ControlPanel_LogSearch_Label.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.ControlPanel_LogSearch_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ControlPanel_LogSearch_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ControlPanel_LogSearch_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_LogSearch_Label.Image")));
+            this.ControlPanel_LogSearch_Label.Location = new System.Drawing.Point(158, 347);
+            this.ControlPanel_LogSearch_Label.Name = "ControlPanel_LogSearch_Label";
+            this.ControlPanel_LogSearch_Label.Size = new System.Drawing.Size(5, 70);
+            this.ControlPanel_LogSearch_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.ControlPanel_LogSearch_Label.TabIndex = 3;
+            this.ControlPanel_LogSearch_Label.Tag = "Log";
+            this.ControlPanel_LogSearch_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>日志搜索</b></font>\r\n<br>搜索，查看，备份本地和远程日志。</br>";
+            this.ControlPanel_LogSearch_Label.WordWrap = true;
+            // 
+            // ControlPanel_PlayBack_Label
+            // 
+            this.ControlPanel_PlayBack_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ControlPanel_PlayBack_Label.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.ControlPanel_PlayBack_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ControlPanel_PlayBack_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ControlPanel_PlayBack_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_PlayBack_Label.Image")));
+            this.ControlPanel_PlayBack_Label.Location = new System.Drawing.Point(640, 193);
+            this.ControlPanel_PlayBack_Label.Name = "ControlPanel_PlayBack_Label";
+            this.ControlPanel_PlayBack_Label.Size = new System.Drawing.Size(135, 80);
+            this.ControlPanel_PlayBack_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.ControlPanel_PlayBack_Label.TabIndex = 2;
+            this.ControlPanel_PlayBack_Label.Tag = "PlayBack";
+            this.ControlPanel_PlayBack_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>远程回放</b></font>\r\n<br>搜索并回放远程视频点的录像文件，回放相关操作功" +
+                "能。</br>";
+            this.ControlPanel_PlayBack_Label.WordWrap = true;
+            // 
+            // ControlPanel_VideoTeach_Label
+            // 
+            this.ControlPanel_VideoTeach_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ControlPanel_VideoTeach_Label.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.ControlPanel_VideoTeach_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ControlPanel_VideoTeach_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ControlPanel_VideoTeach_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_VideoTeach_Label.Image")));
+            this.ControlPanel_VideoTeach_Label.Location = new System.Drawing.Point(158, 193);
+            this.ControlPanel_VideoTeach_Label.Name = "ControlPanel_VideoTeach_Label";
+            this.ControlPanel_VideoTeach_Label.Size = new System.Drawing.Size(45, 80);
+            this.ControlPanel_VideoTeach_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.ControlPanel_VideoTeach_Label.TabIndex = 1;
+            this.ControlPanel_VideoTeach_Label.Tag = "VideoPlay";
+            this.ControlPanel_VideoTeach_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>视频教学</b></font>\r\n<br>显示视频教学的预览或回放画面</br>";
+            this.ControlPanel_VideoTeach_Label.WordWrap = true;
+            // 
+            // labelX3
+            // 
+            this.labelX3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelX3.BackColor = System.Drawing.Color.DarkGray;
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX3.Location = new System.Drawing.Point(158, 299);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(688, 42);
+            this.labelX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX3.TabIndex = 0;
+            this.labelX3.Text = "维护与管理";
+            // 
+            // labelX_OperateAndControl
+            // 
+            this.labelX_OperateAndControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelX_OperateAndControl.BackColor = System.Drawing.Color.DarkGray;
+            // 
+            // 
+            // 
+            this.labelX_OperateAndControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_OperateAndControl.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX_OperateAndControl.Location = new System.Drawing.Point(158, 148);
+            this.labelX_OperateAndControl.Name = "labelX_OperateAndControl";
+            this.labelX_OperateAndControl.Size = new System.Drawing.Size(688, 42);
+            this.labelX_OperateAndControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX_OperateAndControl.TabIndex = 0;
+            this.labelX_OperateAndControl.Text = "操作与控制";
             // 
             // metroTabPanel2
             // 
@@ -3228,8 +3228,6 @@
             this.VideoTeach_EquipmentControl_PtzControl_Panel.ResumeLayout(false);
             this.VideoTeach_EquipmentControl_NvrInfo_Panel.ResumeLayout(false);
             this.panelEx_NVRList.ResumeLayout(false);
-            this.metroTabPanel3.ResumeLayout(false);
-            this.panelEx_ControlPanel.ResumeLayout(false);
             this.PlayBack_Panel.ResumeLayout(false);
             this.PlayBack_PlayViewControl_panel.ResumeLayout(false);
             this.PlayBack_PlayerControl_panel.ResumeLayout(false);
@@ -3273,6 +3271,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput_Log_StartTime)).EndInit();
             this.panelEx_LogView.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Logs)).EndInit();
+            this.metroTabPanel3.ResumeLayout(false);
+            this.panelEx_ControlPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

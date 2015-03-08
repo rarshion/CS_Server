@@ -43,14 +43,21 @@
             this.bt_stop_timecap = new DevComponents.DotNetBar.ButtonX();
             this.filter_button = new DevComponents.DotNetBar.ButtonX();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.videoPixelConfig = new MultiSpel.UserControls.VideoPixelConfig();
             this.Video_SetPixel_Button = new DevComponents.DotNetBar.ButtonX();
             this.bt_start_video = new DevComponents.DotNetBar.ButtonX();
             this.bt_stop_video = new DevComponents.DotNetBar.ButtonX();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.nodeId_textBox = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.nodeLocation_textBox = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.nodeName_textBox = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.SetNodeConfig_button = new DevComponents.DotNetBar.ButtonX();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
+            this.videoState_switchButton = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.videoState_label = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.v_length_textBox = new System.Windows.Forms.TextBox();
             this.v_cyc_textBox = new System.Windows.Forms.TextBox();
@@ -63,7 +70,10 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.cameraState_switchButton = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.c_quanlity_textBox = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.cameraState_label = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.c_cyc_textBox = new System.Windows.Forms.TextBox();
             this.c_saturation_textBox = new System.Windows.Forms.TextBox();
@@ -78,6 +88,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.maxFilter_textBox = new System.Windows.Forms.TextBox();
+            this.minFilter_textBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.filter_textBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.GetNodeConfig_Button = new DevComponents.DotNetBar.ButtonX();
@@ -104,14 +117,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -119,6 +124,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.filter_trackBar)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -131,7 +137,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.axMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
             this.groupBox7.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -151,7 +156,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(992, 638);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(992, 660);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // tabControl1
@@ -164,7 +169,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(249, 632);
+            this.tabControl1.Size = new System.Drawing.Size(249, 654);
             this.tabControl1.TabIndex = 16;
             // 
             // tabPage1
@@ -174,11 +179,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(241, 525);
+            this.tabPage1.Size = new System.Drawing.Size(241, 628);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "节点信息";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // heartTest_button
             // 
@@ -217,7 +221,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(241, 525);
+            this.tabPage2.Size = new System.Drawing.Size(241, 628);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "图像采集";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -287,28 +291,16 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.videoPixelConfig);
             this.tabPage3.Controls.Add(this.Video_SetPixel_Button);
             this.tabPage3.Controls.Add(this.bt_start_video);
             this.tabPage3.Controls.Add(this.bt_stop_video);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(241, 525);
+            this.tabPage3.Size = new System.Drawing.Size(241, 628);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "视频采集";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // videoPixelConfig
-            // 
-            this.videoPixelConfig.Brightness = 5;
-            this.videoPixelConfig.Contrast = 5;
-            this.videoPixelConfig.Location = new System.Drawing.Point(5, 115);
-            this.videoPixelConfig.Name = "videoPixelConfig";
-            this.videoPixelConfig.Saturability = 5;
-            this.videoPixelConfig.Size = new System.Drawing.Size(230, 171);
-            this.videoPixelConfig.TabIndex = 31;
-            this.videoPixelConfig.Whitebalance = 5;
             // 
             // Video_SetPixel_Button
             // 
@@ -321,7 +313,6 @@
             this.Video_SetPixel_Button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.Video_SetPixel_Button.TabIndex = 30;
             this.Video_SetPixel_Button.Text = "设定像素效果";
-            this.Video_SetPixel_Button.Click += new System.EventHandler(this.test_button_Click);
             // 
             // bt_start_video
             // 
@@ -362,16 +353,86 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(241, 606);
+            this.tabPage4.Size = new System.Drawing.Size(241, 628);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "修改配置";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.groupBox4.Controls.Add(this.nodeId_textBox);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.nodeLocation_textBox);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.nodeName_textBox);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Location = new System.Drawing.Point(29, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(191, 85);
+            this.groupBox4.TabIndex = 29;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "节点信息";
+            // 
+            // nodeId_textBox
+            // 
+            this.nodeId_textBox.Location = new System.Drawing.Point(77, 14);
+            this.nodeId_textBox.Name = "nodeId_textBox";
+            this.nodeId_textBox.Size = new System.Drawing.Size(100, 21);
+            this.nodeId_textBox.TabIndex = 12;
+            this.nodeId_textBox.Text = "1";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label18.Location = new System.Drawing.Point(5, 16);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(70, 14);
+            this.label18.TabIndex = 11;
+            this.label18.Text = "节点编号:";
+            // 
+            // nodeLocation_textBox
+            // 
+            this.nodeLocation_textBox.Location = new System.Drawing.Point(77, 61);
+            this.nodeLocation_textBox.Name = "nodeLocation_textBox";
+            this.nodeLocation_textBox.Size = new System.Drawing.Size(100, 21);
+            this.nodeLocation_textBox.TabIndex = 10;
+            this.nodeLocation_textBox.Text = "xinxixueyuan";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label21.Location = new System.Drawing.Point(7, 64);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(70, 14);
+            this.label21.TabIndex = 9;
+            this.label21.Text = "节点位置:";
+            // 
+            // nodeName_textBox
+            // 
+            this.nodeName_textBox.Location = new System.Drawing.Point(78, 38);
+            this.nodeName_textBox.Name = "nodeName_textBox";
+            this.nodeName_textBox.Size = new System.Drawing.Size(100, 21);
+            this.nodeName_textBox.TabIndex = 8;
+            this.nodeName_textBox.Text = "scau";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label22.Location = new System.Drawing.Point(6, 40);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(70, 14);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "节点名字:";
             // 
             // SetNodeConfig_button
             // 
             this.SetNodeConfig_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.SetNodeConfig_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.SetNodeConfig_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SetNodeConfig_button.Location = new System.Drawing.Point(123, 561);
+            this.SetNodeConfig_button.Location = new System.Drawing.Point(123, 590);
             this.SetNodeConfig_button.Name = "SetNodeConfig_button";
             this.SetNodeConfig_button.Size = new System.Drawing.Size(107, 38);
             this.SetNodeConfig_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -382,7 +443,8 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Controls.Add(this.videoState_switchButton);
+            this.groupBox3.Controls.Add(this.videoState_label);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.v_length_textBox);
             this.groupBox3.Controls.Add(this.v_cyc_textBox);
@@ -394,27 +456,43 @@
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.label16);
             this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Location = new System.Drawing.Point(29, 372);
+            this.groupBox3.Location = new System.Drawing.Point(29, 404);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(191, 185);
+            this.groupBox3.Size = new System.Drawing.Size(191, 183);
             this.groupBox3.TabIndex = 27;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "视频配置";
             // 
-            // label18
+            // videoState_switchButton
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(80, 28);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(35, 12);
-            this.label18.TabIndex = 25;
-            this.label18.Text = "开/关";
+            // 
+            // 
+            // 
+            this.videoState_switchButton.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.videoState_switchButton.ForeColor = System.Drawing.Color.Black;
+            this.videoState_switchButton.Location = new System.Drawing.Point(112, 14);
+            this.videoState_switchButton.Name = "videoState_switchButton";
+            this.videoState_switchButton.OffText = "否";
+            this.videoState_switchButton.OnText = "是";
+            this.videoState_switchButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.videoState_switchButton.Size = new System.Drawing.Size(66, 22);
+            this.videoState_switchButton.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.videoState_switchButton.TabIndex = 26;
+            // 
+            // videoState_label
+            // 
+            this.videoState_label.AutoSize = true;
+            this.videoState_label.Location = new System.Drawing.Point(80, 19);
+            this.videoState_label.Name = "videoState_label";
+            this.videoState_label.Size = new System.Drawing.Size(35, 12);
+            this.videoState_label.TabIndex = 25;
+            this.videoState_label.Text = "开/关";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(31, 26);
+            this.label12.Location = new System.Drawing.Point(31, 18);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(42, 14);
             this.label12.TabIndex = 24;
@@ -422,44 +500,49 @@
             // 
             // v_length_textBox
             // 
-            this.v_length_textBox.Location = new System.Drawing.Point(77, 161);
+            this.v_length_textBox.Location = new System.Drawing.Point(77, 157);
             this.v_length_textBox.Name = "v_length_textBox";
             this.v_length_textBox.Size = new System.Drawing.Size(100, 21);
             this.v_length_textBox.TabIndex = 23;
+            this.v_length_textBox.Text = "3";
             // 
             // v_cyc_textBox
             // 
-            this.v_cyc_textBox.Location = new System.Drawing.Point(77, 133);
+            this.v_cyc_textBox.Location = new System.Drawing.Point(77, 129);
             this.v_cyc_textBox.Name = "v_cyc_textBox";
             this.v_cyc_textBox.Size = new System.Drawing.Size(100, 21);
             this.v_cyc_textBox.TabIndex = 22;
+            this.v_cyc_textBox.Text = "15";
             // 
             // v_gopnum_textBox
             // 
-            this.v_gopnum_textBox.Location = new System.Drawing.Point(77, 106);
+            this.v_gopnum_textBox.Location = new System.Drawing.Point(77, 99);
             this.v_gopnum_textBox.Name = "v_gopnum_textBox";
             this.v_gopnum_textBox.Size = new System.Drawing.Size(100, 21);
             this.v_gopnum_textBox.TabIndex = 21;
+            this.v_gopnum_textBox.Text = "1200";
             // 
             // v_framerate_textBox
             // 
-            this.v_framerate_textBox.Location = new System.Drawing.Point(77, 78);
+            this.v_framerate_textBox.Location = new System.Drawing.Point(77, 70);
             this.v_framerate_textBox.Name = "v_framerate_textBox";
             this.v_framerate_textBox.Size = new System.Drawing.Size(100, 21);
             this.v_framerate_textBox.TabIndex = 20;
+            this.v_framerate_textBox.Text = "25";
             // 
             // v_res_textBox
             // 
-            this.v_res_textBox.Location = new System.Drawing.Point(77, 49);
+            this.v_res_textBox.Location = new System.Drawing.Point(77, 39);
             this.v_res_textBox.Name = "v_res_textBox";
             this.v_res_textBox.Size = new System.Drawing.Size(100, 21);
             this.v_res_textBox.TabIndex = 19;
+            this.v_res_textBox.Text = "1";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(4, 163);
+            this.label13.Location = new System.Drawing.Point(4, 160);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(70, 14);
             this.label13.TabIndex = 17;
@@ -469,7 +552,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label14.Location = new System.Drawing.Point(4, 137);
+            this.label14.Location = new System.Drawing.Point(4, 132);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(77, 14);
             this.label14.TabIndex = 16;
@@ -479,7 +562,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label15.Location = new System.Drawing.Point(11, 109);
+            this.label15.Location = new System.Drawing.Point(11, 102);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(63, 14);
             this.label15.TabIndex = 15;
@@ -489,7 +572,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label16.Location = new System.Drawing.Point(31, 81);
+            this.label16.Location = new System.Drawing.Point(31, 73);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(42, 14);
             this.label16.TabIndex = 14;
@@ -499,7 +582,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label17.Location = new System.Drawing.Point(17, 52);
+            this.label17.Location = new System.Drawing.Point(17, 41);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(56, 14);
             this.label17.TabIndex = 13;
@@ -508,7 +591,10 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.groupBox2.Controls.Add(this.label19);
+            this.groupBox2.Controls.Add(this.cameraState_switchButton);
+            this.groupBox2.Controls.Add(this.c_quanlity_textBox);
+            this.groupBox2.Controls.Add(this.label23);
+            this.groupBox2.Controls.Add(this.cameraState_label);
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.c_cyc_textBox);
             this.groupBox2.Controls.Add(this.c_saturation_textBox);
@@ -522,27 +608,61 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(29, 164);
+            this.groupBox2.Location = new System.Drawing.Point(29, 176);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(191, 204);
+            this.groupBox2.Size = new System.Drawing.Size(191, 224);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "图像采集配置";
             // 
-            // label19
+            // cameraState_switchButton
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(81, 24);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(35, 12);
-            this.label19.TabIndex = 27;
-            this.label19.Text = "开/关";
+            // 
+            // 
+            // 
+            this.cameraState_switchButton.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.cameraState_switchButton.ForeColor = System.Drawing.Color.Black;
+            this.cameraState_switchButton.Location = new System.Drawing.Point(112, 11);
+            this.cameraState_switchButton.Name = "cameraState_switchButton";
+            this.cameraState_switchButton.OffText = "否";
+            this.cameraState_switchButton.OnText = "是";
+            this.cameraState_switchButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cameraState_switchButton.Size = new System.Drawing.Size(66, 22);
+            this.cameraState_switchButton.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cameraState_switchButton.TabIndex = 30;
+            // 
+            // c_quanlity_textBox
+            // 
+            this.c_quanlity_textBox.Location = new System.Drawing.Point(77, 163);
+            this.c_quanlity_textBox.Name = "c_quanlity_textBox";
+            this.c_quanlity_textBox.Size = new System.Drawing.Size(100, 21);
+            this.c_quanlity_textBox.TabIndex = 29;
+            this.c_quanlity_textBox.Text = "1";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label23.Location = new System.Drawing.Point(4, 167);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(70, 14);
+            this.label23.TabIndex = 28;
+            this.label23.Text = "图像质量:";
+            // 
+            // cameraState_label
+            // 
+            this.cameraState_label.AutoSize = true;
+            this.cameraState_label.Location = new System.Drawing.Point(77, 18);
+            this.cameraState_label.Name = "cameraState_label";
+            this.cameraState_label.Size = new System.Drawing.Size(35, 12);
+            this.cameraState_label.TabIndex = 27;
+            this.cameraState_label.Text = "开/关";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label20.Location = new System.Drawing.Point(32, 23);
+            this.label20.Location = new System.Drawing.Point(32, 17);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(42, 14);
             this.label20.TabIndex = 26;
@@ -550,51 +670,57 @@
             // 
             // c_cyc_textBox
             // 
-            this.c_cyc_textBox.Location = new System.Drawing.Point(77, 177);
+            this.c_cyc_textBox.Location = new System.Drawing.Point(77, 189);
             this.c_cyc_textBox.Name = "c_cyc_textBox";
             this.c_cyc_textBox.Size = new System.Drawing.Size(100, 21);
             this.c_cyc_textBox.TabIndex = 12;
+            this.c_cyc_textBox.Text = "15";
             // 
             // c_saturation_textBox
             // 
-            this.c_saturation_textBox.Location = new System.Drawing.Point(77, 151);
+            this.c_saturation_textBox.Location = new System.Drawing.Point(77, 137);
             this.c_saturation_textBox.Name = "c_saturation_textBox";
             this.c_saturation_textBox.Size = new System.Drawing.Size(100, 21);
             this.c_saturation_textBox.TabIndex = 11;
+            this.c_saturation_textBox.Text = "1";
             // 
             // c_contrast_textBox
             // 
-            this.c_contrast_textBox.Location = new System.Drawing.Point(77, 125);
+            this.c_contrast_textBox.Location = new System.Drawing.Point(77, 112);
             this.c_contrast_textBox.Name = "c_contrast_textBox";
             this.c_contrast_textBox.Size = new System.Drawing.Size(100, 21);
             this.c_contrast_textBox.TabIndex = 10;
+            this.c_contrast_textBox.Text = "1";
             // 
             // c_bright_textBox
             // 
-            this.c_bright_textBox.Location = new System.Drawing.Point(77, 99);
+            this.c_bright_textBox.Location = new System.Drawing.Point(77, 85);
             this.c_bright_textBox.Name = "c_bright_textBox";
             this.c_bright_textBox.Size = new System.Drawing.Size(100, 21);
             this.c_bright_textBox.TabIndex = 9;
+            this.c_bright_textBox.Text = "1";
             // 
             // c_white_textBox
             // 
-            this.c_white_textBox.Location = new System.Drawing.Point(77, 72);
+            this.c_white_textBox.Location = new System.Drawing.Point(77, 58);
             this.c_white_textBox.Name = "c_white_textBox";
             this.c_white_textBox.Size = new System.Drawing.Size(100, 21);
             this.c_white_textBox.TabIndex = 8;
+            this.c_white_textBox.Text = "1";
             // 
             // c_res_textBox
             // 
-            this.c_res_textBox.Location = new System.Drawing.Point(77, 45);
+            this.c_res_textBox.Location = new System.Drawing.Point(77, 33);
             this.c_res_textBox.Name = "c_res_textBox";
             this.c_res_textBox.Size = new System.Drawing.Size(100, 21);
             this.c_res_textBox.TabIndex = 7;
+            this.c_res_textBox.Text = "1";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(4, 180);
+            this.label11.Location = new System.Drawing.Point(4, 192);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(70, 14);
             this.label11.TabIndex = 6;
@@ -604,7 +730,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(18, 154);
+            this.label10.Location = new System.Drawing.Point(18, 140);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(56, 14);
             this.label10.TabIndex = 5;
@@ -614,7 +740,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(18, 129);
+            this.label9.Location = new System.Drawing.Point(18, 115);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(56, 14);
             this.label9.TabIndex = 4;
@@ -624,7 +750,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(32, 102);
+            this.label8.Location = new System.Drawing.Point(32, 88);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 14);
             this.label8.TabIndex = 3;
@@ -634,7 +760,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(19, 75);
+            this.label7.Location = new System.Drawing.Point(19, 61);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 14);
             this.label7.TabIndex = 2;
@@ -644,7 +770,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(19, 48);
+            this.label6.Location = new System.Drawing.Point(19, 36);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 14);
             this.label6.TabIndex = 1;
@@ -653,17 +779,43 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Yellow;
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.maxFilter_textBox);
+            this.groupBox1.Controls.Add(this.minFilter_textBox);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.filter_textBox);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(28, 84);
+            this.groupBox1.Location = new System.Drawing.Point(28, 94);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(191, 76);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "滤光片";
+            // 
+            // maxFilter_textBox
+            // 
+            this.maxFilter_textBox.Location = new System.Drawing.Point(149, 44);
+            this.maxFilter_textBox.Name = "maxFilter_textBox";
+            this.maxFilter_textBox.Size = new System.Drawing.Size(23, 21);
+            this.maxFilter_textBox.TabIndex = 11;
+            this.maxFilter_textBox.Text = "2";
+            // 
+            // minFilter_textBox
+            // 
+            this.minFilter_textBox.Location = new System.Drawing.Point(104, 44);
+            this.minFilter_textBox.Name = "minFilter_textBox";
+            this.minFilter_textBox.Size = new System.Drawing.Size(23, 21);
+            this.minFilter_textBox.TabIndex = 10;
+            this.minFilter_textBox.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(7, 47);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 14);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "滤片调整范围:";
             // 
             // filter_textBox
             // 
@@ -671,6 +823,7 @@
             this.filter_textBox.Name = "filter_textBox";
             this.filter_textBox.Size = new System.Drawing.Size(100, 21);
             this.filter_textBox.TabIndex = 8;
+            this.filter_textBox.Text = "0";
             // 
             // label4
             // 
@@ -687,7 +840,7 @@
             this.GetNodeConfig_Button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.GetNodeConfig_Button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.GetNodeConfig_Button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.GetNodeConfig_Button.Location = new System.Drawing.Point(7, 560);
+            this.GetNodeConfig_Button.Location = new System.Drawing.Point(7, 590);
             this.GetNodeConfig_Button.Name = "GetNodeConfig_Button";
             this.GetNodeConfig_Button.Size = new System.Drawing.Size(107, 38);
             this.GetNodeConfig_Button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -701,7 +854,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(258, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(731, 632);
+            this.groupBox5.Size = new System.Drawing.Size(731, 654);
             this.groupBox5.TabIndex = 14;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "采集的图像数据";
@@ -719,7 +872,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.94736F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.05263F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(725, 612);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(725, 634);
             this.tableLayoutPanel2.TabIndex = 29;
             // 
             // groupBox6
@@ -733,9 +886,9 @@
             this.groupBox6.Controls.Add(this.textBox1);
             this.groupBox6.Controls.Add(this.label1);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox6.Location = new System.Drawing.Point(3, 486);
+            this.groupBox6.Location = new System.Drawing.Point(3, 503);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(719, 123);
+            this.groupBox6.Size = new System.Drawing.Size(719, 128);
             this.groupBox6.TabIndex = 20;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "存储";
@@ -815,7 +968,7 @@
             this.capture_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.capture_panel.Location = new System.Drawing.Point(3, 3);
             this.capture_panel.Name = "capture_panel";
-            this.capture_panel.Size = new System.Drawing.Size(719, 477);
+            this.capture_panel.Size = new System.Drawing.Size(719, 494);
             this.capture_panel.TabIndex = 18;
             // 
             // panel1
@@ -825,7 +978,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(719, 441);
+            this.panel1.Size = new System.Drawing.Size(719, 458);
             this.panel1.TabIndex = 15;
             // 
             // vedio_panel
@@ -835,7 +988,7 @@
             this.vedio_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vedio_panel.Location = new System.Drawing.Point(0, 0);
             this.vedio_panel.Name = "vedio_panel";
-            this.vedio_panel.Size = new System.Drawing.Size(719, 441);
+            this.vedio_panel.Size = new System.Drawing.Size(719, 458);
             this.vedio_panel.TabIndex = 17;
             // 
             // axMediaPlayer1
@@ -843,7 +996,7 @@
             this.axMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.axMediaPlayer1.Location = new System.Drawing.Point(0, 0);
             this.axMediaPlayer1.Name = "axMediaPlayer1";
-            this.axMediaPlayer1.Size = new System.Drawing.Size(719, 441);
+            this.axMediaPlayer1.Size = new System.Drawing.Size(719, 458);
             this.axMediaPlayer1.TabIndex = 14;
             // 
             // pb
@@ -852,7 +1005,7 @@
             this.pb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pb.Location = new System.Drawing.Point(0, 0);
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(719, 441);
+            this.pb.Size = new System.Drawing.Size(719, 458);
             this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb.TabIndex = 8;
             this.pb.TabStop = false;
@@ -865,7 +1018,7 @@
             this.groupBox7.Controls.Add(this.button3);
             this.groupBox7.Controls.Add(this.button7);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox7.Location = new System.Drawing.Point(0, 441);
+            this.groupBox7.Location = new System.Drawing.Point(0, 458);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(719, 36);
             this.groupBox7.TabIndex = 16;
@@ -916,85 +1069,11 @@
             this.button7.Text = "全屏显示";
             this.button7.UseVisualStyleBackColor = true;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(7, 47);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 14);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "滤片调整范围:";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(104, 44);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(23, 21);
-            this.textBox4.TabIndex = 10;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(149, 44);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(23, 21);
-            this.textBox5.TabIndex = 11;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.groupBox4.Controls.Add(this.textBox6);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.textBox8);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Location = new System.Drawing.Point(29, 4);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(191, 76);
-            this.groupBox4.TabIndex = 29;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "节点信息";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label21.Location = new System.Drawing.Point(7, 47);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(70, 14);
-            this.label21.TabIndex = 9;
-            this.label21.Text = "节点位置:";
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(78, 14);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 21);
-            this.textBox8.TabIndex = 8;
-            this.textBox8.Text = "scau";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label22.Location = new System.Drawing.Point(6, 16);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(70, 14);
-            this.label22.TabIndex = 0;
-            this.label22.Text = "节点名字:";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(77, 46);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 21);
-            this.textBox6.TabIndex = 10;
-            this.textBox6.Text = "xinxixueyuan";
-            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 638);
+            this.ClientSize = new System.Drawing.Size(992, 660);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1011,6 +1090,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.filter_trackBar)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1027,8 +1108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.axMediaPlayer1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.groupBox7.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1110,17 +1189,23 @@
         private System.Windows.Forms.TextBox c_res_textBox;
         private System.Windows.Forms.TextBox filter_textBox;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label videoState_label;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label cameraState_label;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox minFilter_textBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox maxFilter_textBox;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox nodeLocation_textBox;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox nodeName_textBox;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox c_quanlity_textBox;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox nodeId_textBox;
+        private System.Windows.Forms.Label label18;
+        private DevComponents.DotNetBar.Controls.SwitchButton videoState_switchButton;
+        private DevComponents.DotNetBar.Controls.SwitchButton cameraState_switchButton;
     }
 }

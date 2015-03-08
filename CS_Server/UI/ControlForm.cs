@@ -86,7 +86,7 @@ namespace MultiSpel
             this.Focus();
             this.capture_panel.Visible = false;
             this.vedio_panel.Visible = false;
-            videoPixelConfig.ImageConfig += new ImageConfigEventHandler(VideoPixelConfig);
+            //videoPixelConfig.ImageConfig += new ImageConfigEventHandler(VideoPixelConfig);
         }
 
         public ControlForm(ClientPoint cp)
@@ -511,20 +511,15 @@ namespace MultiSpel
 
         }
 
-        #region 滚轮放大缩小
+        #region 图片滚轮放大缩小
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
-            
             this.pb.Focus();
             var t = this.pb.Size;
-
             t.Width += e.Delta;
             t.Height += e.Delta;
             pb.Size = t;
-
-
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
             int v = e.Delta / 100;
             int w, h;
             w = pb.Width;
@@ -533,7 +528,6 @@ namespace MultiSpel
             {
                 pb.Width *= (v + 1);
                 pb.Height *= (v + 1);
-
 
                 if (pb.Width > panel1.Width || pb.Height > panel1.Height)
                 {
@@ -552,8 +546,6 @@ namespace MultiSpel
             {
                 pb.Width /= (-v + 1);
                 pb.Height /= (-v + 1);
-
-
                 if (pb.Width > panel1.Width || pb.Height > panel1.Height)
                 {
                     w = w - pb.Width;
@@ -565,13 +557,12 @@ namespace MultiSpel
                     this.pb.Location = oldpoint;
                     pianx = 0;
                     piany = 0;
-
                 }
-
             }
         }
-        #endregion
-        #region 在panel中的picturebox中显示图片
+        #endregion 图片滚轮放大缩小
+
+        #region 显示图片
         public void Show(string it)
         {
             Console.WriteLine("into showing\n");
@@ -598,35 +589,26 @@ namespace MultiSpel
                 oldpoint = new Point(pb.Location.X, pb.Location.Y);
             }
         }
-        #endregion
-        #region  拖动
+        #endregion 显示图片
+
+        #region  图片拖动
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-         //   Console.WriteLine("mousedown\n");
-
             Cursor = Cursors.Hand;
             m_StarPoint = e.Location;
-
         }
 
-        //判断在指定范围内移动
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-
-
             if (pb.Width > panel1.Width || pb.Height > panel1.Height)
                 m_StarMove = true;
             else
                 m_StarMove = false;
-
         }
 
         int pianx = 0, piany = 0;
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-          //  Console.WriteLine("mouseup\n");
-
-
             if (m_StarMove)
             {
                 int x, y;
@@ -638,13 +620,10 @@ namespace MultiSpel
                 pb.Location = new Point(pb.Location.X - x, pb.Location.Y - y);
             }
             m_StarMove = false;
-
-
-
-
         }
-        #endregion
-        #region 图片旋转函数
+        #endregion 图片拖动
+
+        #region 图片旋转
         /// <summary>
         /// 以逆时针为方向对图像进行旋转
         /// </summary>
@@ -684,8 +663,9 @@ namespace MultiSpel
             //dsImage.Save("yuancd.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             return dsImage;
         }
-        #endregion 图片旋转函数
-        #region 旋转按钮
+        #endregion 图片旋转
+
+        #region 图片旋转按钮
         private void button3_Click(object sender, EventArgs e)
         {
             rot = (rot + 90) % 360;
@@ -707,28 +687,22 @@ namespace MultiSpel
 
             }
         }
-        #endregion
-        #region 放大缩小按钮
+        #endregion 图片旋转按钮
+
+        #region 图片放大缩小按钮
         private void button5_Click(object sender, EventArgs e)
         {
             var t = this.pb.Size;
-
             t.Width += 20;
             t.Height += 20;
             pb.Size = t;
-
-
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
             int v = 10 / 100;
             int w, h;
             w = pb.Width;
             h = pb.Height;
-
             pb.Width /= (-v + 1);
             pb.Height /= (-v + 1);
-
-
             if (pb.Width > panel1.Width || pb.Height > panel1.Height)
             {
                 w = pb.Width - w;
@@ -746,23 +720,16 @@ namespace MultiSpel
         private void button6_Click(object sender, EventArgs e)
         {
             var t = this.pb.Size;
-
             t.Width -= 20;
             t.Height -= 20;
             pb.Size = t;
-
-
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
             int v = 10 / 100;
             int w, h;
             w = pb.Width;
             h = pb.Height;
-
             pb.Width *= (v + 1);
             pb.Height *= (v + 1);
-
-
             if (pb.Width > panel1.Width || pb.Height > panel1.Height)
             {
                 w = pb.Width - w;
@@ -775,9 +742,8 @@ namespace MultiSpel
                 pianx = 0;
                 piany = 0;
             }
-
         }
-        #endregion
+        #endregion 图片放大缩小按钮
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -800,6 +766,7 @@ namespace MultiSpel
                 if(File.Exists(imageFileName))
                     pb.Image = Image.FromFile(imageFileName);
             }
+
              /*
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "请选择存储文件的路径";
@@ -833,48 +800,27 @@ namespace MultiSpel
          * agr:    视频属性等一些输入数据 
          * output: 输出视频
         */
-
-
         private void timephotoing(object o)
         {
             Console.WriteLine("timephotoing");
-
             try
             {
                 while (isTimePictrue)
                 {
                     DateTime dt = DateTime.Now;
-
                     String path = System.Windows.Forms.Application.StartupPath; //获取当前执行文件的文件目录
                     Console.WriteLine(path);
                     string fileName = path + "\\time_capture\\";
-
-
                     fileName += dt.Year.ToString() + "-";
                     fileName += dt.Month.ToString() + "-";
                     fileName += dt.Day.ToString() + " ";
-
                     //  fileName += "-";
                     fileName += dt.Hour.ToString() + "-";
                     fileName += dt.Minute.ToString() + "-";
                     fileName += dt.Second.ToString() + ".jpg";
-
                     //照片属性已经获取了。
                     //下面数组的每一个元素的顺序不能乱，要和客户端的一致。
-
                     int[] pictureAttribute = { -10, caphour, capmin, Resolution, Whitebalance, Bright, Contrast, Saturation, Quanlity };
-
-                    Console.WriteLine("拍摄模式" + capturemod);
-                    Console.WriteLine("间隔钟" + caphour);
-                    Console.WriteLine("间隔分" + capmin);
-
-                    Console.WriteLine(Resolution);
-                    Console.WriteLine(Whitebalance);
-                    Console.WriteLine(Bright);
-                    Console.WriteLine(Contrast);
-                    Console.WriteLine(Saturation);
-                    Console.WriteLine(Quanlity);
-
                     bool flag = false;
                     flag = communicateToClient.gettimePicture(fileName, pictureAttribute);
 
@@ -883,12 +829,9 @@ namespace MultiSpel
                     {
                         if (pb.Image != null) //先清除上一次的图片
                             pb.Image.Dispose();
-
                         pb.Image = Image.FromFile(fileName);
-
                         Console.WriteLine("photoing finish\n");
                         Console.WriteLine(fileName);
-
                         if (fileName != null)
                         {
                             Show(fileName);
@@ -896,7 +839,6 @@ namespace MultiSpel
                         }
                     }
                 }
-
                 communicateToClient.stopTimePicture();
                 bt_stop_timecap.Visible = false; //不可见
             }
@@ -916,10 +858,8 @@ namespace MultiSpel
             }
         }
 
-
         private void time_capture_Click(object sender, EventArgs e)
         {
-
             if (isBusy)
             {
                 MessageBox.Show("等待前一个任务完成，再进行下一个任务");
@@ -947,6 +887,7 @@ namespace MultiSpel
             isTimePictrue = false;
         }
 
+        #region 改变滤片
         private void filter_button_Click(object sender, EventArgs e)
         {
             ThreadPool.QueueUserWorkItem(new WaitCallback(filtering), null);
@@ -960,51 +901,110 @@ namespace MultiSpel
             bool state = true;
             communicateArmClient.Operate(OPERATE.ADJUST_PARAM, DEVICE.FILTER, ref state, ref value, ref config, ref errno);
         }
-
+        #endregion 改变滤片
 
         #region 获取节点配置
         private void GetNodeConfig_Button_Click(object sender, EventArgs e)
         {
             int value = 2;
-            //int value = 2;
             int[] config = null;
             string errno = String.Empty;
             bool state = true;
             //communicateArmClient.Operate(OPERATE.QUERY_PARAM, DEVICE.FILTER, ref state, ref value, ref config, ref errno);
-            communicateArmClient.Operate(OPERATE.QUERY_PARAM, DEVICE.ALL, ref state, ref value, ref config, ref errno);
             //communicateArmClient.Operate(OPERATE.QUERY_PARAM, DEVICE.ALL, ref state, ref value, ref config, ref errno);
-
-            if (config != null)
+            if (communicateArmClient.Operate(OPERATE.QUERY_PARAM, DEVICE.ALL, ref state, ref value, ref config, ref errno))
             {
-                for (int i = 0; i < config.Length; i++)
+                if (config != null)
                 {
-                    Console.Write(config[i] + " ");
+                    for (int i = 0; i < config.Length; i++)
+                    {
+                        Console.Write(config[i] + " ");
+                    }
                 }
+                if (config.Length != 16)
+                {
+                    MessageBox.Show("节点参数获取不完整");
+                    return;
+                }
+
+                this.nodeId_textBox.Text = config[0].ToString();
+                this.filter_textBox.Text = config[1].ToString();
+                if (config[2] == 1)
+                    this.cameraState_label.Text = "开";
+                else
+                    this.cameraState_label.Text = "关";
+                this.c_res_textBox.Text = config[3].ToString();
+                this.c_white_textBox.Text = config[4].ToString();
+                this.c_bright_textBox.Text = config[5].ToString();
+                this.c_saturation_textBox.Text = config[6].ToString();
+                this.c_contrast_textBox.Text = config[7].ToString();
+                this.c_quanlity_textBox.Text = config[8].ToString();
+                this.c_cyc_textBox.Text = config[9].ToString();
+                if (config[10] == 1)
+                    this.videoState_label.Text = "开";
+                else
+                    this.videoState_label.Text = "关";
+                this.v_res_textBox.Text = config[11].ToString();
+                this.v_framerate_textBox.Text = config[12].ToString();
+                this.v_gopnum_textBox.Text = config[13].ToString();
+                this.v_cyc_textBox.Text = config[14].ToString();
+                this.v_length_textBox.Text = config[15].ToString();
             }
+            else
+                ShowControlWarnInMessageBox(false, errno);
         }
         #endregion 获取节点配置
 
         #region 设定节点配置
         private void SetNodeConfig_button_Click(object sender, EventArgs e)
         {
-            
+            string nodeName = this.nodeName_textBox.ToString();
+            string nodeLocation = this.nodeLocation_textBox.ToString();
+            string nodeid = this.nodeId_textBox.ToString();
+
             string filter = this.filter_textBox.ToString();
+            string minfilter = this.minFilter_textBox.ToString();
+            string maxfilter = this.maxFilter_textBox.ToString();
+
+            string cstate = this.cameraState_switchButton.Value.ToString();
             string cRes = this.c_res_textBox.ToString();
             string cWhite = this.c_white_textBox.ToString();
             string cBright = this.c_bright_textBox.ToString();
             string cContrast = this.c_contrast_textBox.ToString();
             string cSaturation = this.c_saturation_textBox.ToString();
+            string cQuanlity = this.c_quanlity_textBox.ToString();
             string cCyc = this.c_cyc_textBox.ToString();
+
+            string vstate = this.videoState_switchButton.Value.ToString();
             string vRes = this.v_res_textBox.ToString();
             string vFrame = this.v_framerate_textBox.ToString();
             string vGop = this.v_gopnum_textBox.ToString();
             string vCyc = this.v_cyc_textBox.ToString();
             string vLength = this.v_length_textBox.ToString();
 
-            string[] str = { filter, cRes, cWhite, cBright, cContrast, cSaturation };
 
+            string[] paramStr = { nodeid, minfilter,maxfilter, cstate,cRes, 
+                                    cWhite, cBright, cContrast, cSaturation, cQuanlity, cCyc,vstate, vRes,vFrame, vGop, vCyc, vLength };
+           
+            if (!CheckConfigParam(paramStr))
+            {
+                MessageBox.Show("设置参数不完整");
+                return;
+            }
+
+            int value = 0;
+            int[] config = new int[] { Int32.Parse(paramStr[0]), Int32.Parse(paramStr[1]), 
+                Int32.Parse(paramStr[2]), Int32.Parse(paramStr[3]), Int32.Parse(paramStr[4]),
+                Int32.Parse(paramStr[5]),Int32.Parse(paramStr[6]),Int32.Parse(paramStr[7]),
+                Int32.Parse(paramStr[8]),Int32.Parse(paramStr[9]),Int32.Parse(paramStr[10]),
+                Int32.Parse(paramStr[11]),Int32.Parse(paramStr[12]),Int32.Parse(paramStr[13])};
+            string errno = String.Empty;
+            bool state = true;
+            if (communicateArmClient.Operate(OPERATE.CONFIG_PARAM, DEVICE.ALL, ref state, ref value, ref config, ref errno))
+                ShowControlWarnInMessageBox(true, "配置设置成功");
+            else
+                ShowControlWarnInMessageBox(false, errno);
         }
-
 
         private bool CheckConfigParam(string[] str)
         {
@@ -1018,21 +1018,7 @@ namespace MultiSpel
             }
             return true;
         }
-
         #endregion 设定节点配置
-
-
-
-
-        private void test_button_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         #region 测试心跳
         private void heartTest_button_Click(object sender, EventArgs e)
