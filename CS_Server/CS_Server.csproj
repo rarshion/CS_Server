@@ -98,6 +98,7 @@
     <Compile Include="DataBaseModule\Model\NodeData.cs" />
     <Compile Include="DataBaseModule\SqlServerDAL\ImageDAL.cs" />
     <Compile Include="DataBaseModule\SqlServerDAL\NodeDAL.cs" />
+    <Compile Include="NetModule\Model\ARMClientList.cs" />
     <Compile Include="NetModule\Model\TcpPort.cs" />
     <Compile Include="NetModule\Control\CommunicateToClient.cs" />
     <Compile Include="NetModule\Model\ArmClient.cs" />

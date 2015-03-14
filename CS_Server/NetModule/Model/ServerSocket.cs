@@ -10,29 +10,28 @@ using System.Windows.Forms;
 
 namespace MultiSpel.Net
 {
-    //这个类负责进行socket通信
-    class ServerSocket
+    public class ServerSocket
     {
-        private IPEndPoint m_ipe;
-        private Socket m_server;
+        private IPEndPoint serverIpe;
+        private Socket serverSocket;
 
         public ServerSocket(int port, int listen)
         {
-            m_ipe = new IPEndPoint(IPAddress.Any, port);
-            m_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            m_server.Bind(m_ipe);
-            m_server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 20);
-            m_server.Listen(listen);
+            serverIpe = new IPEndPoint(IPAddress.Any, port);
+            serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            serverSocket.Bind(serverIpe);
+            serverSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 20);
+            serverSocket.Listen(listen);
         }
 
         public Socket Accept()
         {
-            return m_server.Accept();
+            return serverSocket.Accept();
         }
 
         public void Close()
         {
-            m_server.Close();
+            serverSocket.Close();
         }
 
     }

@@ -14,5 +14,6 @@ namespace MultiSpel.DataBaseModule.Model
         public string longtitude { get; set; }
         public string lantitude { get; set; }
         public string location { get; set; }
+        public string savepath { get; set; }
     }
 }

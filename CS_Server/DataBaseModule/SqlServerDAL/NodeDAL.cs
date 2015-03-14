@@ -10,10 +10,10 @@ namespace MultiSpel.DataBaseModule.SqlServerDAL
 {
     public class NodeDAL
     {
-        private const string Insert_SQL = "insert into [Node] ([name],[status],[longtitude],[lantitude],[location]) values (@name,@status,@longtitude,@lantitude,@location)";
+        private const string Insert_SQL = "insert into [Node] ([name],[status],[longtitude],[lantitude],[location],[savepath]) values (@name,@status,@longtitude,@lantitude,@location,@savepath)";
         //private const string Delete_By_ID_SQL = "delete from [user] where id=@id";
         //private const string BatchDelete_By_ID_SQL = "delete from [user] where id in({0})";
-        //private const string Update_By_ID_SQL = "update [user] set [id]=@id,[userName]=@userName,[userPassword]=@userPassword,[userLevel]=@userLevel where id=@id";
+        private const string Update_By_ID_SQL = "update [Node] set [name]=@name,[status]=@status,[longtitude]=@longtitude,[lantitude]=@lantitude,[location]=@location,[savepath]=@savepath where id=@id";
         private const string Select_Count_SQL = "select count(*) from [Node]";
         private const string Select_By_ID_SQL = "select * from [Node] where id=@id";
         private const string SelectAll_By_SQL = "select * from [Node]";
@@ -34,7 +34,6 @@ namespace MultiSpel.DataBaseModule.SqlServerDAL
             helper.AddParameter(data);
             return helper.ExecuteNonQuery() > 0 ? true : false;
         }
-
 
         ///// <summary>
         ///// 根据主键值删除一条数据记录
@@ -79,18 +78,18 @@ namespace MultiSpel.DataBaseModule.SqlServerDAL
         //    return success;
         //}
 
-        ///// <summary>
-        ///// 根据主键值修改一条数据记录
-        ///// </summary>
-        ///// <param name="data">实体对象</param>
-        ///// <returns>是否修改成功</returns>
-        //public bool UpdateByPK(NodeData data)
-        //{
-        //    SqlHelper helper = new SqlHelper();
-        //    helper.CreateCommand(Update_By_ID_SQL);
-        //    helper.AddParameter(data);
-        //    return helper.ExecuteNonQuery() > 0 ? true : false;
-        //}
+        /// <summary>
+        /// 根据主键值修改一条数据记录
+        /// </summary>
+        /// <param name="data">实体对象</param>
+        /// <returns>是否修改成功</returns>
+        public bool UpdateByPK(NodeData data)
+        {
+            SqlHelper helper = new SqlHelper();
+            helper.CreateCommand(Update_By_ID_SQL);
+            helper.AddParameter(data);
+            return helper.ExecuteNonQuery() > 0 ? true : false;
+        }
 
         /// <summary>
         /// 根据主键值获取一条数据记录详细信息

@@ -99,13 +99,13 @@
             this.PlayBack_PlaybackByFileTime_Button = new System.Windows.Forms.Button();
             this.PlayBack_PlayBackByFileName_Button = new System.Windows.Forms.Button();
             this.PlayBack_StopPlayBack_Button = new System.Windows.Forms.Button();
-            this.VideoTeach_EquipmentControl_PtzControl_Panel = new DevComponents.DotNetBar.ExpandablePanel();
-            this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.VideoTeach_EquipmentControl_NvrInfo_Panel = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelEx_NVRList = new DevComponents.DotNetBar.PanelEx();
-            this.RealVideoImage_EquipmentInfo__listView = new System.Windows.Forms.ListView();
-            this.ColumnHeader_IPChannel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnHeader_Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.nodeInfo__listView = new System.Windows.Forms.ListView();
+            this.nodeId_columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.nodeName_columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.nodeState_columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RealVideoImage_ServerUnInit_button = new DevComponents.DotNetBar.ButtonX();
             this.RealVideoImage_ServerInit_button = new DevComponents.DotNetBar.ButtonX();
             this.PlayBack_Panel = new DevComponents.DotNetBar.Metro.MetroTabPanel();
@@ -243,10 +243,75 @@
             this.ABOUT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroTabPanel3 = new DevComponents.DotNetBar.Metro.MetroTabPanel();
             this.panelEx_ControlPanel = new DevComponents.DotNetBar.PanelEx();
-            this.ControlPanel_SystemConfig_Label = new DevComponents.DotNetBar.LabelX();
-            this.ControlPanel_LogSearch_Label = new DevComponents.DotNetBar.LabelX();
-            this.ControlPanel_PlayBack_Label = new DevComponents.DotNetBar.LabelX();
-            this.ControlPanel_VideoTeach_Label = new DevComponents.DotNetBar.LabelX();
+            this.superTabControl_Setting = new DevComponents.DotNetBar.SuperTabControl();
+            this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx = new DevComponents.DotNetBar.PanelEx();
+            this.SystemConfig_RebackConfig_button = new DevComponents.DotNetBar.ButtonX();
+            this.SystemConfig_Exit_buttonX = new DevComponents.DotNetBar.ButtonX();
+            this.SystemConfig_NvrConfig_panel = new DevComponents.DotNetBar.PanelEx();
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput = new DevComponents.Editors.IpAddressInput();
+            this.labelX12 = new DevComponents.DotNetBar.LabelX();
+            this.integerInput1 = new DevComponents.Editors.IntegerInput();
+            this.labelX19 = new DevComponents.DotNetBar.LabelX();
+            this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput = new DevComponents.Editors.IpAddressInput();
+            this.SystemConfig_DKServerPort_integerInput = new DevComponents.Editors.IntegerInput();
+            this.SystemConfig_ZSPNvrPort_integerInput = new DevComponents.Editors.IntegerInput();
+            this.labelX9 = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput = new DevComponents.Editors.IpAddressInput();
+            this.labelX10 = new DevComponents.DotNetBar.LabelX();
+            this.labelX7 = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_BSPNvrPort_integerInput = new DevComponents.Editors.IntegerInput();
+            this.labelX_NvrPort = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_DKServerIpAddress_ipAddressInput = new DevComponents.Editors.IpAddressInput();
+            this.labelX_NvrIpAddr = new DevComponents.DotNetBar.LabelX();
+            this.panelEx3 = new DevComponents.DotNetBar.PanelEx();
+            this.switchButton2 = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.labelX15 = new DevComponents.DotNetBar.LabelX();
+            this.integerInput_LogMonth = new DevComponents.Editors.IntegerInput();
+            this.integerInput_TimeOut = new DevComponents.Editors.IntegerInput();
+            this.labelX_TimeOut = new DevComponents.DotNetBar.LabelX();
+            this.buttonX_SaveConfig = new DevComponents.DotNetBar.ButtonX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.LocalDataSavePath_panelEx = new DevComponents.DotNetBar.PanelEx();
+            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX_PlayBackServerVideoCache = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_LocalDataVideoPlayPath_textBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX18 = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_PlayBackServerImageSavePath_textBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX17 = new DevComponents.DotNetBar.LabelX();
+            this.labelX16 = new DevComponents.DotNetBar.LabelX();
+            this.labelX13 = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX11 = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX_VideoSavePath = new DevComponents.DotNetBar.LabelX();
+            this.labelX_ScreenPrintSavePath = new DevComponents.DotNetBar.LabelX();
+            this.SystemConfig_VideoTeachImageSavePath_textBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.SystemConfig_VideoTeachVideoSavePath_textBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.SystemConfig_AllConfigSave_button = new DevComponents.DotNetBar.ButtonX();
+            this.superTabItem_Setting = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.superTabItem_Recent = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.superTabItem_Help = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel6 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.panelEx_Config = new DevComponents.DotNetBar.PanelEx();
+            this.switchButton1 = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.labelX_setMDOn = new DevComponents.DotNetBar.LabelX();
+            this.panelEx_DrawScreen = new DevComponents.DotNetBar.PanelEx();
+            this.labelX_MD = new DevComponents.DotNetBar.LabelX();
+            this.buttonX_ClearRectangle = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX_DrawRectangle = new DevComponents.DotNetBar.ButtonX();
+            this.superTabItem_Config = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel12 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.superTabItem8 = new DevComponents.DotNetBar.SuperTabItem();
+            this.buttonItem_Exit = new DevComponents.DotNetBar.ButtonItem();
+            this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.labelX_ControlPanel_PlayBack = new DevComponents.DotNetBar.LabelX();
+            this.labelX_MainView = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.labelX_OperateAndControl = new DevComponents.DotNetBar.LabelX();
             this.metroTabPanel2 = new DevComponents.DotNetBar.Metro.MetroTabPanel();
@@ -260,6 +325,7 @@
             this.metroTabItem_Log = new DevComponents.DotNetBar.Metro.MetroTabItem();
             this.QuitSystem_metroTabItem = new DevComponents.DotNetBar.Metro.MetroTabItem();
             this.UpdateLocation = new System.Windows.Forms.Timer(this.components);
+            this.updateNodeStatus_timer = new System.Windows.Forms.Timer(this.components);
             this.mainUIMetroShell.SuspendLayout();
             this.VideoTeachView_panel.SuspendLayout();
             this.VideoTeach_panel.SuspendLayout();
@@ -277,7 +343,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.SuspendLayout();
             this.VideoTeach_EquipmentControl_NvrInfo_Panel.SuspendLayout();
             this.panelEx_NVRList.SuspendLayout();
             this.PlayBack_Panel.SuspendLayout();
@@ -317,11 +382,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Logs)).BeginInit();
             this.metroTabPanel3.SuspendLayout();
             this.panelEx_ControlPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.superTabControl_Setting)).BeginInit();
+            this.superTabControl_Setting.SuspendLayout();
+            this.superTabControlPanel4.SuspendLayout();
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.SuspendLayout();
+            this.SystemConfig_NvrConfig_panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_AndroidServerIpAddress_ipAddressInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_BSPNvrIpAddress_ipAddressInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_DKServerPort_integerInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_ZSPNvrPort_integerInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_ZSPNvrIpAddress_ipAddressInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_BSPNvrPort_integerInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_DKServerIpAddress_ipAddressInput)).BeginInit();
+            this.panelEx3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput_LogMonth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput_TimeOut)).BeginInit();
+            this.LocalDataSavePath_panelEx.SuspendLayout();
+            this.superTabControlPanel6.SuspendLayout();
+            this.panelEx_Config.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainUIMetroShell
             // 
-            this.mainUIMetroShell.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.mainUIMetroShell.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // 
             // 
@@ -637,7 +721,6 @@
             this.VideoTeach_EquipmentControl_Panel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.VideoTeach_EquipmentControl_Panel.Controls.Add(this.VideoTeach_NvrChannelSelectStatusStrip);
             this.VideoTeach_EquipmentControl_Panel.Controls.Add(this.PlayBack_VideoFileControl_NvrFileInfo_Panel);
-            this.VideoTeach_EquipmentControl_Panel.Controls.Add(this.VideoTeach_EquipmentControl_PtzControl_Panel);
             this.VideoTeach_EquipmentControl_Panel.Controls.Add(this.VideoTeach_EquipmentControl_NvrInfo_Panel);
             this.VideoTeach_EquipmentControl_Panel.Dock = System.Windows.Forms.DockStyle.Left;
             this.VideoTeach_EquipmentControl_Panel.Location = new System.Drawing.Point(0, 0);
@@ -685,9 +768,9 @@
             this.PlayBack_VideoFileControl_NvrFileInfo_Panel.Controls.Add(this.groupBox8);
             this.PlayBack_VideoFileControl_NvrFileInfo_Panel.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlayBack_VideoFileControl_NvrFileInfo_Panel.Expanded = false;
-            this.PlayBack_VideoFileControl_NvrFileInfo_Panel.ExpandedBounds = new System.Drawing.Rectangle(0, 52, 275, 592);
+            this.PlayBack_VideoFileControl_NvrFileInfo_Panel.ExpandedBounds = new System.Drawing.Rectangle(0, 26, 275, 592);
             this.PlayBack_VideoFileControl_NvrFileInfo_Panel.ExpandOnTitleClick = true;
-            this.PlayBack_VideoFileControl_NvrFileInfo_Panel.Location = new System.Drawing.Point(0, 628);
+            this.PlayBack_VideoFileControl_NvrFileInfo_Panel.Location = new System.Drawing.Point(0, 602);
             this.PlayBack_VideoFileControl_NvrFileInfo_Panel.Name = "PlayBack_VideoFileControl_NvrFileInfo_Panel";
             this.PlayBack_VideoFileControl_NvrFileInfo_Panel.Size = new System.Drawing.Size(275, 26);
             this.PlayBack_VideoFileControl_NvrFileInfo_Panel.Style.Alignment = System.Drawing.StringAlignment.Center;
@@ -1076,51 +1159,6 @@
             this.PlayBack_StopPlayBack_Button.Text = "停止回放";
             this.PlayBack_StopPlayBack_Button.UseVisualStyleBackColor = true;
             // 
-            // VideoTeach_EquipmentControl_PtzControl_Panel
-            // 
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.CanvasColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Controls.Add(this.panelEx1);
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Expanded = false;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.ExpandedBounds = new System.Drawing.Rectangle(0, 26, 275, 602);
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.ExpandOnTitleClick = true;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Location = new System.Drawing.Point(0, 602);
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Name = "VideoTeach_EquipmentControl_PtzControl_Panel";
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Size = new System.Drawing.Size(275, 26);
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Style.Border = DevComponents.DotNetBar.eBorderType.Raised;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Style.GradientAngle = 90;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TabIndex = 3;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.Tag = "PtzControl";
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.ThemeAware = true;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TitleStyle.BackColor1.Color = System.Drawing.Color.Silver;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TitleStyle.BorderColor.Color = System.Drawing.Color.Transparent;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TitleStyle.GradientAngle = 90;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TitleStyleMouseDown.BorderColor.Color = System.Drawing.Color.Transparent;
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.TitleText = "云台控制";
-            // 
-            // panelEx1
-            // 
-            this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEx1.Location = new System.Drawing.Point(0, 26);
-            this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(275, 0);
-            this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelEx1.Style.GradientAngle = 90;
-            this.panelEx1.TabIndex = 21;
-            this.panelEx1.Visible = false;
-            // 
             // VideoTeach_EquipmentControl_NvrInfo_Panel
             // 
             this.VideoTeach_EquipmentControl_NvrInfo_Panel.CanvasColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -1152,7 +1190,8 @@
             // 
             this.panelEx_NVRList.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx_NVRList.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx_NVRList.Controls.Add(this.RealVideoImage_EquipmentInfo__listView);
+            this.panelEx_NVRList.Controls.Add(this.buttonX1);
+            this.panelEx_NVRList.Controls.Add(this.nodeInfo__listView);
             this.panelEx_NVRList.Controls.Add(this.RealVideoImage_ServerUnInit_button);
             this.panelEx_NVRList.Controls.Add(this.RealVideoImage_ServerInit_button);
             this.panelEx_NVRList.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1167,35 +1206,54 @@
             this.panelEx_NVRList.TabIndex = 21;
             this.panelEx_NVRList.Visible = false;
             // 
-            // RealVideoImage_EquipmentInfo__listView
+            // buttonX1
             // 
-            this.RealVideoImage_EquipmentInfo__listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ColumnHeader_IPChannel,
-            this.ColumnHeader_Status});
-            this.RealVideoImage_EquipmentInfo__listView.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RealVideoImage_EquipmentInfo__listView.FullRowSelect = true;
-            this.RealVideoImage_EquipmentInfo__listView.GridLines = true;
-            this.RealVideoImage_EquipmentInfo__listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.RealVideoImage_EquipmentInfo__listView.HideSelection = false;
-            this.RealVideoImage_EquipmentInfo__listView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.RealVideoImage_EquipmentInfo__listView.Location = new System.Drawing.Point(3, 2);
-            this.RealVideoImage_EquipmentInfo__listView.MultiSelect = false;
-            this.RealVideoImage_EquipmentInfo__listView.Name = "RealVideoImage_EquipmentInfo__listView";
-            this.RealVideoImage_EquipmentInfo__listView.Size = new System.Drawing.Size(270, 410);
-            this.RealVideoImage_EquipmentInfo__listView.TabIndex = 36;
-            this.RealVideoImage_EquipmentInfo__listView.Tag = "0";
-            this.RealVideoImage_EquipmentInfo__listView.UseCompatibleStateImageBehavior = false;
-            this.RealVideoImage_EquipmentInfo__listView.View = System.Windows.Forms.View.Details;
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonX1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonX1.Location = new System.Drawing.Point(5, 462);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(267, 40);
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.TabIndex = 37;
+            this.buttonX1.Text = "刷 新 列 表 ";
             // 
-            // ColumnHeader_IPChannel
+            // nodeInfo__listView
             // 
-            this.ColumnHeader_IPChannel.Text = "摄像头";
-            this.ColumnHeader_IPChannel.Width = 92;
+            this.nodeInfo__listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nodeId_columnHeader,
+            this.nodeName_columnHeader,
+            this.nodeState_columnHeader});
+            this.nodeInfo__listView.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nodeInfo__listView.FullRowSelect = true;
+            this.nodeInfo__listView.GridLines = true;
+            this.nodeInfo__listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.nodeInfo__listView.HideSelection = false;
+            this.nodeInfo__listView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.nodeInfo__listView.Location = new System.Drawing.Point(2, 2);
+            this.nodeInfo__listView.MultiSelect = false;
+            this.nodeInfo__listView.Name = "nodeInfo__listView";
+            this.nodeInfo__listView.Size = new System.Drawing.Size(270, 410);
+            this.nodeInfo__listView.TabIndex = 36;
+            this.nodeInfo__listView.Tag = "0";
+            this.nodeInfo__listView.UseCompatibleStateImageBehavior = false;
+            this.nodeInfo__listView.View = System.Windows.Forms.View.Details;
             // 
-            // ColumnHeader_Status
+            // nodeId_columnHeader
             // 
-            this.ColumnHeader_Status.Text = "状态";
-            this.ColumnHeader_Status.Width = 139;
+            this.nodeId_columnHeader.Text = "节点编号";
+            this.nodeId_columnHeader.Width = 73;
+            // 
+            // nodeName_columnHeader
+            // 
+            this.nodeName_columnHeader.Text = "节点名";
+            this.nodeName_columnHeader.Width = 119;
+            // 
+            // nodeState_columnHeader
+            // 
+            this.nodeState_columnHeader.Text = "节点状态";
+            this.nodeState_columnHeader.Width = 94;
             // 
             // RealVideoImage_ServerUnInit_button
             // 
@@ -1203,12 +1261,12 @@
             this.RealVideoImage_ServerUnInit_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.RealVideoImage_ServerUnInit_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.RealVideoImage_ServerUnInit_button.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RealVideoImage_ServerUnInit_button.Location = new System.Drawing.Point(7, 463);
+            this.RealVideoImage_ServerUnInit_button.Location = new System.Drawing.Point(7, 508);
             this.RealVideoImage_ServerUnInit_button.Name = "RealVideoImage_ServerUnInit_button";
-            this.RealVideoImage_ServerUnInit_button.Size = new System.Drawing.Size(266, 49);
+            this.RealVideoImage_ServerUnInit_button.Size = new System.Drawing.Size(266, 40);
             this.RealVideoImage_ServerUnInit_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.RealVideoImage_ServerUnInit_button.TabIndex = 35;
-            this.RealVideoImage_ServerUnInit_button.Text = "注 销 登 录";
+            this.RealVideoImage_ServerUnInit_button.Text = "结 束 监 听";
             this.RealVideoImage_ServerUnInit_button.Click += new System.EventHandler(this.RealVideoImage_ServerUnInit_button_Click);
             // 
             // RealVideoImage_ServerInit_button
@@ -1219,10 +1277,10 @@
             this.RealVideoImage_ServerInit_button.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.RealVideoImage_ServerInit_button.Location = new System.Drawing.Point(5, 418);
             this.RealVideoImage_ServerInit_button.Name = "RealVideoImage_ServerInit_button";
-            this.RealVideoImage_ServerInit_button.Size = new System.Drawing.Size(267, 40);
+            this.RealVideoImage_ServerInit_button.Size = new System.Drawing.Size(267, 39);
             this.RealVideoImage_ServerInit_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.RealVideoImage_ServerInit_button.TabIndex = 22;
-            this.RealVideoImage_ServerInit_button.Text = "登 录 设 备";
+            this.RealVideoImage_ServerInit_button.Text = "开 始 监 听";
             this.RealVideoImage_ServerInit_button.Click += new System.EventHandler(this.RealVideoImage_ServerInit_button_Click);
             // 
             // PlayBack_Panel
@@ -1287,7 +1345,7 @@
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnCount = 3;
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.789976F));
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 98.21002F));
-            this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
+            this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_playerControl_videoFileControl_splitter, 2, 0);
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_equimentControl_playerControl_splitter, 0, 0);
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_PlayerScreensControl_tableLayoutPanel, 1, 0);
@@ -2043,7 +2101,7 @@
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 92F));
-            this.PlayBack_PlayerScreensControl_tableLayoutPanel.Size = new System.Drawing.Size(374, 618);
+            this.PlayBack_PlayerScreensControl_tableLayoutPanel.Size = new System.Drawing.Size(365, 618);
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.TabIndex = 16;
             // 
             // PlayBack_PlayerControl_playControl_panel
@@ -2055,7 +2113,7 @@
             this.PlayBack_PlayerControl_playControl_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerControl_playControl_panel.Location = new System.Drawing.Point(3, 529);
             this.PlayBack_PlayerControl_playControl_panel.Name = "PlayBack_PlayerControl_playControl_panel";
-            this.PlayBack_PlayerControl_playControl_panel.Size = new System.Drawing.Size(368, 86);
+            this.PlayBack_PlayerControl_playControl_panel.Size = new System.Drawing.Size(359, 86);
             this.PlayBack_PlayerControl_playControl_panel.TabIndex = 16;
             // 
             // PlayBack_PlayerControl_playControl_tableLayoutPanel
@@ -2070,7 +2128,7 @@
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowCount = 2;
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.42424F));
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.57576F));
-            this.PlayBack_PlayerControl_playControl_tableLayoutPanel.Size = new System.Drawing.Size(368, 86);
+            this.PlayBack_PlayerControl_playControl_tableLayoutPanel.Size = new System.Drawing.Size(359, 86);
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.TabIndex = 0;
             // 
             // PlayBack_PlayerScreensControl_PlayerControl_Panel
@@ -2081,7 +2139,7 @@
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Location = new System.Drawing.Point(3, 39);
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Name = "PlayBack_PlayerScreensControl_PlayerControl_Panel";
-            this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Size = new System.Drawing.Size(362, 44);
+            this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Size = new System.Drawing.Size(353, 44);
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.TabIndex = 1;
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Visible = false;
             // 
@@ -2191,7 +2249,7 @@
             this.PlayBack_PlayerControl_BubbleBar.Name = "PlayBack_PlayerControl_BubbleBar";
             this.PlayBack_PlayerControl_BubbleBar.SelectedTab = this.bubbleBarTab5;
             this.PlayBack_PlayerControl_BubbleBar.SelectedTabColors.BorderColor = System.Drawing.Color.Black;
-            this.PlayBack_PlayerControl_BubbleBar.Size = new System.Drawing.Size(362, 44);
+            this.PlayBack_PlayerControl_BubbleBar.Size = new System.Drawing.Size(353, 44);
             this.PlayBack_PlayerControl_BubbleBar.TabIndex = 76;
             this.PlayBack_PlayerControl_BubbleBar.Tabs.Add(this.bubbleBarTab5);
             this.PlayBack_PlayerControl_BubbleBar.Tabs.Add(this.bubbleBarTab6);
@@ -2331,7 +2389,7 @@
             this.PlayBack_PlayerVideoLengthControl_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerVideoLengthControl_Panel.Location = new System.Drawing.Point(3, 3);
             this.PlayBack_PlayerVideoLengthControl_Panel.Name = "PlayBack_PlayerVideoLengthControl_Panel";
-            this.PlayBack_PlayerVideoLengthControl_Panel.Size = new System.Drawing.Size(362, 30);
+            this.PlayBack_PlayerVideoLengthControl_Panel.Size = new System.Drawing.Size(353, 30);
             this.PlayBack_PlayerVideoLengthControl_Panel.TabIndex = 0;
             this.PlayBack_PlayerVideoLengthControl_Panel.Visible = false;
             // 
@@ -2341,7 +2399,7 @@
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Location = new System.Drawing.Point(0, 0);
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Maximum = 100;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Name = "PlayBack_PlayerVideoLengthControl_TrackBar";
-            this.PlayBack_PlayerVideoLengthControl_TrackBar.Size = new System.Drawing.Size(362, 30);
+            this.PlayBack_PlayerVideoLengthControl_TrackBar.Size = new System.Drawing.Size(353, 30);
             this.PlayBack_PlayerVideoLengthControl_TrackBar.SmallChange = 5;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.TabIndex = 71;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
@@ -2370,7 +2428,7 @@
             this.PlayBack_PlayScreenView_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayScreenView_panel.Location = new System.Drawing.Point(3, 3);
             this.PlayBack_PlayScreenView_panel.Name = "PlayBack_PlayScreenView_panel";
-            this.PlayBack_PlayScreenView_panel.Size = new System.Drawing.Size(368, 505);
+            this.PlayBack_PlayScreenView_panel.Size = new System.Drawing.Size(359, 505);
             this.PlayBack_PlayScreenView_panel.TabIndex = 15;
             // 
             // panel3
@@ -2379,7 +2437,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 514);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(368, 9);
+            this.panel3.Size = new System.Drawing.Size(359, 9);
             this.panel3.TabIndex = 17;
             // 
             // PlayBack_PlayerControl__PlayerControlPanel_splitter
@@ -2415,7 +2473,7 @@
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.HotGripLightColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Location = new System.Drawing.Point(0, -1);
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Name = "PlayBack_PlayerControl__PlayerControlPanel_splitter";
-            this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Size = new System.Drawing.Size(368, 10);
+            this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Size = new System.Drawing.Size(359, 10);
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Style = DevComponents.DotNetBar.eSplitterStyle.Office2007;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.TabIndex = 43;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.TabStop = false;
@@ -2499,7 +2557,7 @@
             this.dateTimeInput_Log_EndTime.ButtonDropDown.Visible = true;
             this.dateTimeInput_Log_EndTime.ForeColor = System.Drawing.Color.Black;
             this.dateTimeInput_Log_EndTime.IsPopupCalendarOpen = false;
-            this.dateTimeInput_Log_EndTime.Location = new System.Drawing.Point(37, 350);
+            this.dateTimeInput_Log_EndTime.Location = new System.Drawing.Point(-10, 347);
             // 
             // 
             // 
@@ -2533,7 +2591,7 @@
             this.dateTimeInput_Log_EndTime.MonthCalendar.TodayButtonVisible = true;
             this.dateTimeInput_Log_EndTime.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateTimeInput_Log_EndTime.Name = "dateTimeInput_Log_EndTime";
-            this.dateTimeInput_Log_EndTime.Size = new System.Drawing.Size(23, 21);
+            this.dateTimeInput_Log_EndTime.Size = new System.Drawing.Size(120, 21);
             this.dateTimeInput_Log_EndTime.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateTimeInput_Log_EndTime.TabIndex = 18;
             // 
@@ -2932,10 +2990,11 @@
             // 
             this.panelEx_ControlPanel.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx_ControlPanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_SystemConfig_Label);
-            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_LogSearch_Label);
-            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_PlayBack_Label);
-            this.panelEx_ControlPanel.Controls.Add(this.ControlPanel_VideoTeach_Label);
+            this.panelEx_ControlPanel.Controls.Add(this.superTabControl_Setting);
+            this.panelEx_ControlPanel.Controls.Add(this.labelX5);
+            this.panelEx_ControlPanel.Controls.Add(this.labelX4);
+            this.panelEx_ControlPanel.Controls.Add(this.labelX_ControlPanel_PlayBack);
+            this.panelEx_ControlPanel.Controls.Add(this.labelX_MainView);
             this.panelEx_ControlPanel.Controls.Add(this.labelX3);
             this.panelEx_ControlPanel.Controls.Add(this.labelX_OperateAndControl);
             this.panelEx_ControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2947,88 +3006,1084 @@
             this.panelEx_ControlPanel.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
             this.panelEx_ControlPanel.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx_ControlPanel.Style.GradientAngle = 90;
-            this.panelEx_ControlPanel.TabIndex = 0;
+            this.panelEx_ControlPanel.TabIndex = 1;
             // 
-            // ControlPanel_SystemConfig_Label
+            // superTabControl_Setting
             // 
-            this.ControlPanel_SystemConfig_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.superTabControl_Setting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlPanel_SystemConfig_Label.BackColor = System.Drawing.Color.Transparent;
+            this.superTabControl_Setting.BackColor = System.Drawing.Color.White;
+            this.superTabControl_Setting.CloseButtonPosition = DevComponents.DotNetBar.eTabCloseButtonPosition.Left;
             // 
             // 
             // 
-            this.ControlPanel_SystemConfig_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ControlPanel_SystemConfig_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ControlPanel_SystemConfig_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_SystemConfig_Label.Image")));
-            this.ControlPanel_SystemConfig_Label.Location = new System.Drawing.Point(640, 343);
-            this.ControlPanel_SystemConfig_Label.Name = "ControlPanel_SystemConfig_Label";
-            this.ControlPanel_SystemConfig_Label.Size = new System.Drawing.Size(209, 74);
-            this.ControlPanel_SystemConfig_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.ControlPanel_SystemConfig_Label.TabIndex = 4;
-            this.ControlPanel_SystemConfig_Label.Tag = "Config";
-            this.ControlPanel_SystemConfig_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>系统配置</b></font>\r\n<br>配置客户端常用参数。</br>";
-            this.ControlPanel_SystemConfig_Label.WordWrap = true;
             // 
-            // ControlPanel_LogSearch_Label
             // 
-            this.ControlPanel_LogSearch_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            // 
+            this.superTabControl_Setting.ControlBox.CloseBox.Name = "";
+            // 
+            // 
+            // 
+            this.superTabControl_Setting.ControlBox.MenuBox.Name = "";
+            this.superTabControl_Setting.ControlBox.Name = "";
+            this.superTabControl_Setting.ControlBox.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.superTabControl_Setting.ControlBox.MenuBox,
+            this.superTabControl_Setting.ControlBox.CloseBox});
+            this.superTabControl_Setting.ControlBox.Visible = false;
+            this.superTabControl_Setting.Controls.Add(this.superTabControlPanel4);
+            this.superTabControl_Setting.Controls.Add(this.superTabControlPanel1);
+            this.superTabControl_Setting.Controls.Add(this.superTabControlPanel3);
+            this.superTabControl_Setting.Controls.Add(this.superTabControlPanel6);
+            this.superTabControl_Setting.Controls.Add(this.superTabControlPanel12);
+            this.superTabControl_Setting.ForeColor = System.Drawing.Color.Black;
+            this.superTabControl_Setting.ItemPadding.Left = 6;
+            this.superTabControl_Setting.ItemPadding.Right = 4;
+            this.superTabControl_Setting.ItemPadding.Top = 4;
+            this.superTabControl_Setting.Location = new System.Drawing.Point(-3, 0);
+            this.superTabControl_Setting.Name = "superTabControl_Setting";
+            this.superTabControl_Setting.ReorderTabsEnabled = false;
+            this.superTabControl_Setting.SelectedTabFont = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.superTabControl_Setting.SelectedTabIndex = 0;
+            this.superTabControl_Setting.Size = new System.Drawing.Size(978, 624);
+            this.superTabControl_Setting.TabAlignment = DevComponents.DotNetBar.eTabStripAlignment.Left;
+            this.superTabControl_Setting.TabFont = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.superTabControl_Setting.TabHorizontalSpacing = 16;
+            this.superTabControl_Setting.TabIndex = 1;
+            this.superTabControl_Setting.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.superTabItem_Setting,
+            this.superTabItem_Config,
+            this.superTabItem_Help,
+            this.superTabItem_Recent,
+            this.superTabItem8,
+            this.buttonItem_Exit});
+            this.superTabControl_Setting.TabVerticalSpacing = 8;
+            this.superTabControl_Setting.Visible = false;
+            // 
+            // superTabControlPanel4
+            // 
+            this.superTabControlPanel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("superTabControlPanel4.BackgroundImage")));
+            this.superTabControlPanel4.BackgroundImagePosition = DevComponents.DotNetBar.eStyleBackgroundImage.BottomRight;
+            this.superTabControlPanel4.Controls.Add(this.SystemConfig_NvrAndLocalDataSavePath_panelEx);
+            this.superTabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel4.Location = new System.Drawing.Point(106, 0);
+            this.superTabControlPanel4.Name = "superTabControlPanel4";
+            this.superTabControlPanel4.Size = new System.Drawing.Size(872, 624);
+            this.superTabControlPanel4.TabIndex = 6;
+            this.superTabControlPanel4.TabItem = this.superTabItem_Setting;
+            // 
+            // SystemConfig_NvrAndLocalDataSavePath_panelEx
+            // 
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.CanvasColor = System.Drawing.Color.Maroon;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_RebackConfig_button);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_Exit_buttonX);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_NvrConfig_panel);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Controls.Add(this.panelEx3);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Controls.Add(this.LocalDataSavePath_panelEx);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_AllConfigSave_button);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Location = new System.Drawing.Point(0, 0);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Name = "SystemConfig_NvrAndLocalDataSavePath_panelEx";
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Size = new System.Drawing.Size(872, 624);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Style.GradientAngle = 90;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.TabIndex = 0;
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.Text = "panelEx1";
+            // 
+            // SystemConfig_RebackConfig_button
+            // 
+            this.SystemConfig_RebackConfig_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.SystemConfig_RebackConfig_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.SystemConfig_RebackConfig_button.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SystemConfig_RebackConfig_button.Location = new System.Drawing.Point(715, 694);
+            this.SystemConfig_RebackConfig_button.Name = "SystemConfig_RebackConfig_button";
+            this.SystemConfig_RebackConfig_button.Size = new System.Drawing.Size(95, 23);
+            this.SystemConfig_RebackConfig_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.SystemConfig_RebackConfig_button.TabIndex = 29;
+            this.SystemConfig_RebackConfig_button.Text = "还原";
+            // 
+            // SystemConfig_Exit_buttonX
+            // 
+            this.SystemConfig_Exit_buttonX.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.SystemConfig_Exit_buttonX.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.SystemConfig_Exit_buttonX.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SystemConfig_Exit_buttonX.Location = new System.Drawing.Point(932, 695);
+            this.SystemConfig_Exit_buttonX.Name = "SystemConfig_Exit_buttonX";
+            this.SystemConfig_Exit_buttonX.Size = new System.Drawing.Size(95, 23);
+            this.SystemConfig_Exit_buttonX.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.SystemConfig_Exit_buttonX.TabIndex = 28;
+            this.SystemConfig_Exit_buttonX.Text = "取消";
+            // 
+            // SystemConfig_NvrConfig_panel
+            // 
+            this.SystemConfig_NvrConfig_panel.CanvasColor = System.Drawing.SystemColors.AppWorkspace;
+            this.SystemConfig_NvrConfig_panel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.SystemConfig_AndroidServerIpAddress_ipAddressInput);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.labelX12);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.integerInput1);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.labelX19);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.labelX8);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.SystemConfig_BSPNvrIpAddress_ipAddressInput);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.SystemConfig_DKServerPort_integerInput);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.SystemConfig_ZSPNvrPort_integerInput);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.labelX9);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.SystemConfig_ZSPNvrIpAddress_ipAddressInput);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.labelX10);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.labelX7);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.SystemConfig_BSPNvrPort_integerInput);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.labelX_NvrPort);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.SystemConfig_DKServerIpAddress_ipAddressInput);
+            this.SystemConfig_NvrConfig_panel.Controls.Add(this.labelX_NvrIpAddr);
+            this.SystemConfig_NvrConfig_panel.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SystemConfig_NvrConfig_panel.Location = new System.Drawing.Point(62, 16);
+            this.SystemConfig_NvrConfig_panel.Name = "SystemConfig_NvrConfig_panel";
+            this.SystemConfig_NvrConfig_panel.Size = new System.Drawing.Size(1043, 194);
+            this.SystemConfig_NvrConfig_panel.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.SystemConfig_NvrConfig_panel.Style.BackColor1.Color = System.Drawing.SystemColors.Control;
+            this.SystemConfig_NvrConfig_panel.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.SystemConfig_NvrConfig_panel.Style.BorderColor.Color = System.Drawing.Color.Black;
+            this.SystemConfig_NvrConfig_panel.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.SystemConfig_NvrConfig_panel.Style.GradientAngle = 90;
+            this.SystemConfig_NvrConfig_panel.TabIndex = 8;
+            // 
+            // SystemConfig_AndroidServerIpAddress_ipAddressInput
+            // 
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.AutoOverwrite = true;
+            // 
+            // 
+            // 
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.ButtonFreeText.Visible = true;
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.Location = new System.Drawing.Point(230, 151);
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.Name = "SystemConfig_AndroidServerIpAddress_ipAddressInput";
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.Size = new System.Drawing.Size(149, 26);
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.TabIndex = 19;
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.Value = "192.168.1.10";
+            this.SystemConfig_AndroidServerIpAddress_ipAddressInput.WatermarkText = "请输入远程设备IP";
+            // 
+            // labelX12
+            // 
+            // 
+            // 
+            // 
+            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX12.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX12.ForeColor = System.Drawing.Color.Black;
+            this.labelX12.Location = new System.Drawing.Point(11, 151);
+            this.labelX12.Name = "labelX12";
+            this.labelX12.Size = new System.Drawing.Size(184, 23);
+            this.labelX12.TabIndex = 18;
+            this.labelX12.Text = "安卓视频通话服务器IP地址:";
+            // 
+            // integerInput1
+            // 
+            // 
+            // 
+            // 
+            this.integerInput1.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.integerInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.integerInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.integerInput1.Location = new System.Drawing.Point(852, 19);
+            this.integerInput1.Name = "integerInput1";
+            this.integerInput1.ShowUpDown = true;
+            this.integerInput1.Size = new System.Drawing.Size(64, 26);
+            this.integerInput1.TabIndex = 17;
+            this.integerInput1.Value = 8889;
+            this.integerInput1.WatermarkText = "请输入远程设备端口号";
+            // 
+            // labelX19
+            // 
+            // 
+            // 
+            // 
+            this.labelX19.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX19.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX19.ForeColor = System.Drawing.Color.Black;
+            this.labelX19.Location = new System.Drawing.Point(724, 17);
+            this.labelX19.Name = "labelX19";
+            this.labelX19.Size = new System.Drawing.Size(122, 23);
+            this.labelX19.TabIndex = 16;
+            this.labelX19.Text = "服务器Udp端口号:";
+            // 
+            // labelX8
+            // 
+            // 
+            // 
+            // 
+            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX8.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX8.ForeColor = System.Drawing.Color.Black;
+            this.labelX8.Location = new System.Drawing.Point(421, 103);
+            this.labelX8.Name = "labelX8";
+            this.labelX8.Size = new System.Drawing.Size(178, 23);
+            this.labelX8.TabIndex = 15;
+            this.labelX8.Text = "白石猪场NVR设备端口号:";
+            // 
+            // SystemConfig_BSPNvrIpAddress_ipAddressInput
+            // 
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.AutoOverwrite = true;
+            // 
+            // 
+            // 
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.ButtonFreeText.Visible = true;
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.Location = new System.Drawing.Point(230, 106);
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.Name = "SystemConfig_BSPNvrIpAddress_ipAddressInput";
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.Size = new System.Drawing.Size(149, 26);
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.TabIndex = 14;
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.Value = "192.168.1.10";
+            this.SystemConfig_BSPNvrIpAddress_ipAddressInput.WatermarkText = "请输入远程设备IP";
+            // 
+            // SystemConfig_DKServerPort_integerInput
+            // 
+            // 
+            // 
+            // 
+            this.SystemConfig_DKServerPort_integerInput.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.SystemConfig_DKServerPort_integerInput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_DKServerPort_integerInput.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.SystemConfig_DKServerPort_integerInput.Location = new System.Drawing.Point(632, 16);
+            this.SystemConfig_DKServerPort_integerInput.Name = "SystemConfig_DKServerPort_integerInput";
+            this.SystemConfig_DKServerPort_integerInput.ShowUpDown = true;
+            this.SystemConfig_DKServerPort_integerInput.Size = new System.Drawing.Size(70, 26);
+            this.SystemConfig_DKServerPort_integerInput.TabIndex = 13;
+            this.SystemConfig_DKServerPort_integerInput.Value = 8889;
+            this.SystemConfig_DKServerPort_integerInput.WatermarkText = "请输入远程设备端口号";
+            // 
+            // SystemConfig_ZSPNvrPort_integerInput
+            // 
+            // 
+            // 
+            // 
+            this.SystemConfig_ZSPNvrPort_integerInput.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.SystemConfig_ZSPNvrPort_integerInput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_ZSPNvrPort_integerInput.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.SystemConfig_ZSPNvrPort_integerInput.Location = new System.Drawing.Point(632, 59);
+            this.SystemConfig_ZSPNvrPort_integerInput.Name = "SystemConfig_ZSPNvrPort_integerInput";
+            this.SystemConfig_ZSPNvrPort_integerInput.ShowUpDown = true;
+            this.SystemConfig_ZSPNvrPort_integerInput.Size = new System.Drawing.Size(70, 26);
+            this.SystemConfig_ZSPNvrPort_integerInput.TabIndex = 11;
+            this.SystemConfig_ZSPNvrPort_integerInput.Value = 8000;
+            this.SystemConfig_ZSPNvrPort_integerInput.WatermarkText = "请输入远程设备端口号";
+            // 
+            // labelX9
+            // 
+            // 
+            // 
+            // 
+            this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX9.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX9.ForeColor = System.Drawing.Color.Black;
+            this.labelX9.Location = new System.Drawing.Point(421, 59);
+            this.labelX9.Name = "labelX9";
+            this.labelX9.Size = new System.Drawing.Size(192, 23);
+            this.labelX9.TabIndex = 10;
+            this.labelX9.Text = "中山白石猪场NVR设备端口:";
+            // 
+            // SystemConfig_ZSPNvrIpAddress_ipAddressInput
+            // 
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.AutoOverwrite = true;
+            // 
+            // 
+            // 
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.ButtonFreeText.Visible = true;
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.Location = new System.Drawing.Point(231, 59);
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.Name = "SystemConfig_ZSPNvrIpAddress_ipAddressInput";
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.Size = new System.Drawing.Size(148, 26);
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.TabIndex = 9;
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.Value = "113.106.13.19";
+            this.SystemConfig_ZSPNvrIpAddress_ipAddressInput.WatermarkText = "请输入远程设备IP";
+            // 
+            // labelX10
+            // 
+            // 
+            // 
+            // 
+            this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX10.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX10.ForeColor = System.Drawing.Color.Black;
+            this.labelX10.Location = new System.Drawing.Point(11, 59);
+            this.labelX10.Name = "labelX10";
+            this.labelX10.Size = new System.Drawing.Size(200, 23);
+            this.labelX10.TabIndex = 8;
+            this.labelX10.Text = "中山白石猪场NVR设备IP地址:";
+            // 
+            // labelX7
+            // 
+            // 
+            // 
+            // 
+            this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX7.ForeColor = System.Drawing.Color.Black;
+            this.labelX7.Location = new System.Drawing.Point(11, 106);
+            this.labelX7.Name = "labelX7";
+            this.labelX7.Size = new System.Drawing.Size(174, 23);
+            this.labelX7.TabIndex = 5;
+            this.labelX7.Text = "白石猪场NVR设备IP地址:";
+            // 
+            // SystemConfig_BSPNvrPort_integerInput
+            // 
+            // 
+            // 
+            // 
+            this.SystemConfig_BSPNvrPort_integerInput.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.SystemConfig_BSPNvrPort_integerInput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_BSPNvrPort_integerInput.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.SystemConfig_BSPNvrPort_integerInput.Location = new System.Drawing.Point(632, 100);
+            this.SystemConfig_BSPNvrPort_integerInput.Name = "SystemConfig_BSPNvrPort_integerInput";
+            this.SystemConfig_BSPNvrPort_integerInput.ShowUpDown = true;
+            this.SystemConfig_BSPNvrPort_integerInput.Size = new System.Drawing.Size(70, 26);
+            this.SystemConfig_BSPNvrPort_integerInput.TabIndex = 4;
+            this.SystemConfig_BSPNvrPort_integerInput.Value = 8000;
+            this.SystemConfig_BSPNvrPort_integerInput.WatermarkText = "请输入远程设备端口号";
+            // 
+            // labelX_NvrPort
+            // 
+            // 
+            // 
+            // 
+            this.labelX_NvrPort.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_NvrPort.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX_NvrPort.ForeColor = System.Drawing.Color.Black;
+            this.labelX_NvrPort.Location = new System.Drawing.Point(423, 16);
+            this.labelX_NvrPort.Name = "labelX_NvrPort";
+            this.labelX_NvrPort.Size = new System.Drawing.Size(154, 23);
+            this.labelX_NvrPort.TabIndex = 3;
+            this.labelX_NvrPort.Text = "控制服务器Tcp端口号:";
+            // 
+            // SystemConfig_DKServerIpAddress_ipAddressInput
+            // 
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.AutoOverwrite = true;
+            // 
+            // 
+            // 
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.ButtonFreeText.Visible = true;
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.Location = new System.Drawing.Point(231, 16);
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.Name = "SystemConfig_DKServerIpAddress_ipAddressInput";
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.Size = new System.Drawing.Size(148, 26);
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.TabIndex = 2;
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.Value = "192.168.100.12";
+            this.SystemConfig_DKServerIpAddress_ipAddressInput.WatermarkText = "请输入远程设备IP";
+            // 
+            // labelX_NvrIpAddr
+            // 
+            // 
+            // 
+            // 
+            this.labelX_NvrIpAddr.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_NvrIpAddr.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX_NvrIpAddr.ForeColor = System.Drawing.Color.Black;
+            this.labelX_NvrIpAddr.Location = new System.Drawing.Point(11, 16);
+            this.labelX_NvrIpAddr.Name = "labelX_NvrIpAddr";
+            this.labelX_NvrIpAddr.Size = new System.Drawing.Size(126, 23);
+            this.labelX_NvrIpAddr.TabIndex = 1;
+            this.labelX_NvrIpAddr.Text = "控制服务器IP地址:";
+            // 
+            // panelEx3
+            // 
+            this.panelEx3.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx3.Controls.Add(this.switchButton2);
+            this.panelEx3.Controls.Add(this.labelX15);
+            this.panelEx3.Controls.Add(this.integerInput_LogMonth);
+            this.panelEx3.Controls.Add(this.integerInput_TimeOut);
+            this.panelEx3.Controls.Add(this.labelX_TimeOut);
+            this.panelEx3.Controls.Add(this.buttonX_SaveConfig);
+            this.panelEx3.Controls.Add(this.labelX1);
+            this.panelEx3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panelEx3.Location = new System.Drawing.Point(62, 404);
+            this.panelEx3.Name = "panelEx3";
+            this.panelEx3.Size = new System.Drawing.Size(1043, 75);
+            this.panelEx3.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelEx3.Style.BackColor1.Color = System.Drawing.SystemColors.Control;
+            this.panelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelEx3.Style.BorderColor.Color = System.Drawing.Color.Black;
+            this.panelEx3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelEx3.Style.GradientAngle = 90;
+            this.panelEx3.TabIndex = 7;
+            // 
+            // switchButton2
+            // 
+            // 
+            // 
+            // 
+            this.switchButton2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.switchButton2.ForeColor = System.Drawing.Color.Black;
+            this.switchButton2.Location = new System.Drawing.Point(385, 17);
+            this.switchButton2.Name = "switchButton2";
+            this.switchButton2.OffText = "否";
+            this.switchButton2.OnText = "是";
+            this.switchButton2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.switchButton2.Size = new System.Drawing.Size(66, 22);
+            this.switchButton2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.switchButton2.TabIndex = 23;
+            // 
+            // labelX15
+            // 
+            // 
+            // 
+            // 
+            this.labelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX15.ForeColor = System.Drawing.Color.Black;
+            this.labelX15.Location = new System.Drawing.Point(253, 14);
+            this.labelX15.Name = "labelX15";
+            this.labelX15.Size = new System.Drawing.Size(126, 25);
+            this.labelX15.TabIndex = 22;
+            this.labelX15.Text = "磁盘满覆盖文件";
+            this.labelX15.TextAlignment = System.Drawing.StringAlignment.Far;
+            // 
+            // integerInput_LogMonth
+            // 
+            // 
+            // 
+            // 
+            this.integerInput_LogMonth.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.integerInput_LogMonth.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.integerInput_LogMonth.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.integerInput_LogMonth.ForeColor = System.Drawing.Color.Black;
+            this.integerInput_LogMonth.Location = new System.Drawing.Point(651, 14);
+            this.integerInput_LogMonth.MaxValue = 12;
+            this.integerInput_LogMonth.MinValue = 0;
+            this.integerInput_LogMonth.Name = "integerInput_LogMonth";
+            this.integerInput_LogMonth.ShowUpDown = true;
+            this.integerInput_LogMonth.Size = new System.Drawing.Size(66, 26);
+            this.integerInput_LogMonth.TabIndex = 21;
+            // 
+            // integerInput_TimeOut
+            // 
+            // 
+            // 
+            // 
+            this.integerInput_TimeOut.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.integerInput_TimeOut.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.integerInput_TimeOut.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.integerInput_TimeOut.ForeColor = System.Drawing.Color.Black;
+            this.integerInput_TimeOut.Location = new System.Drawing.Point(145, 13);
+            this.integerInput_TimeOut.MaxValue = 60;
+            this.integerInput_TimeOut.MinValue = 0;
+            this.integerInput_TimeOut.Name = "integerInput_TimeOut";
+            this.integerInput_TimeOut.ShowUpDown = true;
+            this.integerInput_TimeOut.Size = new System.Drawing.Size(66, 26);
+            this.integerInput_TimeOut.TabIndex = 20;
+            // 
+            // labelX_TimeOut
+            // 
+            // 
+            // 
+            // 
+            this.labelX_TimeOut.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_TimeOut.ForeColor = System.Drawing.Color.Black;
+            this.labelX_TimeOut.Location = new System.Drawing.Point(17, 13);
+            this.labelX_TimeOut.Name = "labelX_TimeOut";
+            this.labelX_TimeOut.Size = new System.Drawing.Size(112, 23);
+            this.labelX_TimeOut.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX_TimeOut.TabIndex = 19;
+            this.labelX_TimeOut.Text = "连接超时（秒）";
+            this.labelX_TimeOut.TextAlignment = System.Drawing.StringAlignment.Far;
+            // 
+            // buttonX_SaveConfig
+            // 
+            this.buttonX_SaveConfig.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX_SaveConfig.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX_SaveConfig.Location = new System.Drawing.Point(803, 114);
+            this.buttonX_SaveConfig.Name = "buttonX_SaveConfig";
+            this.buttonX_SaveConfig.Size = new System.Drawing.Size(95, 23);
+            this.buttonX_SaveConfig.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX_SaveConfig.TabIndex = 6;
+            this.buttonX_SaveConfig.Text = "保存";
+            // 
+            // labelX1
+            // 
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.ForeColor = System.Drawing.Color.Black;
+            this.labelX1.Location = new System.Drawing.Point(480, 17);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(148, 23);
+            this.labelX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX1.TabIndex = 15;
+            this.labelX1.Text = "日志保存时间（月）";
+            this.labelX1.TextAlignment = System.Drawing.StringAlignment.Far;
+            // 
+            // LocalDataSavePath_panelEx
+            // 
+            this.LocalDataSavePath_panelEx.CanvasColor = System.Drawing.SystemColors.Control;
+            this.LocalDataSavePath_panelEx.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.LocalDataSavePath_panelEx.Controls.Add(this.textBoxX1);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.labelX_PlayBackServerVideoCache);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_LocalDataVideoPlayPath_textBox);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.labelX18);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_PlayBackServerImageSavePath_textBox);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_PlayBackServerVideoSavePath_textBox);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.labelX17);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.labelX16);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.labelX13);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_PlayBackNvrImageSavePath_textBox);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.labelX11);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_PlayBackNvrVideoSavePath_textBox);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.labelX_VideoSavePath);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.labelX_ScreenPrintSavePath);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_VideoTeachImageSavePath_textBox);
+            this.LocalDataSavePath_panelEx.Controls.Add(this.SystemConfig_VideoTeachVideoSavePath_textBox);
+            this.LocalDataSavePath_panelEx.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LocalDataSavePath_panelEx.Location = new System.Drawing.Point(62, 216);
+            this.LocalDataSavePath_panelEx.Name = "LocalDataSavePath_panelEx";
+            this.LocalDataSavePath_panelEx.Size = new System.Drawing.Size(1043, 179);
+            this.LocalDataSavePath_panelEx.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.LocalDataSavePath_panelEx.Style.BackColor1.Color = System.Drawing.SystemColors.Control;
+            this.LocalDataSavePath_panelEx.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.LocalDataSavePath_panelEx.Style.BorderColor.Color = System.Drawing.Color.Black;
+            this.LocalDataSavePath_panelEx.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.LocalDataSavePath_panelEx.Style.GradientAngle = 90;
+            this.LocalDataSavePath_panelEx.TabIndex = 0;
+            // 
+            // textBoxX1
+            // 
+            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX1.Border.Class = "TextBoxBorder";
+            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX1.Location = new System.Drawing.Point(702, 134);
+            this.textBoxX1.Name = "textBoxX1";
+            this.textBoxX1.Size = new System.Drawing.Size(280, 26);
+            this.textBoxX1.TabIndex = 35;
+            this.textBoxX1.Tag = "SystemConfig_PlayBackServerImageSavePath";
+            // 
+            // labelX_PlayBackServerVideoCache
+            // 
+            // 
+            // 
+            // 
+            this.labelX_PlayBackServerVideoCache.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_PlayBackServerVideoCache.ForeColor = System.Drawing.Color.Black;
+            this.labelX_PlayBackServerVideoCache.Location = new System.Drawing.Point(501, 133);
+            this.labelX_PlayBackServerVideoCache.Name = "labelX_PlayBackServerVideoCache";
+            this.labelX_PlayBackServerVideoCache.Size = new System.Drawing.Size(200, 25);
+            this.labelX_PlayBackServerVideoCache.TabIndex = 34;
+            this.labelX_PlayBackServerVideoCache.Text = "回放服务器视频文件缓冲路径:";
+            // 
+            // SystemConfig_LocalDataVideoPlayPath_textBox
+            // 
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.Border.Class = "TextBoxBorder";
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.ForeColor = System.Drawing.Color.Black;
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.Location = new System.Drawing.Point(701, 94);
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.Name = "SystemConfig_LocalDataVideoPlayPath_textBox";
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.Size = new System.Drawing.Size(280, 26);
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.TabIndex = 33;
+            this.SystemConfig_LocalDataVideoPlayPath_textBox.Tag = "SystemConfig_LocalDataVideoPlayPath";
+            // 
+            // labelX18
+            // 
+            // 
+            // 
+            // 
+            this.labelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX18.ForeColor = System.Drawing.Color.Black;
+            this.labelX18.Location = new System.Drawing.Point(501, 95);
+            this.labelX18.Name = "labelX18";
+            this.labelX18.Size = new System.Drawing.Size(160, 18);
+            this.labelX18.TabIndex = 32;
+            this.labelX18.Text = "本地视频文件播放路径:";
+            // 
+            // SystemConfig_PlayBackServerImageSavePath_textBox
+            // 
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.Border.Class = "TextBoxBorder";
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.ForeColor = System.Drawing.Color.Black;
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.Location = new System.Drawing.Point(701, 55);
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.Name = "SystemConfig_PlayBackServerImageSavePath_textBox";
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.Size = new System.Drawing.Size(281, 26);
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.TabIndex = 31;
+            this.SystemConfig_PlayBackServerImageSavePath_textBox.Tag = "SystemConfig_PlayBackServerImageSavePath";
+            // 
+            // SystemConfig_PlayBackServerVideoSavePath_textBox
+            // 
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.Border.Class = "TextBoxBorder";
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.ForeColor = System.Drawing.Color.Black;
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.Location = new System.Drawing.Point(702, 13);
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.Name = "SystemConfig_PlayBackServerVideoSavePath_textBox";
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.Size = new System.Drawing.Size(281, 26);
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.TabIndex = 30;
+            this.SystemConfig_PlayBackServerVideoSavePath_textBox.Tag = "SystemConfig_PlayBackServerVideoSavePath";
+            // 
+            // labelX17
+            // 
+            // 
+            // 
+            // 
+            this.labelX17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX17.ForeColor = System.Drawing.Color.Black;
+            this.labelX17.Location = new System.Drawing.Point(501, 56);
+            this.labelX17.Name = "labelX17";
+            this.labelX17.Size = new System.Drawing.Size(181, 21);
+            this.labelX17.TabIndex = 29;
+            this.labelX17.Text = "服务器图像文件保存路径:";
+            // 
+            // labelX16
+            // 
+            // 
+            // 
+            // 
+            this.labelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX16.ForeColor = System.Drawing.Color.Black;
+            this.labelX16.Location = new System.Drawing.Point(501, 18);
+            this.labelX16.Name = "labelX16";
+            this.labelX16.Size = new System.Drawing.Size(201, 26);
+            this.labelX16.TabIndex = 28;
+            this.labelX16.Text = "服务器视频文件下载保存路径:";
+            // 
+            // labelX13
+            // 
+            // 
+            // 
+            // 
+            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX13.ForeColor = System.Drawing.Color.Black;
+            this.labelX13.Location = new System.Drawing.Point(8, 133);
+            this.labelX13.Name = "labelX13";
+            this.labelX13.Size = new System.Drawing.Size(187, 23);
+            this.labelX13.TabIndex = 22;
+            this.labelX13.Text = "回放NVR图像文件保存路径:";
+            // 
+            // SystemConfig_PlayBackNvrImageSavePath_textBox
+            // 
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.Border.Class = "TextBoxBorder";
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.ForeColor = System.Drawing.Color.Black;
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.Location = new System.Drawing.Point(209, 131);
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.Name = "SystemConfig_PlayBackNvrImageSavePath_textBox";
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.Size = new System.Drawing.Size(280, 26);
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.TabIndex = 23;
+            this.SystemConfig_PlayBackNvrImageSavePath_textBox.Tag = "SystemConfig_PlayBackNvrImageSavePath";
+            // 
+            // labelX11
+            // 
+            // 
+            // 
+            // 
+            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX11.ForeColor = System.Drawing.Color.Black;
+            this.labelX11.Location = new System.Drawing.Point(10, 89);
+            this.labelX11.Name = "labelX11";
+            this.labelX11.Size = new System.Drawing.Size(193, 23);
+            this.labelX11.TabIndex = 17;
+            this.labelX11.Text = "回放NVR视频文件保存路径:";
+            // 
+            // SystemConfig_PlayBackNvrVideoSavePath_textBox
+            // 
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.Border.Class = "TextBoxBorder";
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.ForeColor = System.Drawing.Color.Black;
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.Location = new System.Drawing.Point(209, 89);
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.Name = "SystemConfig_PlayBackNvrVideoSavePath_textBox";
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.Size = new System.Drawing.Size(280, 26);
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.TabIndex = 18;
+            this.SystemConfig_PlayBackNvrVideoSavePath_textBox.Tag = "SystemConfig_PlayBackNvrVideoSavePath";
+            // 
+            // labelX_VideoSavePath
+            // 
+            // 
+            // 
+            // 
+            this.labelX_VideoSavePath.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_VideoSavePath.ForeColor = System.Drawing.Color.Black;
+            this.labelX_VideoSavePath.Location = new System.Drawing.Point(13, 11);
+            this.labelX_VideoSavePath.Name = "labelX_VideoSavePath";
+            this.labelX_VideoSavePath.Size = new System.Drawing.Size(190, 23);
+            this.labelX_VideoSavePath.TabIndex = 0;
+            this.labelX_VideoSavePath.Text = "实时NVR视频文件保存路径:";
+            // 
+            // labelX_ScreenPrintSavePath
+            // 
+            // 
+            // 
+            // 
+            this.labelX_ScreenPrintSavePath.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_ScreenPrintSavePath.ForeColor = System.Drawing.Color.Black;
+            this.labelX_ScreenPrintSavePath.Location = new System.Drawing.Point(13, 49);
+            this.labelX_ScreenPrintSavePath.Name = "labelX_ScreenPrintSavePath";
+            this.labelX_ScreenPrintSavePath.Size = new System.Drawing.Size(190, 23);
+            this.labelX_ScreenPrintSavePath.TabIndex = 0;
+            this.labelX_ScreenPrintSavePath.Text = "实时NVR图像文件保存路径:";
+            // 
+            // SystemConfig_VideoTeachImageSavePath_textBox
+            // 
+            this.SystemConfig_VideoTeachImageSavePath_textBox.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.SystemConfig_VideoTeachImageSavePath_textBox.Border.Class = "TextBoxBorder";
+            this.SystemConfig_VideoTeachImageSavePath_textBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_VideoTeachImageSavePath_textBox.ForeColor = System.Drawing.Color.Black;
+            this.SystemConfig_VideoTeachImageSavePath_textBox.Location = new System.Drawing.Point(209, 51);
+            this.SystemConfig_VideoTeachImageSavePath_textBox.Name = "SystemConfig_VideoTeachImageSavePath_textBox";
+            this.SystemConfig_VideoTeachImageSavePath_textBox.Size = new System.Drawing.Size(280, 26);
+            this.SystemConfig_VideoTeachImageSavePath_textBox.TabIndex = 5;
+            this.SystemConfig_VideoTeachImageSavePath_textBox.Tag = "SystemConfig_VideoTeachImageSavePath";
+            // 
+            // SystemConfig_VideoTeachVideoSavePath_textBox
+            // 
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.Border.Class = "TextBoxBorder";
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.ForeColor = System.Drawing.Color.Black;
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.Location = new System.Drawing.Point(209, 13);
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.Name = "SystemConfig_VideoTeachVideoSavePath_textBox";
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.Size = new System.Drawing.Size(280, 26);
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.TabIndex = 2;
+            this.SystemConfig_VideoTeachVideoSavePath_textBox.Tag = "SystemConfig_VideoTeachVideoSavePath";
+            // 
+            // SystemConfig_AllConfigSave_button
+            // 
+            this.SystemConfig_AllConfigSave_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.SystemConfig_AllConfigSave_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.SystemConfig_AllConfigSave_button.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SystemConfig_AllConfigSave_button.Location = new System.Drawing.Point(822, 694);
+            this.SystemConfig_AllConfigSave_button.Name = "SystemConfig_AllConfigSave_button";
+            this.SystemConfig_AllConfigSave_button.Size = new System.Drawing.Size(95, 23);
+            this.SystemConfig_AllConfigSave_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.SystemConfig_AllConfigSave_button.TabIndex = 27;
+            this.SystemConfig_AllConfigSave_button.Text = "保存";
+            // 
+            // superTabItem_Setting
+            // 
+            this.superTabItem_Setting.AttachedControl = this.superTabControlPanel4;
+            this.superTabItem_Setting.Description = "本程序的相关帮助信息";
+            this.superTabItem_Setting.GlobalItem = false;
+            this.superTabItem_Setting.KeyTips = "C";
+            this.superTabItem_Setting.Name = "superTabItem_Setting";
+            this.superTabItem_Setting.PredefinedColor = DevComponents.DotNetBar.eTabItemColor.Silver;
+            this.superTabItem_Setting.Tag = "0";
+            this.superTabItem_Setting.Text = "系统选项";
+            // 
+            // superTabControlPanel1
+            // 
+            this.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel1.Location = new System.Drawing.Point(106, 0);
+            this.superTabControlPanel1.Name = "superTabControlPanel1";
+            this.superTabControlPanel1.Size = new System.Drawing.Size(872, 624);
+            this.superTabControlPanel1.TabIndex = 1;
+            this.superTabControlPanel1.TabItem = this.superTabItem_Recent;
+            this.superTabControlPanel1.Visible = false;
+            // 
+            // superTabItem_Recent
+            // 
+            this.superTabItem_Recent.AttachedControl = this.superTabControlPanel1;
+            this.superTabItem_Recent.GlobalItem = false;
+            this.superTabItem_Recent.KeyTips = "R";
+            this.superTabItem_Recent.Name = "superTabItem_Recent";
+            this.superTabItem_Recent.PredefinedColor = DevComponents.DotNetBar.eTabItemColor.Silver;
+            this.superTabItem_Recent.Tag = "2";
+            this.superTabItem_Recent.Text = "最近";
+            // 
+            // superTabControlPanel3
+            // 
+            this.superTabControlPanel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("superTabControlPanel3.BackgroundImage")));
+            this.superTabControlPanel3.BackgroundImagePosition = DevComponents.DotNetBar.eStyleBackgroundImage.BottomRight;
+            this.superTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel3.Location = new System.Drawing.Point(106, 0);
+            this.superTabControlPanel3.Name = "superTabControlPanel3";
+            this.superTabControlPanel3.Size = new System.Drawing.Size(872, 624);
+            this.superTabControlPanel3.TabIndex = 5;
+            this.superTabControlPanel3.TabItem = this.superTabItem_Help;
+            this.superTabControlPanel3.Visible = false;
+            // 
+            // superTabItem_Help
+            // 
+            this.superTabItem_Help.AttachedControl = this.superTabControlPanel3;
+            this.superTabItem_Help.Description = "本程序的相关配置信息";
+            this.superTabItem_Help.GlobalItem = false;
+            this.superTabItem_Help.KeyTips = "H";
+            this.superTabItem_Help.Name = "superTabItem_Help";
+            this.superTabItem_Help.PredefinedColor = DevComponents.DotNetBar.eTabItemColor.Silver;
+            this.superTabItem_Help.Tag = "1";
+            this.superTabItem_Help.Text = "帮助";
+            // 
+            // superTabControlPanel6
+            // 
+            this.superTabControlPanel6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("superTabControlPanel6.BackgroundImage")));
+            this.superTabControlPanel6.BackgroundImagePosition = DevComponents.DotNetBar.eStyleBackgroundImage.BottomRight;
+            this.superTabControlPanel6.Controls.Add(this.panelEx_Config);
+            this.superTabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel6.Location = new System.Drawing.Point(106, 0);
+            this.superTabControlPanel6.Name = "superTabControlPanel6";
+            this.superTabControlPanel6.Size = new System.Drawing.Size(872, 624);
+            this.superTabControlPanel6.TabIndex = 7;
+            this.superTabControlPanel6.TabItem = this.superTabItem_Config;
+            this.superTabControlPanel6.Visible = false;
+            // 
+            // panelEx_Config
+            // 
+            this.panelEx_Config.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelEx_Config.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx_Config.Controls.Add(this.switchButton1);
+            this.panelEx_Config.Controls.Add(this.labelX_setMDOn);
+            this.panelEx_Config.Controls.Add(this.panelEx_DrawScreen);
+            this.panelEx_Config.Controls.Add(this.labelX_MD);
+            this.panelEx_Config.Controls.Add(this.buttonX_ClearRectangle);
+            this.panelEx_Config.Controls.Add(this.buttonX_DrawRectangle);
+            this.panelEx_Config.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEx_Config.Location = new System.Drawing.Point(0, 0);
+            this.panelEx_Config.Name = "panelEx_Config";
+            this.panelEx_Config.Size = new System.Drawing.Size(872, 624);
+            this.panelEx_Config.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelEx_Config.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelEx_Config.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelEx_Config.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelEx_Config.Style.GradientAngle = 90;
+            this.panelEx_Config.TabIndex = 0;
+            this.panelEx_Config.Text = "配置";
+            // 
+            // switchButton1
+            // 
+            // 
+            // 
+            // 
+            this.switchButton1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.switchButton1.ForeColor = System.Drawing.Color.Black;
+            this.switchButton1.Location = new System.Drawing.Point(229, 104);
+            this.switchButton1.Name = "switchButton1";
+            this.switchButton1.OffText = "否";
+            this.switchButton1.OnText = "是";
+            this.switchButton1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.switchButton1.Size = new System.Drawing.Size(66, 22);
+            this.switchButton1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.switchButton1.TabIndex = 19;
+            // 
+            // labelX_setMDOn
+            // 
+            // 
+            // 
+            // 
+            this.labelX_setMDOn.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_setMDOn.ForeColor = System.Drawing.Color.Black;
+            this.labelX_setMDOn.Location = new System.Drawing.Point(97, 106);
+            this.labelX_setMDOn.Name = "labelX_setMDOn";
+            this.labelX_setMDOn.Size = new System.Drawing.Size(126, 23);
+            this.labelX_setMDOn.TabIndex = 18;
+            this.labelX_setMDOn.Text = "启动移动侦测";
+            this.labelX_setMDOn.TextAlignment = System.Drawing.StringAlignment.Far;
+            // 
+            // panelEx_DrawScreen
+            // 
+            this.panelEx_DrawScreen.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelEx_DrawScreen.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx_DrawScreen.Location = new System.Drawing.Point(97, 138);
+            this.panelEx_DrawScreen.Name = "panelEx_DrawScreen";
+            this.panelEx_DrawScreen.Size = new System.Drawing.Size(389, 260);
+            this.panelEx_DrawScreen.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelEx_DrawScreen.Style.BackColor1.Color = System.Drawing.Color.Black;
+            this.panelEx_DrawScreen.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelEx_DrawScreen.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelEx_DrawScreen.Style.GradientAngle = 90;
+            this.panelEx_DrawScreen.TabIndex = 8;
+            // 
+            // labelX_MD
+            // 
+            this.labelX_MD.BackColor = System.Drawing.Color.DarkGray;
+            // 
+            // 
+            // 
+            this.labelX_MD.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_MD.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX_MD.Location = new System.Drawing.Point(97, 40);
+            this.labelX_MD.Name = "labelX_MD";
+            this.labelX_MD.Size = new System.Drawing.Size(1074, 42);
+            this.labelX_MD.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX_MD.TabIndex = 7;
+            this.labelX_MD.Text = "移动侦测";
+            // 
+            // buttonX_ClearRectangle
+            // 
+            this.buttonX_ClearRectangle.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX_ClearRectangle.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX_ClearRectangle.Location = new System.Drawing.Point(218, 430);
+            this.buttonX_ClearRectangle.Name = "buttonX_ClearRectangle";
+            this.buttonX_ClearRectangle.Size = new System.Drawing.Size(95, 23);
+            this.buttonX_ClearRectangle.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX_ClearRectangle.TabIndex = 6;
+            this.buttonX_ClearRectangle.Text = "清除全部";
+            // 
+            // buttonX_DrawRectangle
+            // 
+            this.buttonX_DrawRectangle.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX_DrawRectangle.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX_DrawRectangle.Location = new System.Drawing.Point(97, 430);
+            this.buttonX_DrawRectangle.Name = "buttonX_DrawRectangle";
+            this.buttonX_DrawRectangle.Size = new System.Drawing.Size(95, 23);
+            this.buttonX_DrawRectangle.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX_DrawRectangle.TabIndex = 6;
+            this.buttonX_DrawRectangle.Text = "描绘区域";
+            // 
+            // superTabItem_Config
+            // 
+            this.superTabItem_Config.AttachedControl = this.superTabControlPanel6;
+            this.superTabItem_Config.Description = "本程序的相关帮助信息";
+            this.superTabItem_Config.GlobalItem = false;
+            this.superTabItem_Config.KeyTips = "C";
+            this.superTabItem_Config.Name = "superTabItem_Config";
+            this.superTabItem_Config.PredefinedColor = DevComponents.DotNetBar.eTabItemColor.Silver;
+            this.superTabItem_Config.Tag = "0";
+            this.superTabItem_Config.Text = "视频配置";
+            // 
+            // superTabControlPanel12
+            // 
+            this.superTabControlPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel12.Location = new System.Drawing.Point(106, 0);
+            this.superTabControlPanel12.Name = "superTabControlPanel12";
+            this.superTabControlPanel12.Size = new System.Drawing.Size(872, 624);
+            this.superTabControlPanel12.TabIndex = 0;
+            this.superTabControlPanel12.TabItem = this.superTabItem8;
+            // 
+            // superTabItem8
+            // 
+            this.superTabItem8.AttachedControl = this.superTabControlPanel12;
+            this.superTabItem8.GlobalItem = false;
+            this.superTabItem8.Name = "superTabItem8";
+            this.superTabItem8.Text = "退出";
+            // 
+            // buttonItem_Exit
+            // 
+            this.buttonItem_Exit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem_Exit.ColorTable = DevComponents.DotNetBar.eButtonColor.Blue;
+            this.buttonItem_Exit.Image = ((System.Drawing.Image)(resources.GetObject("buttonItem_Exit.Image")));
+            this.buttonItem_Exit.ImagePaddingHorizontal = 18;
+            this.buttonItem_Exit.ImagePaddingVertical = 10;
+            this.buttonItem_Exit.KeyTips = "X";
+            this.buttonItem_Exit.Name = "buttonItem_Exit";
+            this.buttonItem_Exit.Stretch = true;
+            this.buttonItem_Exit.Text = "Exit";
+            // 
+            // labelX5
+            // 
+            this.labelX5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlPanel_LogSearch_Label.BackColor = System.Drawing.Color.Transparent;
+            this.labelX5.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.ControlPanel_LogSearch_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ControlPanel_LogSearch_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ControlPanel_LogSearch_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_LogSearch_Label.Image")));
-            this.ControlPanel_LogSearch_Label.Location = new System.Drawing.Point(158, 347);
-            this.ControlPanel_LogSearch_Label.Name = "ControlPanel_LogSearch_Label";
-            this.ControlPanel_LogSearch_Label.Size = new System.Drawing.Size(5, 70);
-            this.ControlPanel_LogSearch_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.ControlPanel_LogSearch_Label.TabIndex = 3;
-            this.ControlPanel_LogSearch_Label.Tag = "Log";
-            this.ControlPanel_LogSearch_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>日志搜索</b></font>\r\n<br>搜索，查看，备份本地和远程日志。</br>";
-            this.ControlPanel_LogSearch_Label.WordWrap = true;
+            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX5.Image = ((System.Drawing.Image)(resources.GetObject("labelX5.Image")));
+            this.labelX5.Location = new System.Drawing.Point(640, 343);
+            this.labelX5.Name = "labelX5";
+            this.labelX5.Size = new System.Drawing.Size(209, 74);
+            this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX5.TabIndex = 4;
+            this.labelX5.Tag = "Config";
+            this.labelX5.Text = "<font size = \"12\" color=\"#2E415A\"><b>系统配置</b></font>\r\n<br>配置客户端常用参数。</br>";
+            this.labelX5.WordWrap = true;
             // 
-            // ControlPanel_PlayBack_Label
+            // labelX4
             // 
-            this.ControlPanel_PlayBack_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.labelX4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlPanel_PlayBack_Label.BackColor = System.Drawing.Color.Transparent;
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.ControlPanel_PlayBack_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ControlPanel_PlayBack_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ControlPanel_PlayBack_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_PlayBack_Label.Image")));
-            this.ControlPanel_PlayBack_Label.Location = new System.Drawing.Point(640, 193);
-            this.ControlPanel_PlayBack_Label.Name = "ControlPanel_PlayBack_Label";
-            this.ControlPanel_PlayBack_Label.Size = new System.Drawing.Size(135, 80);
-            this.ControlPanel_PlayBack_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.ControlPanel_PlayBack_Label.TabIndex = 2;
-            this.ControlPanel_PlayBack_Label.Tag = "PlayBack";
-            this.ControlPanel_PlayBack_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>远程回放</b></font>\r\n<br>搜索并回放远程视频点的录像文件，回放相关操作功" +
-                "能。</br>";
-            this.ControlPanel_PlayBack_Label.WordWrap = true;
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX4.Image = ((System.Drawing.Image)(resources.GetObject("labelX4.Image")));
+            this.labelX4.Location = new System.Drawing.Point(158, 343);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(209, 74);
+            this.labelX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX4.TabIndex = 3;
+            this.labelX4.Tag = "Log";
+            this.labelX4.Text = "<font size = \"12\" color=\"#2E415A\"><b>日志搜索</b></font>\r\n<br>搜索，查看，备份本地和远程日志。</br>";
+            this.labelX4.WordWrap = true;
             // 
-            // ControlPanel_VideoTeach_Label
+            // labelX_ControlPanel_PlayBack
             // 
-            this.ControlPanel_VideoTeach_Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.labelX_ControlPanel_PlayBack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlPanel_VideoTeach_Label.BackColor = System.Drawing.Color.Transparent;
+            this.labelX_ControlPanel_PlayBack.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.ControlPanel_VideoTeach_Label.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ControlPanel_VideoTeach_Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ControlPanel_VideoTeach_Label.Image = ((System.Drawing.Image)(resources.GetObject("ControlPanel_VideoTeach_Label.Image")));
-            this.ControlPanel_VideoTeach_Label.Location = new System.Drawing.Point(158, 193);
-            this.ControlPanel_VideoTeach_Label.Name = "ControlPanel_VideoTeach_Label";
-            this.ControlPanel_VideoTeach_Label.Size = new System.Drawing.Size(45, 80);
-            this.ControlPanel_VideoTeach_Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
-            this.ControlPanel_VideoTeach_Label.TabIndex = 1;
-            this.ControlPanel_VideoTeach_Label.Tag = "VideoPlay";
-            this.ControlPanel_VideoTeach_Label.Text = "<font size = \"12\" color=\"#2E415A\"><b>视频教学</b></font>\r\n<br>显示视频教学的预览或回放画面</br>";
-            this.ControlPanel_VideoTeach_Label.WordWrap = true;
+            this.labelX_ControlPanel_PlayBack.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_ControlPanel_PlayBack.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX_ControlPanel_PlayBack.Image = ((System.Drawing.Image)(resources.GetObject("labelX_ControlPanel_PlayBack.Image")));
+            this.labelX_ControlPanel_PlayBack.Location = new System.Drawing.Point(640, 193);
+            this.labelX_ControlPanel_PlayBack.Name = "labelX_ControlPanel_PlayBack";
+            this.labelX_ControlPanel_PlayBack.Size = new System.Drawing.Size(209, 80);
+            this.labelX_ControlPanel_PlayBack.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX_ControlPanel_PlayBack.TabIndex = 2;
+            this.labelX_ControlPanel_PlayBack.Tag = "PlayBack";
+            this.labelX_ControlPanel_PlayBack.Text = "<font size = \"12\" color=\"#2E415A\"><b>远程回放</b></font>\r\n<br>搜索并回放远程视频点的录像文件，以及回放的相关" +
+                "操作功能。</br>";
+            this.labelX_ControlPanel_PlayBack.WordWrap = true;
+            // 
+            // labelX_MainView
+            // 
+            this.labelX_MainView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelX_MainView.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX_MainView.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX_MainView.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX_MainView.Image = ((System.Drawing.Image)(resources.GetObject("labelX_MainView.Image")));
+            this.labelX_MainView.Location = new System.Drawing.Point(158, 193);
+            this.labelX_MainView.Name = "labelX_MainView";
+            this.labelX_MainView.Size = new System.Drawing.Size(231, 80);
+            this.labelX_MainView.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.labelX_MainView.TabIndex = 1;
+            this.labelX_MainView.Tag = "VideoPlay";
+            this.labelX_MainView.Text = "<font size = \"12\" color=\"#2E415A\"><b>视频教学</b></font>\r\n<br>显示视频教学的预览或回放画面，以及预览画面的操" +
+                "作系统。</br>";
+            this.labelX_MainView.WordWrap = true;
             // 
             // labelX3
             // 
@@ -3090,6 +4145,7 @@
             // metroAppButton_Setting
             // 
             this.metroAppButton_Setting.AutoExpandOnClick = true;
+            this.metroAppButton_Setting.BackstageTab = this.superTabControl_Setting;
             this.metroAppButton_Setting.FixedSize = new System.Drawing.Size(60, 27);
             this.metroAppButton_Setting.HotFontBold = true;
             this.metroAppButton_Setting.ImageFixedSize = new System.Drawing.Size(16, 16);
@@ -3185,6 +4241,12 @@
             // 
             this.UpdateLocation.Tick += new System.EventHandler(this.UpdateLocation_Tick);
             // 
+            // updateNodeStatus_timer
+            // 
+            this.updateNodeStatus_timer.Enabled = true;
+            this.updateNodeStatus_timer.Interval = 5000;
+            this.updateNodeStatus_timer.Tick += new System.EventHandler(this.updateNodeStatus_timer_Tick);
+            // 
             // NewMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -3225,7 +4287,6 @@
             this.groupBox5.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.VideoTeach_EquipmentControl_PtzControl_Panel.ResumeLayout(false);
             this.VideoTeach_EquipmentControl_NvrInfo_Panel.ResumeLayout(false);
             this.panelEx_NVRList.ResumeLayout(false);
             this.PlayBack_Panel.ResumeLayout(false);
@@ -3273,6 +4334,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Logs)).EndInit();
             this.metroTabPanel3.ResumeLayout(false);
             this.panelEx_ControlPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.superTabControl_Setting)).EndInit();
+            this.superTabControl_Setting.ResumeLayout(false);
+            this.superTabControlPanel4.ResumeLayout(false);
+            this.SystemConfig_NvrAndLocalDataSavePath_panelEx.ResumeLayout(false);
+            this.SystemConfig_NvrConfig_panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_AndroidServerIpAddress_ipAddressInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_BSPNvrIpAddress_ipAddressInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_DKServerPort_integerInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_ZSPNvrPort_integerInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_ZSPNvrIpAddress_ipAddressInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_BSPNvrPort_integerInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SystemConfig_DKServerIpAddress_ipAddressInput)).EndInit();
+            this.panelEx3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput_LogMonth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput_TimeOut)).EndInit();
+            this.LocalDataSavePath_panelEx.ResumeLayout(false);
+            this.superTabControlPanel6.ResumeLayout(false);
+            this.panelEx_Config.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3384,13 +4464,6 @@
         private System.Windows.Forms.Panel panel3;
         private DevComponents.DotNetBar.ExpandableSplitter PlayBack_PlayerControl__PlayerControlPanel_splitter;
         private DevComponents.DotNetBar.Metro.MetroTabPanel metroTabPanel3;
-        private DevComponents.DotNetBar.PanelEx panelEx_ControlPanel;
-        private DevComponents.DotNetBar.LabelX ControlPanel_SystemConfig_Label;
-        private DevComponents.DotNetBar.LabelX ControlPanel_LogSearch_Label;
-        private DevComponents.DotNetBar.LabelX ControlPanel_PlayBack_Label;
-        private DevComponents.DotNetBar.LabelX ControlPanel_VideoTeach_Label;
-        private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.LabelX labelX_OperateAndControl;
         private DevComponents.DotNetBar.Metro.MetroTabPanel VideoTeachView_panel;
         private DevComponents.DotNetBar.DockSite barRightDockSite;
         private DevComponents.DotNetBar.DockSite dockSite9;
@@ -3443,8 +4516,6 @@
         private System.Windows.Forms.Button PlayBack_PlaybackByFileTime_Button;
         private System.Windows.Forms.Button PlayBack_PlayBackByFileName_Button;
         private System.Windows.Forms.Button PlayBack_StopPlayBack_Button;
-        private DevComponents.DotNetBar.ExpandablePanel VideoTeach_EquipmentControl_PtzControl_Panel;
-        private DevComponents.DotNetBar.PanelEx panelEx1;
         private DevComponents.DotNetBar.ExpandablePanel VideoTeach_EquipmentControl_NvrInfo_Panel;
         private DevComponents.DotNetBar.PanelEx panelEx_NVRList;
         private DevComponents.DotNetBar.ButtonX RealVideoImage_ServerUnInit_button;
@@ -3494,9 +4565,8 @@
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ListView RealVideoImage_EquipmentInfo__listView;
-        private System.Windows.Forms.ColumnHeader ColumnHeader_IPChannel;
-        private System.Windows.Forms.ColumnHeader ColumnHeader_Status;
+        private System.Windows.Forms.ListView nodeInfo__listView;
+        private System.Windows.Forms.ColumnHeader nodeId_columnHeader;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel Longtitude_StatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel Latitude_StatusLabel;
@@ -3505,5 +4575,81 @@
         private System.Windows.Forms.ToolStripSplitButton AddNodeButton;
         private System.Windows.Forms.ToolStripSplitButton RemoveNodeButton;
         private System.Windows.Forms.Timer UpdateLocation;
+        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private System.Windows.Forms.ColumnHeader nodeName_columnHeader;
+        private System.Windows.Forms.ColumnHeader nodeState_columnHeader;
+        private System.Windows.Forms.Timer updateNodeStatus_timer;
+        private DevComponents.DotNetBar.PanelEx panelEx_ControlPanel;
+        private DevComponents.DotNetBar.SuperTabControl superTabControl_Setting;
+        private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel4;
+        private DevComponents.DotNetBar.PanelEx SystemConfig_NvrAndLocalDataSavePath_panelEx;
+        private DevComponents.DotNetBar.ButtonX SystemConfig_RebackConfig_button;
+        private DevComponents.DotNetBar.ButtonX SystemConfig_Exit_buttonX;
+        private DevComponents.DotNetBar.PanelEx SystemConfig_NvrConfig_panel;
+        private DevComponents.Editors.IpAddressInput SystemConfig_AndroidServerIpAddress_ipAddressInput;
+        private DevComponents.DotNetBar.LabelX labelX12;
+        private DevComponents.Editors.IntegerInput integerInput1;
+        private DevComponents.DotNetBar.LabelX labelX19;
+        private DevComponents.DotNetBar.LabelX labelX8;
+        private DevComponents.Editors.IpAddressInput SystemConfig_BSPNvrIpAddress_ipAddressInput;
+        private DevComponents.Editors.IntegerInput SystemConfig_DKServerPort_integerInput;
+        private DevComponents.Editors.IntegerInput SystemConfig_ZSPNvrPort_integerInput;
+        private DevComponents.DotNetBar.LabelX labelX9;
+        private DevComponents.Editors.IpAddressInput SystemConfig_ZSPNvrIpAddress_ipAddressInput;
+        private DevComponents.DotNetBar.LabelX labelX10;
+        private DevComponents.DotNetBar.LabelX labelX7;
+        private DevComponents.Editors.IntegerInput SystemConfig_BSPNvrPort_integerInput;
+        private DevComponents.DotNetBar.LabelX labelX_NvrPort;
+        private DevComponents.Editors.IpAddressInput SystemConfig_DKServerIpAddress_ipAddressInput;
+        private DevComponents.DotNetBar.LabelX labelX_NvrIpAddr;
+        private DevComponents.DotNetBar.PanelEx panelEx3;
+        private DevComponents.DotNetBar.Controls.SwitchButton switchButton2;
+        private DevComponents.DotNetBar.LabelX labelX15;
+        private DevComponents.Editors.IntegerInput integerInput_LogMonth;
+        private DevComponents.Editors.IntegerInput integerInput_TimeOut;
+        private DevComponents.DotNetBar.LabelX labelX_TimeOut;
+        private DevComponents.DotNetBar.ButtonX buttonX_SaveConfig;
+        private DevComponents.DotNetBar.LabelX labelX1;
+        private DevComponents.DotNetBar.PanelEx LocalDataSavePath_panelEx;
+        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.LabelX labelX_PlayBackServerVideoCache;
+        private DevComponents.DotNetBar.Controls.TextBoxX SystemConfig_LocalDataVideoPlayPath_textBox;
+        private DevComponents.DotNetBar.LabelX labelX18;
+        private DevComponents.DotNetBar.Controls.TextBoxX SystemConfig_PlayBackServerImageSavePath_textBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX SystemConfig_PlayBackServerVideoSavePath_textBox;
+        private DevComponents.DotNetBar.LabelX labelX17;
+        private DevComponents.DotNetBar.LabelX labelX16;
+        private DevComponents.DotNetBar.LabelX labelX13;
+        private DevComponents.DotNetBar.Controls.TextBoxX SystemConfig_PlayBackNvrImageSavePath_textBox;
+        private DevComponents.DotNetBar.LabelX labelX11;
+        private DevComponents.DotNetBar.Controls.TextBoxX SystemConfig_PlayBackNvrVideoSavePath_textBox;
+        private DevComponents.DotNetBar.LabelX labelX_VideoSavePath;
+        private DevComponents.DotNetBar.LabelX labelX_ScreenPrintSavePath;
+        private DevComponents.DotNetBar.Controls.TextBoxX SystemConfig_VideoTeachImageSavePath_textBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX SystemConfig_VideoTeachVideoSavePath_textBox;
+        private DevComponents.DotNetBar.ButtonX SystemConfig_AllConfigSave_button;
+        private DevComponents.DotNetBar.SuperTabItem superTabItem_Setting;
+        private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel12;
+        private DevComponents.DotNetBar.SuperTabItem superTabItem8;
+        private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel1;
+        private DevComponents.DotNetBar.SuperTabItem superTabItem_Recent;
+        private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel3;
+        private DevComponents.DotNetBar.SuperTabItem superTabItem_Help;
+        private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel6;
+        private DevComponents.DotNetBar.PanelEx panelEx_Config;
+        private DevComponents.DotNetBar.Controls.SwitchButton switchButton1;
+        private DevComponents.DotNetBar.LabelX labelX_setMDOn;
+        private DevComponents.DotNetBar.PanelEx panelEx_DrawScreen;
+        private DevComponents.DotNetBar.LabelX labelX_MD;
+        private DevComponents.DotNetBar.ButtonX buttonX_ClearRectangle;
+        private DevComponents.DotNetBar.ButtonX buttonX_DrawRectangle;
+        private DevComponents.DotNetBar.SuperTabItem superTabItem_Config;
+        private DevComponents.DotNetBar.ButtonItem buttonItem_Exit;
+        private DevComponents.DotNetBar.LabelX labelX5;
+        private DevComponents.DotNetBar.LabelX labelX4;
+        private DevComponents.DotNetBar.LabelX labelX_ControlPanel_PlayBack;
+        private DevComponents.DotNetBar.LabelX labelX_MainView;
+        private DevComponents.DotNetBar.LabelX labelX3;
+        private DevComponents.DotNetBar.LabelX labelX_OperateAndControl;
     }
 }

@@ -10,6 +10,7 @@ using MultiSpel.UserControls.Event;
 using DevComponents.DotNetBar;
 using MultiSpel.DataBaseModule.Model;
 using MultiSpel.DataBaseModule.BLL;
+using System.Net;
 
 namespace MultiSpel
 {
@@ -21,7 +22,6 @@ namespace MultiSpel
         private ClientPoint m_clientPoint;
         private ArmClient armClient;
         private NodeData nodeData;
-
         private const int HEARTTIMEOUT = 5;
 
         private string videoSavePath = System.Windows.Forms.Application.StartupPath;
@@ -72,9 +72,7 @@ namespace MultiSpel
             this.Focus();
             this.capture_panel.Visible = false;
             this.vedio_panel.Visible = false;
-            videoPixelConfig.ImageConfig +=new ImageConfigEventHandler(VideoPixelConfig);
         }
-
 
         public ControlForm(ArmClient client,NodeData node)
         {
@@ -86,7 +84,14 @@ namespace MultiSpel
             this.Focus();
             this.capture_panel.Visible = false;
             this.vedio_panel.Visible = false;
-            //videoPixelConfig.ImageConfig += new ImageConfigEventHandler(VideoPixelConfig);
+            IPEndPoint remoteEndPoint = client.ControlPort.PortSocket.RemoteEndPoint as IPEndPoint;
+            if (remoteEndPoint != null)
+            {
+                this.nodeIp_StatusLabel.Text += remoteEndPoint.Address.ToString();
+                this.nodePort_StatusLabel.Text += remoteEndPoint.Port.ToString();
+            }
+            this.nodeSavePath_textBox.Text = node.savepath; 
+            videoPixelConfigControl.ImageConfig += new ImageConfigEventHandler(VideoPixelConfig);
         }
 
         public ControlForm(ClientPoint cp)
@@ -117,6 +122,27 @@ namespace MultiSpel
             armClient.LastAccessTime = DateTime.Now;
             armClient.IsUsing = false;
         }
+
+        #region 更改节点存储路径
+        private void selectNodeSavePath_button_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+            folderDlg.SelectedPath = @"d:/";
+            if (folderDlg.ShowDialog() == DialogResult.OK)
+            {
+                NodeBLL nodeBll = new NodeBLL();
+                this.nodeData.savepath = folderDlg.SelectedPath;
+                if (nodeBll.UpdateByPK(this.nodeData))
+                {
+                    this.nodeSavePath_textBox.Text = folderDlg.SelectedPath;
+                    ShowControlWarnInMessageBox(true,"设定节点保存路径成功" + this.nodeData.savepath);
+                }
+                else
+                    ShowControlWarnInMessageBox(false, "设定节点保存路径失败");
+            }
+        }
+        #endregion 更改节点存储路径
+
 
         #region 获取水分
         private void bt_water_Click(object sender, EventArgs e)
@@ -243,8 +269,8 @@ namespace MultiSpel
             pictureAttribute[0] = Resolution;
             pictureAttribute[1] = Whitebalance;
             pictureAttribute[2] = Bright;
-            pictureAttribute[3] = Contrast;
-            pictureAttribute[4] = Saturation;
+            pictureAttribute[3] = Saturation;
+            pictureAttribute[4] = Contrast;
             pictureAttribute[5] = Quanlity;
 
             string savePath = imageSavePath + "\\capture\\";
@@ -502,14 +528,9 @@ namespace MultiSpel
         {
             m_clientPoint.loseConnect = true;
             m_clientPoint.shutdown(); //断开连接
-
             this.Close(); //关闭当前窗口
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
 
         #region 图片滚轮放大缩小
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
@@ -751,14 +772,13 @@ namespace MultiSpel
             OpenFileDialog fileDialog1 = new OpenFileDialog();
             fileDialog1.InitialDirectory = "d://";
             fileDialog1.ShowDialog();
-
             if (fileDialog1.ShowDialog() == DialogResult.OK)
             {
                 imageFileName = fileDialog1.FileName;
             }
             else
             {
-                textBox1.Text = "";
+                nodeSavePath_textBox.Text = "";
             }
 
             if (imageFileName != null)
@@ -770,8 +790,7 @@ namespace MultiSpel
              /*
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "请选择存储文件的路径";
-
-          
+            
           //  dialog.ShowNewFolderButton = false;
         
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -781,7 +800,6 @@ namespace MultiSpel
                 //... 
             }
             Console.WriteLine("the button is click");
-           
             Console.WriteLine(path);
             */
         }
@@ -958,30 +976,29 @@ namespace MultiSpel
         #region 设定节点配置
         private void SetNodeConfig_button_Click(object sender, EventArgs e)
         {
-            string nodeName = this.nodeName_textBox.ToString();
-            string nodeLocation = this.nodeLocation_textBox.ToString();
-            string nodeid = this.nodeId_textBox.ToString();
+            string nodeName = this.nodeName_textBox.Text.ToString();
+            string nodeLocation = this.nodeLocation_textBox.Text.ToString();
+            string nodeid = this.nodeId_textBox.Text.ToString();
 
-            string filter = this.filter_textBox.ToString();
-            string minfilter = this.minFilter_textBox.ToString();
-            string maxfilter = this.maxFilter_textBox.ToString();
+            string filter = this.filter_textBox.Text.ToString();
+            string minfilter = this.minFilter_textBox.Text.ToString();
+            string maxfilter = this.maxFilter_textBox.Text.ToString();
 
-            string cstate = this.cameraState_switchButton.Value.ToString();
-            string cRes = this.c_res_textBox.ToString();
-            string cWhite = this.c_white_textBox.ToString();
-            string cBright = this.c_bright_textBox.ToString();
-            string cContrast = this.c_contrast_textBox.ToString();
-            string cSaturation = this.c_saturation_textBox.ToString();
-            string cQuanlity = this.c_quanlity_textBox.ToString();
-            string cCyc = this.c_cyc_textBox.ToString();
+            string cstate = this.cameraState_switchButton.Value ?  "1" : "0" ;
+            string cRes = this.c_res_textBox.Text.ToString();
+            string cWhite = this.c_white_textBox.Text.ToString();
+            string cBright = this.c_bright_textBox.Text.ToString();
+            string cContrast = this.c_contrast_textBox.Text.ToString();
+            string cSaturation = this.c_saturation_textBox.Text.ToString();
+            string cQuanlity = this.c_quanlity_textBox.Text.ToString();
+            string cCyc = this.c_cyc_textBox.Text.ToString();
 
-            string vstate = this.videoState_switchButton.Value.ToString();
-            string vRes = this.v_res_textBox.ToString();
-            string vFrame = this.v_framerate_textBox.ToString();
-            string vGop = this.v_gopnum_textBox.ToString();
-            string vCyc = this.v_cyc_textBox.ToString();
-            string vLength = this.v_length_textBox.ToString();
-
+            string vstate = this.videoState_switchButton.Value ? "1" : "0";
+            string vRes = this.v_res_textBox.Text.ToString();
+            string vFrame = this.v_framerate_textBox.Text.ToString();
+            string vGop = this.v_gopnum_textBox.Text.ToString();
+            string vCyc = this.v_cyc_textBox.Text.ToString();
+            string vLength = this.v_length_textBox.Text.ToString();
 
             string[] paramStr = { nodeid, minfilter,maxfilter, cstate,cRes, 
                                     cWhite, cBright, cContrast, cSaturation, cQuanlity, cCyc,vstate, vRes,vFrame, vGop, vCyc, vLength };
@@ -997,7 +1014,8 @@ namespace MultiSpel
                 Int32.Parse(paramStr[2]), Int32.Parse(paramStr[3]), Int32.Parse(paramStr[4]),
                 Int32.Parse(paramStr[5]),Int32.Parse(paramStr[6]),Int32.Parse(paramStr[7]),
                 Int32.Parse(paramStr[8]),Int32.Parse(paramStr[9]),Int32.Parse(paramStr[10]),
-                Int32.Parse(paramStr[11]),Int32.Parse(paramStr[12]),Int32.Parse(paramStr[13])};
+                Int32.Parse(paramStr[11]),Int32.Parse(paramStr[12]),Int32.Parse(paramStr[13]),
+                Int32.Parse(paramStr[14]),Int32.Parse(paramStr[15]),Int32.Parse(paramStr[16])};
             string errno = String.Empty;
             bool state = true;
             if (communicateArmClient.Operate(OPERATE.CONFIG_PARAM, DEVICE.ALL, ref state, ref value, ref config, ref errno))

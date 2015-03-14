@@ -26,10 +26,10 @@ namespace MultiSpel.DataBaseModule.BLL
         //    return dal.DeleteByPK(id);
         //}
 
-        //public bool UpdateByPK(NodeData data)
-        //{
-        //    return dal.UpdateByPK(data);
-        //}
+        public bool UpdateByPK(NodeData data)
+        {
+            return dal.UpdateByPK(data);
+        }
 
         //public bool UpdateByPK(int id)
         //{
@@ -60,10 +60,5 @@ namespace MultiSpel.DataBaseModule.BLL
         {
             return dal.GetCount();
         }
-
-        //public NodeData GetDetailByUN(string username)
-        //{
-        //    return dal.GetDetailByUN(username);
-        //}
     }
 }

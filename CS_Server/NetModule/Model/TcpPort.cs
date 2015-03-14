@@ -35,16 +35,23 @@ namespace MultiSpel.Net
 
         #endregion 3.私有方法
 
+        #region 4.公有方法
+
+        #region 设置超时时间
         public bool poll(int second)
         {
             return portSocket.Poll(second * 1000, SelectMode.SelectRead);
         }
+        #endregion 设置超时时间
 
+        #region 关闭端口
         public void Close()
         {
             portSocket.Shutdown(SocketShutdown.Both);
         }
+        #endregion 关闭端口
 
+        #region 设置等待的最长时间
         /// <summary>
         /// 设置Receive函数等待的最长时间
         /// </summary>
@@ -56,6 +63,7 @@ namespace MultiSpel.Net
                 second = -1;
             portSocket.ReceiveTimeout = second ;
         }
+        #endregion 设置等待的最长时间
 
         /// <summary>
         /// 由于数据消息的边界问题而要使用该方法。
@@ -68,7 +76,6 @@ namespace MultiSpel.Net
             int total = 0;
             int data_left = size; //余下未接收的字节数
             int recv_num = 0;
-
             int lastTotal = 0;
             int times = 0; 
 
@@ -77,6 +84,10 @@ namespace MultiSpel.Net
                 try
                 {
                     recv_num = portSocket.Receive(data, total, data_left, SocketFlags.None);
+                    if (portSocket.Connected && recv_num == 0)
+                    {
+                        
+                    }
                 }
                 catch (SocketException ex)
                 {
@@ -102,13 +113,11 @@ namespace MultiSpel.Net
                         {
                             times = 0; //清零。从新开始计算
                         }
-
                     }
                 }
                 total += recv_num;
                 data_left -= recv_num;
             }
-
             return total;
         }
 
@@ -160,25 +169,25 @@ namespace MultiSpel.Net
             int total = 0;
             int data_left = size;
             int send_num;
-
             while (total < size)
             {
                 send_num = portSocket.Send(data, total, data_left, SocketFlags.None);
-
                 total += send_num;
                 data_left -= send_num;
             }
             return total;
         }
+
+        #endregion 4.公有方法
     }
 
 
+    #region 转换类
     /// <summary>
     /// 进行一下字节底层的转换
     /// </summary>
     class Transform
     {
-
         /// <summary>
         /// 将一个很小的整型转换为一个byte类型存储.返回的数组只有一个元素
         /// </summary>
@@ -260,6 +269,6 @@ namespace MultiSpel.Net
             }
             return size;
         }
-
     }
 }
+    #endregion 转换类

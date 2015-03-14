@@ -684,6 +684,7 @@
             this.MaximizeBox = false;
             this.Name = "photoAttribute";
             this.Text = "采集图像属性";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.photoAttribute_FormClosing);
             this.Load += new System.EventHandler(this.photoAttribute_Load);
             this.groupBox1.ResumeLayout(false);

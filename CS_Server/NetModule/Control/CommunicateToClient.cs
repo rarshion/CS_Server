@@ -40,6 +40,7 @@ namespace MultiSpel.Net
         private const bool hasAdditionalInformation = true;
         private const bool noAdditionalInformation = false;
         private static int RECVSIZE = 1024 * 20 * 5;//这里要申请大一点
+        private const int ConfigAllNum = 17;
 
         public CommunicateToClient(Socket client)
         {
@@ -471,7 +472,7 @@ namespace MultiSpel.Net
                         }
                         if (Device == DEVICE.ALL)//全局配置
                         {
-                            if (config.Length != 5)//全局配置时，传入参数只有一个
+                            if (config.Length != ConfigAllNum)//全局配置时，传入参数只有一个
                             {
                                 erro += "全局配置时，传入参数出错！";
                                 return false;

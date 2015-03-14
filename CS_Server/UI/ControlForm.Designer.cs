@@ -97,13 +97,12 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.nodeIp_StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.nodePort_StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.selectNodeSavePath_button = new System.Windows.Forms.Button();
+            this.nodeSavePath_textBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.capture_panel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -117,6 +116,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.videoPixelConfigControl = new MultiSpel.UserControls.VideoPixelConfig();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -131,6 +131,7 @@
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.capture_panel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.vedio_panel.SuspendLayout();
@@ -231,9 +232,9 @@
             this.bt_photo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.bt_photo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.bt_photo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bt_photo.Location = new System.Drawing.Point(61, 65);
+            this.bt_photo.Location = new System.Drawing.Point(63, 95);
             this.bt_photo.Name = "bt_photo";
-            this.bt_photo.Size = new System.Drawing.Size(107, 37);
+            this.bt_photo.Size = new System.Drawing.Size(107, 45);
             this.bt_photo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bt_photo.TabIndex = 23;
             this.bt_photo.Text = "单次图像采集";
@@ -244,9 +245,9 @@
             this.bt_start_timecap.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.bt_start_timecap.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.bt_start_timecap.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bt_start_timecap.Location = new System.Drawing.Point(12, 108);
+            this.bt_start_timecap.Location = new System.Drawing.Point(63, 147);
             this.bt_start_timecap.Name = "bt_start_timecap";
-            this.bt_start_timecap.Size = new System.Drawing.Size(107, 34);
+            this.bt_start_timecap.Size = new System.Drawing.Size(107, 43);
             this.bt_start_timecap.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bt_start_timecap.TabIndex = 26;
             this.bt_start_timecap.Text = "定时图像采集";
@@ -255,10 +256,10 @@
             // filter_trackBar
             // 
             this.filter_trackBar.LargeChange = 1;
-            this.filter_trackBar.Location = new System.Drawing.Point(25, 165);
+            this.filter_trackBar.Location = new System.Drawing.Point(32, 310);
             this.filter_trackBar.Maximum = 2;
             this.filter_trackBar.Name = "filter_trackBar";
-            this.filter_trackBar.Size = new System.Drawing.Size(179, 45);
+            this.filter_trackBar.Size = new System.Drawing.Size(176, 45);
             this.filter_trackBar.TabIndex = 1;
             this.filter_trackBar.Tag = "0";
             // 
@@ -268,9 +269,9 @@
             this.bt_stop_timecap.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.bt_stop_timecap.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bt_stop_timecap.Enabled = false;
-            this.bt_stop_timecap.Location = new System.Drawing.Point(125, 108);
+            this.bt_stop_timecap.Location = new System.Drawing.Point(63, 197);
             this.bt_stop_timecap.Name = "bt_stop_timecap";
-            this.bt_stop_timecap.Size = new System.Drawing.Size(92, 34);
+            this.bt_stop_timecap.Size = new System.Drawing.Size(107, 47);
             this.bt_stop_timecap.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bt_stop_timecap.TabIndex = 27;
             this.bt_stop_timecap.Text = "结束定时采集";
@@ -281,9 +282,9 @@
             this.filter_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.filter_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.filter_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filter_button.Location = new System.Drawing.Point(61, 229);
+            this.filter_button.Location = new System.Drawing.Point(63, 252);
             this.filter_button.Name = "filter_button";
-            this.filter_button.Size = new System.Drawing.Size(92, 34);
+            this.filter_button.Size = new System.Drawing.Size(107, 40);
             this.filter_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.filter_button.TabIndex = 29;
             this.filter_button.Text = "滤光片转换";
@@ -291,6 +292,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.videoPixelConfigControl);
             this.tabPage3.Controls.Add(this.Video_SetPixel_Button);
             this.tabPage3.Controls.Add(this.bt_start_video);
             this.tabPage3.Controls.Add(this.bt_stop_video);
@@ -307,7 +309,7 @@
             this.Video_SetPixel_Button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.Video_SetPixel_Button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.Video_SetPixel_Button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Video_SetPixel_Button.Location = new System.Drawing.Point(63, 305);
+            this.Video_SetPixel_Button.Location = new System.Drawing.Point(73, 288);
             this.Video_SetPixel_Button.Name = "Video_SetPixel_Button";
             this.Video_SetPixel_Button.Size = new System.Drawing.Size(90, 36);
             this.Video_SetPixel_Button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -343,7 +345,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.tabPage4.Controls.Add(this.groupBox4);
             this.tabPage4.Controls.Add(this.SetNodeConfig_button);
             this.tabPage4.Controls.Add(this.groupBox3);
@@ -359,7 +361,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.groupBox4.BackColor = System.Drawing.Color.Silver;
             this.groupBox4.Controls.Add(this.nodeId_textBox);
             this.groupBox4.Controls.Add(this.label18);
             this.groupBox4.Controls.Add(this.nodeLocation_textBox);
@@ -437,12 +439,12 @@
             this.SetNodeConfig_button.Size = new System.Drawing.Size(107, 38);
             this.SetNodeConfig_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.SetNodeConfig_button.TabIndex = 28;
-            this.SetNodeConfig_button.Text = "保存当前配置";
+            this.SetNodeConfig_button.Text = "保存配置";
             this.SetNodeConfig_button.Click += new System.EventHandler(this.SetNodeConfig_button_Click);
             // 
             // groupBox3
             // 
-            this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.groupBox3.BackColor = System.Drawing.Color.Silver;
             this.groupBox3.Controls.Add(this.videoState_switchButton);
             this.groupBox3.Controls.Add(this.videoState_label);
             this.groupBox3.Controls.Add(this.label12);
@@ -590,7 +592,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.groupBox2.BackColor = System.Drawing.Color.Silver;
             this.groupBox2.Controls.Add(this.cameraState_switchButton);
             this.groupBox2.Controls.Add(this.c_quanlity_textBox);
             this.groupBox2.Controls.Add(this.label23);
@@ -778,7 +780,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Yellow;
+            this.groupBox1.BackColor = System.Drawing.Color.Silver;
             this.groupBox1.Controls.Add(this.maxFilter_textBox);
             this.groupBox1.Controls.Add(this.minFilter_textBox);
             this.groupBox1.Controls.Add(this.label5);
@@ -845,7 +847,7 @@
             this.GetNodeConfig_Button.Size = new System.Drawing.Size(107, 38);
             this.GetNodeConfig_Button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.GetNodeConfig_Button.TabIndex = 24;
-            this.GetNodeConfig_Button.Text = "获取节点当前配置";
+            this.GetNodeConfig_Button.Text = "节点当前启动配置";
             this.GetNodeConfig_Button.Click += new System.EventHandler(this.GetNodeConfig_Button_Click);
             // 
             // groupBox5
@@ -877,85 +879,69 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.textBox3);
-            this.groupBox6.Controls.Add(this.textBox2);
-            this.groupBox6.Controls.Add(this.button2);
-            this.groupBox6.Controls.Add(this.label3);
-            this.groupBox6.Controls.Add(this.label2);
-            this.groupBox6.Controls.Add(this.button1);
-            this.groupBox6.Controls.Add(this.textBox1);
+            this.groupBox6.Controls.Add(this.statusStrip1);
+            this.groupBox6.Controls.Add(this.selectNodeSavePath_button);
+            this.groupBox6.Controls.Add(this.nodeSavePath_textBox);
             this.groupBox6.Controls.Add(this.label1);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox6.Location = new System.Drawing.Point(3, 503);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox6.Location = new System.Drawing.Point(3, 547);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(719, 128);
+            this.groupBox6.Size = new System.Drawing.Size(719, 84);
             this.groupBox6.TabIndex = 20;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "存储";
             // 
-            // textBox3
+            // statusStrip1
             // 
-            this.textBox3.Location = new System.Drawing.Point(145, 69);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(77, 21);
-            this.textBox3.TabIndex = 7;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nodeIp_StatusLabel,
+            this.toolStripStatusLabel2,
+            this.nodePort_StatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 59);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(713, 22);
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // textBox2
+            // nodeIp_StatusLabel
             // 
-            this.textBox2.Location = new System.Drawing.Point(10, 68);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 6;
-            this.textBox2.Text = "192.168.1.13";
+            this.nodeIp_StatusLabel.Name = "nodeIp_StatusLabel";
+            this.nodeIp_StatusLabel.Size = new System.Drawing.Size(70, 17);
+            this.nodeIp_StatusLabel.Text = "节点IP地址:";
             // 
-            // button2
+            // toolStripStatusLabel2
             // 
-            this.button2.Location = new System.Drawing.Point(282, 63);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(56, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "设置";
-            this.button2.UseVisualStyleBackColor = true;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(11, 17);
+            this.toolStripStatusLabel2.Text = "|";
             // 
-            // label3
+            // nodePort_StatusLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(143, 55);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 12);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "端口号:";
+            this.nodePort_StatusLabel.Name = "nodePort_StatusLabel";
+            this.nodePort_StatusLabel.Size = new System.Drawing.Size(59, 17);
+            this.nodePort_StatusLabel.Text = "节点端口:";
             // 
-            // label2
+            // selectNodeSavePath_button
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "服务器IP:";
+            this.selectNodeSavePath_button.Location = new System.Drawing.Point(282, 27);
+            this.selectNodeSavePath_button.Name = "selectNodeSavePath_button";
+            this.selectNodeSavePath_button.Size = new System.Drawing.Size(60, 23);
+            this.selectNodeSavePath_button.TabIndex = 2;
+            this.selectNodeSavePath_button.Text = "浏览";
+            this.selectNodeSavePath_button.UseVisualStyleBackColor = true;
+            this.selectNodeSavePath_button.Click += new System.EventHandler(this.selectNodeSavePath_button_Click);
             // 
-            // button1
+            // nodeSavePath_textBox
             // 
-            this.button1.Location = new System.Drawing.Point(278, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "浏览";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(64, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(208, 21);
-            this.textBox1.TabIndex = 1;
+            this.nodeSavePath_textBox.Location = new System.Drawing.Point(68, 24);
+            this.nodeSavePath_textBox.Name = "nodeSavePath_textBox";
+            this.nodeSavePath_textBox.Size = new System.Drawing.Size(208, 21);
+            this.nodeSavePath_textBox.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 17);
+            this.label1.Location = new System.Drawing.Point(6, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
@@ -978,7 +964,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(719, 458);
+            this.panel1.Size = new System.Drawing.Size(719, 494);
             this.panel1.TabIndex = 15;
             // 
             // vedio_panel
@@ -988,7 +974,7 @@
             this.vedio_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vedio_panel.Location = new System.Drawing.Point(0, 0);
             this.vedio_panel.Name = "vedio_panel";
-            this.vedio_panel.Size = new System.Drawing.Size(719, 458);
+            this.vedio_panel.Size = new System.Drawing.Size(719, 494);
             this.vedio_panel.TabIndex = 17;
             // 
             // axMediaPlayer1
@@ -996,7 +982,7 @@
             this.axMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.axMediaPlayer1.Location = new System.Drawing.Point(0, 0);
             this.axMediaPlayer1.Name = "axMediaPlayer1";
-            this.axMediaPlayer1.Size = new System.Drawing.Size(719, 458);
+            this.axMediaPlayer1.Size = new System.Drawing.Size(719, 494);
             this.axMediaPlayer1.TabIndex = 14;
             // 
             // pb
@@ -1005,7 +991,7 @@
             this.pb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pb.Location = new System.Drawing.Point(0, 0);
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(719, 458);
+            this.pb.Size = new System.Drawing.Size(719, 494);
             this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb.TabIndex = 8;
             this.pb.TabStop = false;
@@ -1017,7 +1003,6 @@
             this.groupBox7.Controls.Add(this.button4);
             this.groupBox7.Controls.Add(this.button3);
             this.groupBox7.Controls.Add(this.button7);
-            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox7.Location = new System.Drawing.Point(0, 458);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(719, 36);
@@ -1069,6 +1054,17 @@
             this.button7.Text = "全屏显示";
             this.button7.UseVisualStyleBackColor = true;
             // 
+            // videoPixelConfigControl
+            // 
+            this.videoPixelConfigControl.Brightness = 5;
+            this.videoPixelConfigControl.Contrast = 5;
+            this.videoPixelConfigControl.Location = new System.Drawing.Point(11, 105);
+            this.videoPixelConfigControl.Name = "videoPixelConfigControl";
+            this.videoPixelConfigControl.Saturability = 5;
+            this.videoPixelConfigControl.Size = new System.Drawing.Size(230, 171);
+            this.videoPixelConfigControl.TabIndex = 31;
+            this.videoPixelConfigControl.Whitebalance = 5;
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1102,6 +1098,8 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.capture_panel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.vedio_panel.ResumeLayout(false);
@@ -1130,13 +1128,8 @@
         private DevComponents.DotNetBar.ButtonX bt_photo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button selectNodeSavePath_button;
+        private System.Windows.Forms.TextBox nodeSavePath_textBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel capture_panel;
         private System.Windows.Forms.Panel panel1;
@@ -1158,7 +1151,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private MultiSpel.UserControls.VideoPixelConfig videoPixelConfig;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1207,5 +1199,10 @@
         private System.Windows.Forms.Label label18;
         private DevComponents.DotNetBar.Controls.SwitchButton videoState_switchButton;
         private DevComponents.DotNetBar.Controls.SwitchButton cameraState_switchButton;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel nodeIp_StatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel nodePort_StatusLabel;
+        private UserControls.VideoPixelConfig videoPixelConfigControl;
     }
 }

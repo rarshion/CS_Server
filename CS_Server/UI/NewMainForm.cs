@@ -1,4 +1,15 @@
-﻿using System;
+﻿#region ************************文件说明************************************
+/// 作者(Author)：                       黄顺彬
+/// 
+/// 日期(Create Date)：              2015.3.12
+/// 
+/// 功能：                                      程序主界面
+///
+/// 修改记录(Revision History)：     无
+///
+#endregion *****************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -39,10 +50,11 @@ namespace MultiSpel.UI
         bool heartListenning = false;
         public NodeData curNodeInMap;
         public ImageData curImageInMap;
+        List<ArmClient> armClientList = new List<ArmClient>();
         Dictionary<string, ArmClient> armClientDictionary = new Dictionary<string, ArmClient>();//用于存放ARM客户端
-        readonly static object _sync = new object(); //用于同步
+        readonly static object deviceSync = new object(); //
         readonly static object listSync = new object(); //用于对List容器进行操作时的同步
-        readonly static object syncLock = new object();
+        readonly static object dicSync = new object();//用于对dictionary容易进行操作时的同步
         public int nodeNum = 5;
         public double[] pointArr = new double[10] { 113.35646, 23.16704, 113.35857, 23.16690, 113.35743, 23.16601, 113.35880, 23.16667, 113.35681, 23.16600 };
         public double[] nodePoints;
@@ -63,6 +75,7 @@ namespace MultiSpel.UI
         
         #endregion 1.变量属性
 
+        #region 2.构造方法
         public NewMainForm()
         {
             InitializeComponent();
@@ -76,7 +89,6 @@ namespace MultiSpel.UI
             Uri url = new Uri(str_url);
             webBrowser1.Url = url;
             webBrowser1.ObjectForScripting = this;
-
             //systemXmlConfig = new SystemXmlConfig(systemConfigXmlFilePath);
             //systemXmlConfig.Open();
             //systemXmlConfig.ServerIp = "127.0.0.1";
@@ -86,10 +98,8 @@ namespace MultiSpel.UI
             //systemXmlConfig.ServerHeartPort = "8892";
             //systemXmlConfig.MaxRecNum = "10";
             //systemXmlConfig.Close();
-
             NodeBLL nodeBll = new NodeBLL();
             List<NodeData> list = nodeBll.GetAllNodes();
-            
             //NodeData nodeData = new NodeData();
             //nodeData.name="光谱图像节点";
             //nodeData.longtitude = "113.35857";
@@ -97,40 +107,40 @@ namespace MultiSpel.UI
             //nodeData.location = "华南农业大学信息学院";
             //nodeData.status = 1;
             //nodeBll.Insert(nodeData);
-
             //nodeData.name = "光谱图像节点";
             //nodeData.longtitude = "113.35743";
             //nodeData.lantitude = "23.16667";
             //nodeData.location = "华南农业大学动物科学学院";
             //nodeData.status = 1;
             //nodeBll.Insert(nodeData);
-
             //nodeData.name = "光谱图像节点";
             //nodeData.longtitude = "113.35681";
             //nodeData.lantitude = "23.16600";
             //nodeData.location = "华南农业大学理学院";
             //nodeData.status = 1;
             //nodeBll.Insert(nodeData);
-
             //nodeData.name = "光谱图像节点";
             //nodeData.longtitude = "113.35681";
             //nodeData.lantitude = "23.16600";
             //nodeData.location = "华南农业大学理学院";
             //nodeData.status = 1;
             //nodeBll.Insert(nodeData);
-
             //nodeData.name = "光谱图像节点";
             //nodeData.longtitude = "113.35880";
             //nodeData.lantitude = "23.16667";
             //nodeData.location = "华南农业大学理学院";
             //nodeData.status = 1;
             //nodeBll.Insert(nodeData);
-
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
 
         }
+        #endregion 构造方法
 
-        #region 服务器初始化
+        #region 3.私有方法
+
+        #endregion 3.私有方法
+
+        #region 服务器开始监听
         private void RealVideoImage_ServerInit_button_Click(object sender, EventArgs e)
         {
             if (controlAccept)
@@ -139,7 +149,7 @@ namespace MultiSpel.UI
                 return;
             }
 
-            int maxRecvNum = 10;
+            int maxRecvNum = 50;
             controlServer = new ServerSocket(8888, maxRecvNum);
             controlListenning = true;
             controlAccept = true;
@@ -172,116 +182,105 @@ namespace MultiSpel.UI
             heartThread.IsBackground = true;
             heartThread.Start();
 
+            updateNodeStatus_timer.Enabled = true;
+
             //m_checkOnlineThread = new Thread(onlineCheck);
             //m_checkOnlineThread.IsBackground = true;
             //m_checkOnlineThread.Start();
-
         }
+        #endregion 服务器开始监听
 
-        #region 接受客户端连接
+        #region 服务器接收客户端连接
         private void startControlAccept()
         {
-            while (controlListenning)
+            while (controlAccept)
             {
                 Console.WriteLine("StartControlAccept");
-                Socket controlClient = controlServer.Accept(); //在等待时，可能会被强制终止
+                Socket controlClient = controlServer.Accept();
                 Console.WriteLine("控制客户端IP地址:" + controlClient.RemoteEndPoint);
-                AddSocket(controlClient, 1);
+                AddClient(controlClient, 1);
             }
         }
-
 
         private void startVideoAccept()
         {
-            while (videoListenning)
+            while (videoAccept)
             {
                 Console.WriteLine("StartVideoAccept");
-                Socket videoClient = videoServer.Accept(); //在等待时，可能会被强制终止
+                Socket videoClient = videoServer.Accept();
                 Console.WriteLine("视频客户端IP地址:" + videoClient.RemoteEndPoint);
-                AddSocket(videoClient, 2); //向容器添加一个客户端
+                AddClient(videoClient, 2); 
             }
         }
 
-
         private void startPhotoAccept()
         {
-            while (photoListenning)
+            while (photoAccept)
             {
                 Console.WriteLine("StartPhotoAccept");
                 Socket photoClient = photoServer.Accept(); //在等待时，可能会被强制终止
                 Console.WriteLine("图像客户端IP地址:" + photoClient.RemoteEndPoint);
-                AddSocket(photoClient, 3);
+                AddClient(photoClient, 3);
             }
         }
 
         private void startHeartAccept()
         {
-            while (heartListenning)
+            while (heartAccept)
             {
                 Console.WriteLine("StartHeartAccept");
                 Socket heartClient = heartServer.Accept(); //在等待时，可能会被强制终止
                 Console.WriteLine("心跳客户端IP地址:" + heartClient.RemoteEndPoint);
-                AddSocket(heartClient, 4);
+                AddClient(heartClient, 4);
             }
         }
         #endregion 接受客户端连接
 
         #region 添加客户端连接
         /// <summary>
-        /// 添加Socket
+        ///  armClientDictionary
         /// </summary>
-        /// <param name="socket">接收到的Socket</param>
-        /// <param name="flag">该Socket类型</param>
-        public void AddSocket(Socket socket, int flag)
+        /// 
+        /// <param name="socket"></param>
+        /// <param name="flag"></param>
+        public void AddClient(Socket socket, int flag)
         {
-            lock (_sync)
+            lock (deviceSync)
             {
                 ArmClient armClient = null;
                 TcpPort tempPort = new TcpPort(socket);
-                InstallClientPort(tempPort, flag, ref armClientDictionary);
-                if (!(HasValDevice(out armClient)))
-                    return;
+                AddClientPort(tempPort, flag, ref armClientDictionary);
+                if (!(HasValDevice(out armClient))) return;
                 if (armClient != null)
                 {
-                    Console.WriteLine("ARM客户端开始接收数据");
                     TcpPort comPort = armClient.ControlPort;
-                    byte[] location = new byte[200];
-                    comPort.Receive(location);
-                    armClient.Location = (Encoding.ASCII.GetString(location)).TrimEnd('\0');
-                    Console.WriteLine("ARM客户端地址为:" + armClient.Location);
+                    byte[] nodeIdMes = new byte[200];
+                    comPort.Receive(nodeIdMes);
+                    armClient.Id = (Encoding.ASCII.GetString(nodeIdMes)).TrimEnd('\0');
+                    Console.WriteLine("客户端编号为" + armClient.Id);
                     byte[] data = Encoding.ASCII.GetBytes("Welcome to server");
                     comPort.Send(data, Kind.message);
-                    armClient.IsChecking = false;
-                    armClient.IsUsing = false;
-                    armClient.LastAccessTime = DateTime.Now;
-                    armClient.IsLoseConnect = false;
+                    NodeBLL nodeBll = new NodeBLL();
+                    int clientId;
+                    if(Int32.TryParse(armClient.Id, out clientId))
+                    {
+                        UpdateArmClientId(armClient.Ipaddress, clientId);
+                        NodeData nodeData = nodeBll.GetDetailByPK(clientId);
+                        if (nodeData != null)
+                        {
+                            armClient.Location = nodeData.location;
+                            if (controlListenning)
+                                AddClientToList(armClient,ref armClientList);
+                            DeleteClientPort(armClient.Ipaddress, ref armClientDictionary);
+                            armClient.IsChecking = false;
+                            armClient.IsUsing = false;
+                            armClient.LastAccessTime = DateTime.Now;
+                            armClient.IsLoseConnect = false;
+                            armClient.Status = true;
+                        }
+                    }
                 }
             }
-
-            //lock (_sync)
-            //{
-            //    if (controlListenning) //仍然在监听状态
-            //    {
-            //        lock (listSync) //套大锁，再套小锁
-            //        {
-            //            //检查该客户端之前是否已经登录过了。有的话，删除之前的，然后再添加
-
-            //            int i;
-            //            for (i = 0; i < clients.Count; ++i)
-            //            {
-            //                if (one_client.localtion.Equals(clients[i].localtion))
-            //                {
-            //                    clients.Remove(clients[i]);
-            //                    break;
-            //                }
-            //            }
-
-            //            clients.Add(one_client); //把连接好的客户端放到容器里面
-            //            ShowClientsinGrid(one_client);
-            //            lb_conn_num.Text = "" + clients.Count;
-            //        }
-            //    }
-            //}
         }
         #endregion 添加客户端连接
 
@@ -293,19 +292,19 @@ namespace MultiSpel.UI
         /// <param name="flag">端口标志<1.控制 2.视频 3.图像 4.心跳></param>
         /// <param name="deviceDictonary">客户端字典</param>
         /// <returns></returns>
-        public bool InstallClientPort(TcpPort port, int flag, ref Dictionary<string, ArmClient> deviceDictonary)
+        public bool AddClientPort(TcpPort port, int flag, ref Dictionary<string, ArmClient> deviceDictonary)
         {
             IPEndPoint remoteEndPoint = (IPEndPoint)port.PortSocket.RemoteEndPoint;
             IPAddress ipaddress = IPAddress.Parse(remoteEndPoint.Address.ToString());
             string ip = ipaddress.ToString();
-
-            lock (syncLock)
+            lock (dicSync)
             {
                 ArmClient device = null;
                 if (!deviceDictonary.TryGetValue(ip, out device))
                 {
                     device = new ArmClient(ip);
                     deviceDictonary.Add(ip, device);
+                    Console.WriteLine("在字典里面的新建" + device.Ipaddress);
                 }
                 if (flag == 1)
                     device.ControlPort = port;
@@ -328,19 +327,18 @@ namespace MultiSpel.UI
         /// <returns>armClient</returns>
         public bool IsValDevice(ArmClient device)
         {
-            lock (syncLock)
+            if (device == null)
+                return false;
+            if (device.ControlPort != null && device.VideoPort != null
+                && device.PhotoPort != null && device.HeartPort != null)
             {
-                if (device == null)
-                    return false;
-
-                if (device.ControlPort != null && device.VideoPort != null
-                    && device.PhotoPort != null && device.HeartPort != null)
-                {
-                    Console.WriteLine("端口齐全");
-                    return true;
-                }
-                else
-                    return false;
+                Console.WriteLine("端口齐全");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("端口不齐全");
+                return false;
             }
         }
         #endregion  检查客户端合法
@@ -353,7 +351,7 @@ namespace MultiSpel.UI
         /// <returns></returns>
         public bool HasValDevice(out ArmClient armClient)
         {
-            lock (listSync)
+            lock (dicSync)
             {
                 foreach (var item in armClientDictionary)
                 {
@@ -372,45 +370,177 @@ namespace MultiSpel.UI
         }
         #endregion 查找合法的客户端
 
-        #region 根据位置查找客户端
-        public bool FindDeviceByLocation(string location, out ArmClient armClient)
+        #region 删除字典中的客户端
+        public void DeleteClientPort(string ipAddr, ref Dictionary<string, ArmClient> deviceDictonary)
         {
-            lock (listSync)
+            lock (dicSync)
+            {
+                if (deviceDictonary.ContainsKey(ipAddr))
+                {
+                    Console.WriteLine("删除字典中的设备");
+                    deviceDictonary.Remove(ipAddr);
+                }
+            }
+        }
+        #endregion 删除字典中的客户端
+
+        #region  更新字典中客户端编号
+        void UpdateArmClientId(string ipAdd,int id)
+        {
+            lock (dicSync)
             {
                 foreach (var item in armClientDictionary)
                 {
                     ArmClient dev = item.Value;
-                    if (dev.Location.Trim().Equals(location))
+                    if (dev.Ipaddress.Trim().Equals(ipAdd))
                     {
-                        Console.WriteLine("找到该设备了");
-                        armClient = dev;
-                        return true;
+                        Console.WriteLine("找到该设备ID为" + id);
+                        dev.Id = id.ToString();
                     }
                 }
             }
-            armClient = null;
-            return false;
         }
-        #endregion 根据位置查找客户端
+        #endregion  更新字典中客户端编号
 
-        #region 添加客户端
+        #region 添加列表中的客户端
+        public void AddClientToList(ArmClient armClient,ref List<ArmClient> armClientList)
+        {
+            lock (listSync)
+            {
+                DelectClientInList(armClient.Id, ref armClientList);
+                armClientList.Add(armClient);
+            }
+        }
+        #endregion 添加列表中的客户端
 
+        #region 删除列表中的客户端
+        public void DelectClientInList(string clientId, ref List<ArmClient> armClientList)
+        {
+            for (int i = 0; i < armClientList.Count; i++)
+            {
+                if (armClientList[i].Id.Equals(clientId))
+                {
+                    Console.WriteLine("它登录过了,消除他的记录");
+                    armClientList.Remove(armClientList[i]);
+                }
+            }
+        }
+        #endregion 删除列表中的客户端
+
+        #region 添加客户端到列表
+        private delegate void AddItemToNodeInfoOnListViewDelegate(string nodeId, string nodeName, string nodeStatus);
+        private void AddItemToNodeInfoOnListView(string nodeId,string nodeName,string nodeStatus)
+        {
+            if (nodeInfo__listView.InvokeRequired)
+            {
+                AddItemToNodeInfoOnListViewDelegate d
+                    = AddItemToNodeInfoOnListView;
+                nodeInfo__listView.Invoke(
+                    d, new object[] { nodeId,nodeName,nodeStatus });
+            }
+            else
+            {
+                ListViewItem item = new ListViewItem(new string[] {nodeId,nodeName,nodeStatus});
+                this.nodeInfo__listView.Items.Add(item);
+            }
+        }
 
         #endregion 添加客户端
+
+        #region 更新客户端状态
+        private void updateNodeStatus_timer_Tick(object sender, EventArgs e)
+        {
+            if (controlListenning)
+            {
+                lock (listSync)
+                {
+                    nodeInfo__listView.Items.Clear();
+                    for (int i = 0; i < armClientList.Count; i++)
+                    {
+                        AddItemToNodeInfoOnListView(armClientList[i].Id,
+                            armClientList[i].Location, armClientList[i].Status == true ? "在线" : "离线");
+                    }
+                }
+            }
+        }
+        #endregion 更新客户端状态
 
         #region 移除客户端
 
         #endregion 移除客户端
 
-        #endregion 服务器初始化
-
-        #region 服务器
+        #region 服务器结束监听
         private void RealVideoImage_ServerUnInit_button_Click(object sender, EventArgs e)
         {
 
+            controlAccept = false;
+            photoAccept = false;
+            videoAccept = false;
+            heartAccept = false;
 
+            if (controlThread != null && controlThread.IsAlive)
+            {
+                controlThread.Abort();
+                controlThread = null;
+            }
+
+            if (videoThread != null)
+            {
+                videoThread.Abort();
+                videoThread = null;
+            }
+
+            if (photoThread != null)
+            {
+                photoThread.Abort();
+                photoThread = null;
+            }
+
+            if (heartThread != null)
+            {
+                heartThread.Abort();
+                heartThread = null;
+            }
+
+            if (controlServer != null)
+            {
+                controlServer.Close();
+                controlServer = null;
+            }
+
+            if (photoServer != null)
+            {
+                photoServer.Close();
+                photoServer = null;
+            }
+
+            if (videoServer != null)
+            {
+                videoServer.Close();
+                videoServer = null;
+            }
+
+            if (heartServer != null)
+            {
+                heartServer.Close();
+                heartServer = null;
+            }
+
+            updateNodeStatus_timer.Enabled = false;
+
+            lock (dicSync)
+            {
+                armClientDictionary.Clear();
+            }
+
+            lock (listSync)
+            {
+                armClientList.Clear();
+            }
         }
-        #endregion 服务器
+        #endregion 服务器结束监听
+
+        #region 百度地图操作
 
         #region 获取节点经纬度数组
         public int GetNodeNumber()
@@ -573,17 +703,50 @@ namespace MultiSpel.UI
         }
         #endregion 获取选择节点纬度
 
+        #region 根据位置查找客户端
+        public bool FindDeviceByNoeId(int id, out ArmClient armClient)
+        {
+            lock (listSync)
+            {
+                foreach (var item in armClientList)
+                {
+                    int devId;
+                    ArmClient dev = item;
+                    if (Int32.TryParse(dev.Id, out devId))
+                    {
+                        if (devId == id)
+                        {
+                            Console.WriteLine("找到该设备了");
+                            armClient = dev;
+                            return true;
+                        }
+                    }
+                }
+            }
+            armClient = null;
+            return false;
+        }
+        #endregion 根据位置查找客户端
+
+        #endregion 百度地图操作
+
+        #region 节点操作
+
         #region 节点采集图像
         public void NodeCapture()
         {
             if (curNodeInMap != null)
             {
                 ArmClient armClient = null;
-                if (FindDeviceByLocation(curNodeInMap.location, out armClient))
+                if (FindDeviceByNoeId(curNodeInMap.id, out armClient))
                 {
-                    ControlForm form = new ControlForm(armClient,curNodeInMap);
-                    form.Show();
-                    //Application.Run(form);
+                    if (armClient.Status)
+                    {
+                        ControlForm form = new ControlForm(armClient, curNodeInMap);
+                        form.Show();
+                    }
+                    else
+                        MessageBox.Show("该节点不在线");
                 }
             }
             else
@@ -593,5 +756,8 @@ namespace MultiSpel.UI
         }
         #endregion 节点采集图像
 
+        
+
+        #endregion 节点操作
     }
 }

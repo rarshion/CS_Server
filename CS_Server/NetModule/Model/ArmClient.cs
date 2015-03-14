@@ -19,6 +19,7 @@ namespace MultiSpel.Net
         private bool isChecking = false;
         private bool isLoseConnect = false;
         private bool isUsing = false;
+        private bool status = false;
         private DateTime lastAccessTime;
 
         public TcpPort ControlPort
@@ -61,6 +62,12 @@ namespace MultiSpel.Net
         {
             get { return isChecking; }
             set { isChecking = value; }
+        }
+
+        public bool Status
+        {
+            get { return status; }
+            set { status = value; }
         }
 
         public bool IsLoseConnect
