@@ -211,6 +211,7 @@
             this.PlayBack_PlayScreenView_panel = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter = new DevComponents.DotNetBar.ExpandableSplitter();
+            this.metroTabPanel2 = new DevComponents.DotNetBar.Metro.MetroTabPanel();
             this.metroTabPanel1 = new DevComponents.DotNetBar.Metro.MetroTabPanel();
             this.panelEx_Log = new DevComponents.DotNetBar.PanelEx();
             this.panelEx_LogSearch = new DevComponents.DotNetBar.PanelEx();
@@ -314,7 +315,6 @@
             this.labelX_MainView = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.labelX_OperateAndControl = new DevComponents.DotNetBar.LabelX();
-            this.metroTabPanel2 = new DevComponents.DotNetBar.Metro.MetroTabPanel();
             this.metroAppButton_Setting = new DevComponents.DotNetBar.Metro.MetroAppButton();
             this.metroTabItem_ControlPanel = new DevComponents.DotNetBar.Metro.MetroTabItem();
             this.metroTabItem_VideoPlay = new DevComponents.DotNetBar.Metro.MetroTabItem();
@@ -326,6 +326,8 @@
             this.QuitSystem_metroTabItem = new DevComponents.DotNetBar.Metro.MetroTabItem();
             this.UpdateLocation = new System.Windows.Forms.Timer(this.components);
             this.updateNodeStatus_timer = new System.Windows.Forms.Timer(this.components);
+            this.nodeControl_contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NodeControl_Item = new System.Windows.Forms.ToolStripMenuItem();
             this.mainUIMetroShell.SuspendLayout();
             this.VideoTeachView_panel.SuspendLayout();
             this.VideoTeach_panel.SuspendLayout();
@@ -401,6 +403,7 @@
             this.LocalDataSavePath_panelEx.SuspendLayout();
             this.superTabControlPanel6.SuspendLayout();
             this.panelEx_Config.SuspendLayout();
+            this.nodeControl_contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainUIMetroShell
@@ -419,9 +422,9 @@
             this.mainUIMetroShell.CaptionVisible = true;
             this.mainUIMetroShell.Controls.Add(this.VideoTeachView_panel);
             this.mainUIMetroShell.Controls.Add(this.PlayBack_Panel);
+            this.mainUIMetroShell.Controls.Add(this.metroTabPanel2);
             this.mainUIMetroShell.Controls.Add(this.metroTabPanel1);
             this.mainUIMetroShell.Controls.Add(this.metroTabPanel3);
-            this.mainUIMetroShell.Controls.Add(this.metroTabPanel2);
             this.mainUIMetroShell.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainUIMetroShell.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.mainUIMetroShell.ForeColor = System.Drawing.Color.Black;
@@ -1239,6 +1242,7 @@
             this.nodeInfo__listView.Tag = "0";
             this.nodeInfo__listView.UseCompatibleStateImageBehavior = false;
             this.nodeInfo__listView.View = System.Windows.Forms.View.Details;
+            this.nodeInfo__listView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.nodeInfo__listView_MouseClick);
             // 
             // nodeId_columnHeader
             // 
@@ -1248,7 +1252,7 @@
             // nodeName_columnHeader
             // 
             this.nodeName_columnHeader.Text = "节点名";
-            this.nodeName_columnHeader.Width = 119;
+            this.nodeName_columnHeader.Width = 108;
             // 
             // nodeState_columnHeader
             // 
@@ -1345,7 +1349,7 @@
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnCount = 3;
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.789976F));
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 98.21002F));
-            this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_playerControl_videoFileControl_splitter, 2, 0);
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_equimentControl_playerControl_splitter, 0, 0);
             this.PlayBack_PlayerControl_playerScreen_tableLayoutpanel.Controls.Add(this.PlayBack_PlayerScreensControl_tableLayoutPanel, 1, 0);
@@ -2101,7 +2105,7 @@
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 92F));
-            this.PlayBack_PlayerScreensControl_tableLayoutPanel.Size = new System.Drawing.Size(365, 618);
+            this.PlayBack_PlayerScreensControl_tableLayoutPanel.Size = new System.Drawing.Size(359, 618);
             this.PlayBack_PlayerScreensControl_tableLayoutPanel.TabIndex = 16;
             // 
             // PlayBack_PlayerControl_playControl_panel
@@ -2113,7 +2117,7 @@
             this.PlayBack_PlayerControl_playControl_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerControl_playControl_panel.Location = new System.Drawing.Point(3, 529);
             this.PlayBack_PlayerControl_playControl_panel.Name = "PlayBack_PlayerControl_playControl_panel";
-            this.PlayBack_PlayerControl_playControl_panel.Size = new System.Drawing.Size(359, 86);
+            this.PlayBack_PlayerControl_playControl_panel.Size = new System.Drawing.Size(353, 86);
             this.PlayBack_PlayerControl_playControl_panel.TabIndex = 16;
             // 
             // PlayBack_PlayerControl_playControl_tableLayoutPanel
@@ -2128,7 +2132,7 @@
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowCount = 2;
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.42424F));
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.57576F));
-            this.PlayBack_PlayerControl_playControl_tableLayoutPanel.Size = new System.Drawing.Size(359, 86);
+            this.PlayBack_PlayerControl_playControl_tableLayoutPanel.Size = new System.Drawing.Size(353, 86);
             this.PlayBack_PlayerControl_playControl_tableLayoutPanel.TabIndex = 0;
             // 
             // PlayBack_PlayerScreensControl_PlayerControl_Panel
@@ -2139,7 +2143,7 @@
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Location = new System.Drawing.Point(3, 39);
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Name = "PlayBack_PlayerScreensControl_PlayerControl_Panel";
-            this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Size = new System.Drawing.Size(353, 44);
+            this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Size = new System.Drawing.Size(347, 44);
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.TabIndex = 1;
             this.PlayBack_PlayerScreensControl_PlayerControl_Panel.Visible = false;
             // 
@@ -2249,7 +2253,7 @@
             this.PlayBack_PlayerControl_BubbleBar.Name = "PlayBack_PlayerControl_BubbleBar";
             this.PlayBack_PlayerControl_BubbleBar.SelectedTab = this.bubbleBarTab5;
             this.PlayBack_PlayerControl_BubbleBar.SelectedTabColors.BorderColor = System.Drawing.Color.Black;
-            this.PlayBack_PlayerControl_BubbleBar.Size = new System.Drawing.Size(353, 44);
+            this.PlayBack_PlayerControl_BubbleBar.Size = new System.Drawing.Size(347, 44);
             this.PlayBack_PlayerControl_BubbleBar.TabIndex = 76;
             this.PlayBack_PlayerControl_BubbleBar.Tabs.Add(this.bubbleBarTab5);
             this.PlayBack_PlayerControl_BubbleBar.Tabs.Add(this.bubbleBarTab6);
@@ -2389,7 +2393,7 @@
             this.PlayBack_PlayerVideoLengthControl_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayerVideoLengthControl_Panel.Location = new System.Drawing.Point(3, 3);
             this.PlayBack_PlayerVideoLengthControl_Panel.Name = "PlayBack_PlayerVideoLengthControl_Panel";
-            this.PlayBack_PlayerVideoLengthControl_Panel.Size = new System.Drawing.Size(353, 30);
+            this.PlayBack_PlayerVideoLengthControl_Panel.Size = new System.Drawing.Size(347, 30);
             this.PlayBack_PlayerVideoLengthControl_Panel.TabIndex = 0;
             this.PlayBack_PlayerVideoLengthControl_Panel.Visible = false;
             // 
@@ -2399,7 +2403,7 @@
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Location = new System.Drawing.Point(0, 0);
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Maximum = 100;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.Name = "PlayBack_PlayerVideoLengthControl_TrackBar";
-            this.PlayBack_PlayerVideoLengthControl_TrackBar.Size = new System.Drawing.Size(353, 30);
+            this.PlayBack_PlayerVideoLengthControl_TrackBar.Size = new System.Drawing.Size(347, 30);
             this.PlayBack_PlayerVideoLengthControl_TrackBar.SmallChange = 5;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.TabIndex = 71;
             this.PlayBack_PlayerVideoLengthControl_TrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
@@ -2428,7 +2432,7 @@
             this.PlayBack_PlayScreenView_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlayBack_PlayScreenView_panel.Location = new System.Drawing.Point(3, 3);
             this.PlayBack_PlayScreenView_panel.Name = "PlayBack_PlayScreenView_panel";
-            this.PlayBack_PlayScreenView_panel.Size = new System.Drawing.Size(359, 505);
+            this.PlayBack_PlayScreenView_panel.Size = new System.Drawing.Size(353, 505);
             this.PlayBack_PlayScreenView_panel.TabIndex = 15;
             // 
             // panel3
@@ -2437,7 +2441,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 514);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(359, 9);
+            this.panel3.Size = new System.Drawing.Size(353, 9);
             this.panel3.TabIndex = 17;
             // 
             // PlayBack_PlayerControl__PlayerControlPanel_splitter
@@ -2473,10 +2477,33 @@
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.HotGripLightColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Location = new System.Drawing.Point(0, -1);
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Name = "PlayBack_PlayerControl__PlayerControlPanel_splitter";
-            this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Size = new System.Drawing.Size(359, 10);
+            this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Size = new System.Drawing.Size(353, 10);
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.Style = DevComponents.DotNetBar.eSplitterStyle.Office2007;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.TabIndex = 43;
             this.PlayBack_PlayerControl__PlayerControlPanel_splitter.TabStop = false;
+            // 
+            // metroTabPanel2
+            // 
+            this.metroTabPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.metroTabPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroTabPanel2.Location = new System.Drawing.Point(0, 149);
+            this.metroTabPanel2.Name = "metroTabPanel2";
+            this.metroTabPanel2.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.metroTabPanel2.Size = new System.Drawing.Size(984, 627);
+            // 
+            // 
+            // 
+            this.metroTabPanel2.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.metroTabPanel2.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.metroTabPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.metroTabPanel2.TabIndex = 5;
+            this.metroTabPanel2.Visible = false;
             // 
             // metroTabPanel1
             // 
@@ -4014,9 +4041,9 @@
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelX5.Image = ((System.Drawing.Image)(resources.GetObject("labelX5.Image")));
-            this.labelX5.Location = new System.Drawing.Point(640, 343);
+            this.labelX5.Location = new System.Drawing.Point(480, 348);
             this.labelX5.Name = "labelX5";
-            this.labelX5.Size = new System.Drawing.Size(209, 74);
+            this.labelX5.Size = new System.Drawing.Size(333, 74);
             this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
             this.labelX5.TabIndex = 4;
             this.labelX5.Tag = "Config";
@@ -4034,7 +4061,7 @@
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelX4.Image = ((System.Drawing.Image)(resources.GetObject("labelX4.Image")));
-            this.labelX4.Location = new System.Drawing.Point(158, 343);
+            this.labelX4.Location = new System.Drawing.Point(80, 356);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(209, 74);
             this.labelX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
@@ -4054,9 +4081,9 @@
             this.labelX_ControlPanel_PlayBack.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX_ControlPanel_PlayBack.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelX_ControlPanel_PlayBack.Image = ((System.Drawing.Image)(resources.GetObject("labelX_ControlPanel_PlayBack.Image")));
-            this.labelX_ControlPanel_PlayBack.Location = new System.Drawing.Point(640, 193);
+            this.labelX_ControlPanel_PlayBack.Location = new System.Drawing.Point(480, 199);
             this.labelX_ControlPanel_PlayBack.Name = "labelX_ControlPanel_PlayBack";
-            this.labelX_ControlPanel_PlayBack.Size = new System.Drawing.Size(209, 80);
+            this.labelX_ControlPanel_PlayBack.Size = new System.Drawing.Size(320, 80);
             this.labelX_ControlPanel_PlayBack.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
             this.labelX_ControlPanel_PlayBack.TabIndex = 2;
             this.labelX_ControlPanel_PlayBack.Tag = "PlayBack";
@@ -4075,7 +4102,7 @@
             this.labelX_MainView.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX_MainView.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelX_MainView.Image = ((System.Drawing.Image)(resources.GetObject("labelX_MainView.Image")));
-            this.labelX_MainView.Location = new System.Drawing.Point(158, 193);
+            this.labelX_MainView.Location = new System.Drawing.Point(79, 208);
             this.labelX_MainView.Name = "labelX_MainView";
             this.labelX_MainView.Size = new System.Drawing.Size(231, 80);
             this.labelX_MainView.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
@@ -4095,9 +4122,9 @@
             // 
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelX3.Location = new System.Drawing.Point(158, 299);
+            this.labelX3.Location = new System.Drawing.Point(79, 299);
             this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(688, 42);
+            this.labelX3.Size = new System.Drawing.Size(767, 42);
             this.labelX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
             this.labelX3.TabIndex = 0;
             this.labelX3.Text = "维护与管理";
@@ -4112,35 +4139,12 @@
             // 
             this.labelX_OperateAndControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX_OperateAndControl.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelX_OperateAndControl.Location = new System.Drawing.Point(158, 148);
+            this.labelX_OperateAndControl.Location = new System.Drawing.Point(79, 148);
             this.labelX_OperateAndControl.Name = "labelX_OperateAndControl";
-            this.labelX_OperateAndControl.Size = new System.Drawing.Size(688, 42);
+            this.labelX_OperateAndControl.Size = new System.Drawing.Size(767, 42);
             this.labelX_OperateAndControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
             this.labelX_OperateAndControl.TabIndex = 0;
             this.labelX_OperateAndControl.Text = "操作与控制";
-            // 
-            // metroTabPanel2
-            // 
-            this.metroTabPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.metroTabPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroTabPanel2.Location = new System.Drawing.Point(0, 149);
-            this.metroTabPanel2.Name = "metroTabPanel2";
-            this.metroTabPanel2.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.metroTabPanel2.Size = new System.Drawing.Size(984, 627);
-            // 
-            // 
-            // 
-            this.metroTabPanel2.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.metroTabPanel2.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.metroTabPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.metroTabPanel2.TabIndex = 5;
-            this.metroTabPanel2.Visible = false;
             // 
             // metroAppButton_Setting
             // 
@@ -4246,6 +4250,20 @@
             this.updateNodeStatus_timer.Enabled = true;
             this.updateNodeStatus_timer.Interval = 5000;
             this.updateNodeStatus_timer.Tick += new System.EventHandler(this.updateNodeStatus_timer_Tick);
+            // 
+            // nodeControl_contextMenuStrip
+            // 
+            this.nodeControl_contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NodeControl_Item});
+            this.nodeControl_contextMenuStrip.Name = "nodeControl_contextMenuStrip";
+            this.nodeControl_contextMenuStrip.Size = new System.Drawing.Size(125, 26);
+            // 
+            // NodeControl_Item
+            // 
+            this.NodeControl_Item.Name = "NodeControl_Item";
+            this.NodeControl_Item.Size = new System.Drawing.Size(124, 22);
+            this.NodeControl_Item.Text = "控制界面";
+            this.NodeControl_Item.Click += new System.EventHandler(this.NodeControl_Item_Click);
             // 
             // NewMainForm
             // 
@@ -4353,6 +4371,7 @@
             this.LocalDataSavePath_panelEx.ResumeLayout(false);
             this.superTabControlPanel6.ResumeLayout(false);
             this.panelEx_Config.ResumeLayout(false);
+            this.nodeControl_contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -4651,5 +4670,7 @@
         private DevComponents.DotNetBar.LabelX labelX_MainView;
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.LabelX labelX_OperateAndControl;
+        private System.Windows.Forms.ContextMenuStrip nodeControl_contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem NodeControl_Item;
     }
 }

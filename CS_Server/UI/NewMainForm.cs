@@ -21,6 +21,7 @@ using System.Net;
 using MultiSpel.SystemDataModule;
 using MultiSpel.DataBaseModule.BLL;
 using MultiSpel.DataBaseModule.Model;
+using System.Drawing;
 
 namespace MultiSpel.UI
 {
@@ -48,7 +49,7 @@ namespace MultiSpel.UI
         bool photoListenning = false;
         bool videoListenning = false;
         bool heartListenning = false;
-        public NodeData curNodeInMap;
+        public NodeData curSelectNode;
         public ImageData curImageInMap;
         List<ArmClient> armClientList = new List<ArmClient>();
         Dictionary<string, ArmClient> armClientDictionary = new Dictionary<string, ArmClient>();//用于存放ARM客户端
@@ -56,7 +57,8 @@ namespace MultiSpel.UI
         readonly static object listSync = new object(); //用于对List容器进行操作时的同步
         readonly static object dicSync = new object();//用于对dictionary容易进行操作时的同步
         public int nodeNum = 5;
-        public double[] pointArr = new double[10] { 113.35646, 23.16704, 113.35857, 23.16690, 113.35743, 23.16601, 113.35880, 23.16667, 113.35681, 23.16600 };
+        //public double[] pointArr = 
+        //new double[10] { 113.35646, 23.16704, 113.35857, 23.16690, 113.35743, 23.16601, 113.35880, 23.16667, 113.35681, 23.16600 };
         public double[] nodePoints;
 
         public double[] NodePoints
@@ -138,8 +140,6 @@ namespace MultiSpel.UI
 
         #region 3.私有方法
 
-        #endregion 3.私有方法
-
         #region 服务器开始监听
         private void RealVideoImage_ServerInit_button_Click(object sender, EventArgs e)
         {
@@ -209,7 +209,7 @@ namespace MultiSpel.UI
                 Console.WriteLine("StartVideoAccept");
                 Socket videoClient = videoServer.Accept();
                 Console.WriteLine("视频客户端IP地址:" + videoClient.RemoteEndPoint);
-                AddClient(videoClient, 2); 
+                AddClient(videoClient, 2);
             }
         }
 
@@ -235,6 +235,79 @@ namespace MultiSpel.UI
             }
         }
         #endregion 接受客户端连接
+
+        #region 服务器结束监听
+        private void RealVideoImage_ServerUnInit_button_Click(object sender, EventArgs e)
+        {
+
+            controlAccept = false;
+            photoAccept = false;
+            videoAccept = false;
+            heartAccept = false;
+
+            if (controlThread != null && controlThread.IsAlive)
+            {
+                controlThread.Abort();
+                controlThread = null;
+            }
+
+            if (videoThread != null)
+            {
+                videoThread.Abort();
+                videoThread = null;
+            }
+
+            if (photoThread != null)
+            {
+                photoThread.Abort();
+                photoThread = null;
+            }
+
+            if (heartThread != null)
+            {
+                heartThread.Abort();
+                heartThread = null;
+            }
+
+            if (controlServer != null)
+            {
+                controlServer.Close();
+                controlServer = null;
+            }
+
+            if (photoServer != null)
+            {
+                photoServer.Close();
+                photoServer = null;
+            }
+
+            if (videoServer != null)
+            {
+                videoServer.Close();
+                videoServer = null;
+            }
+
+            if (heartServer != null)
+            {
+                heartServer.Close();
+                heartServer = null;
+            }
+
+            updateNodeStatus_timer.Enabled = false;
+
+            lock (dicSync)
+            {
+                armClientDictionary.Clear();
+            }
+
+            lock (listSync)
+            {
+                armClientList.Clear();
+            }
+        }
+        #endregion 服务器结束监听
+
+        #endregion 3.私有方法
 
         #region 添加客户端连接
         /// <summary>
@@ -469,77 +542,6 @@ namespace MultiSpel.UI
 
         #endregion 移除客户端
 
-        #region 服务器结束监听
-        private void RealVideoImage_ServerUnInit_button_Click(object sender, EventArgs e)
-        {
-
-            controlAccept = false;
-            photoAccept = false;
-            videoAccept = false;
-            heartAccept = false;
-
-            if (controlThread != null && controlThread.IsAlive)
-            {
-                controlThread.Abort();
-                controlThread = null;
-            }
-
-            if (videoThread != null)
-            {
-                videoThread.Abort();
-                videoThread = null;
-            }
-
-            if (photoThread != null)
-            {
-                photoThread.Abort();
-                photoThread = null;
-            }
-
-            if (heartThread != null)
-            {
-                heartThread.Abort();
-                heartThread = null;
-            }
-
-            if (controlServer != null)
-            {
-                controlServer.Close();
-                controlServer = null;
-            }
-
-            if (photoServer != null)
-            {
-                photoServer.Close();
-                photoServer = null;
-            }
-
-            if (videoServer != null)
-            {
-                videoServer.Close();
-                videoServer = null;
-            }
-
-            if (heartServer != null)
-            {
-                heartServer.Close();
-                heartServer = null;
-            }
-
-            updateNodeStatus_timer.Enabled = false;
-
-            lock (dicSync)
-            {
-                armClientDictionary.Clear();
-            }
-
-            lock (listSync)
-            {
-                armClientList.Clear();
-            }
-        }
-        #endregion 服务器结束监听
-
         #region 百度地图操作
 
         #region 获取节点经纬度数组
@@ -622,7 +624,7 @@ namespace MultiSpel.UI
                     nodeBll.GetDetailByPoint(dou_lng, dou_lat);
                 if (nodeData != null)
                 {
-                    curNodeInMap = nodeData;
+                    curSelectNode = nodeData;
                     ImageBLL imageBll = new ImageBLL();
                     ImageData imageData =
                         imageBll.GetDetailByLastTime(nodeData.id);
@@ -636,10 +638,23 @@ namespace MultiSpel.UI
             }
             else
             {
-                curNodeInMap = null;
+                curSelectNode = null;
                 curImageInMap = null;
                 return false;
             }
+        }
+
+        public bool SelectNodeInListView(int nodeId)
+        {
+            NodeBLL nodeBll = new NodeBLL();
+            NodeData nodeData =
+                nodeBll.GetDetailByPK(nodeId);
+            if (nodeData != null)
+            {
+                curSelectNode = nodeData;
+                return true;
+            }
+            return false;
         }
         #endregion 选择节点
 
@@ -666,8 +681,8 @@ namespace MultiSpel.UI
         #region 获取选择节点编号
         public int SelectNodeNum()
         {
-            if(curNodeInMap !=null)
-                return curNodeInMap.id;
+            if(curSelectNode !=null)
+                return curSelectNode.id;
             else
                 return -1;
         }
@@ -676,8 +691,8 @@ namespace MultiSpel.UI
         #region 获取选择节点名字
         public string SelectNodeName()
         {
-            if (curNodeInMap != null)
-                return curNodeInMap.name;
+            if (curSelectNode != null)
+                return curSelectNode.name;
             else
                 return "该节点无名字";
         }
@@ -686,8 +701,8 @@ namespace MultiSpel.UI
         #region 获取选择节点经度
         public string SelectNodeLong()
         {
-            if (curNodeInMap != null)
-                return curNodeInMap.longtitude.ToString();
+            if (curSelectNode != null)
+                return curSelectNode.longtitude.ToString();
             else
                 return "该节点经度未知";
         }
@@ -696,8 +711,8 @@ namespace MultiSpel.UI
         #region 获取选择节点纬度
         public string SelectNodeLan()
         {
-            if (curNodeInMap != null)
-                return curNodeInMap.longtitude.ToString();
+            if (curSelectNode != null)
+                return curSelectNode.longtitude.ToString();
             else
                 return "该节点纬度未知";
         }
@@ -735,14 +750,14 @@ namespace MultiSpel.UI
         #region 节点采集图像
         public void NodeCapture()
         {
-            if (curNodeInMap != null)
+            if (curSelectNode != null)
             {
                 ArmClient armClient = null;
-                if (FindDeviceByNoeId(curNodeInMap.id, out armClient))
+                if (FindDeviceByNoeId(curSelectNode.id, out armClient))
                 {
                     if (armClient.Status)
                     {
-                        ControlForm form = new ControlForm(armClient, curNodeInMap);
+                        ControlForm form = new ControlForm(armClient, curSelectNode);
                         form.Show();
                     }
                     else
@@ -756,7 +771,47 @@ namespace MultiSpel.UI
         }
         #endregion 节点采集图像
 
-        
+
+        #region  节点列表
+        private void nodeInfo__listView_MouseClick(object sender, MouseEventArgs e)
+        {
+            nodeInfo__listView.MultiSelect = false;
+            if (e.Button == MouseButtons.Right)
+            {
+                int id;
+                string nodeId = nodeInfo__listView.SelectedItems[0].Text;
+                Point p = new Point(e.X, e.Y);
+                this.nodeControl_contextMenuStrip.Show(this.nodeInfo__listView, p);
+                if(Int32.TryParse(nodeId,out id))
+                    SelectNodeInListView(id);
+            }
+        }
+        #endregion 节点列表
+
+        #region 文件列表右击打开控制界面
+        private void NodeControl_Item_Click(object sender, EventArgs e)
+        {
+            if (curSelectNode != null)
+            {
+                ArmClient armClient = null;
+                if (FindDeviceByNoeId(curSelectNode.id, out armClient))
+                {
+                    if (armClient.Status)
+                    {
+                        ControlForm form = new ControlForm(armClient, curSelectNode);
+                        form.Show();
+                    }
+                    else
+                        MessageBox.Show("该节点不在线");
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+        #endregion 文件列表右击打开控制界面
+
 
         #endregion 节点操作
     }

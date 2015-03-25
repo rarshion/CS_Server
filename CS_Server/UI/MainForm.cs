@@ -489,7 +489,7 @@ namespace MultiSpel
 
         private bool isOnline(ClientPoint point)
         {
-            CommunicateToClient client = new CommunicateToClient(point.client);
+            ClientSession client = new ClientSession(point.client);
             return client.heartCheck(5 * 60); //等待时间为5分钟
         }
 

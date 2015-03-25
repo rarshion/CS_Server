@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("CS_Server")]
+[assembly: AssemblyTitle("多光谱图像采集与分析系统")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("WwW.YlmF.CoM")]
 [assembly: AssemblyProduct("CS_Server")]
-[assembly: AssemblyCopyright("Copyright © WwW.YlmF.CoM 2013")]
+[assembly: AssemblyCopyright("Copyright © WSN640 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

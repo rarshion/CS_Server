@@ -6,7 +6,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Windows.Forms;
-using System.Media;// axWindowsMediaPlayer1
+using System.Media;
+using MultiSpel.NetModule.Utils;// axWindowsMediaPlayer1
 
 namespace MultiSpel.Net
 {
@@ -32,7 +33,7 @@ namespace MultiSpel.Net
     /// <summary>
     /// 服务器端每接收到一个客户端的请求后，就启动一个线程，该线程创建本对象，然后对客户端进行操作
     /// </summary>
-    public class CommunicateToClient
+    public class ClientSession
     {
         private TcpPort clientPort;
         private ArmClient armClient;
@@ -42,12 +43,12 @@ namespace MultiSpel.Net
         private static int RECVSIZE = 1024 * 20 * 5;//这里要申请大一点
         private const int ConfigAllNum = 17;
 
-        public CommunicateToClient(Socket client)
+        public ClientSession(Socket client)
         {
             clientPort = new TcpPort(client);
         }
 
-        public CommunicateToClient(ArmClient client)
+        public ClientSession(ArmClient client)
         {
             armClient = client;
         }

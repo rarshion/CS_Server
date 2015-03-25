@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MultiSpel</RootNamespace>
-    <AssemblyName>CS_Server</AssemblyName>
+    <AssemblyName>多光谱图像采集与分析系统</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -48,6 +48,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bin\Debug\Resource\camera.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ConfigurationPattern">
@@ -100,10 +106,11 @@
     <Compile Include="DataBaseModule\SqlServerDAL\NodeDAL.cs" />
     <Compile Include="NetModule\Model\ARMClientList.cs" />
     <Compile Include="NetModule\Model\TcpPort.cs" />
-    <Compile Include="NetModule\Control\CommunicateToClient.cs" />
+    <Compile Include="NetModule\Control\CientSession.cs" />
     <Compile Include="NetModule\Model\ArmClient.cs" />
     <Compile Include="NetModule\Model\SockMsgFormat.cs" />
-    <Compile Include="NetModule\SystemDataModule\SystemXmlConfig.cs" />
+    <Compile Include="SystemDataModule\SystemXmlConfig.cs" />
+    <Compile Include="NetModule\Utils\Transform.cs" />
     <Compile Include="UI\ControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,13 +196,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\Biger.png" />
-    <Content Include="images\left.png" />
-    <Content Include="images\Next.png" />
-    <Content Include="images\pictures.ico" />
-    <Content Include="images\pre.png" />
-    <Content Include="images\right.png" />
-    <Content Include="images\smaller.png" />
+    <None Include="bin\Debug\Resource\camera.ico" />
+    <Content Include="bin\Debug\Resource\Biger.png" />
+    <Content Include="bin\Debug\Resource\left.png" />
+    <Content Include="bin\Debug\Resource\Next.png" />
+    <Content Include="bin\Debug\Resource\pictures.ico" />
+    <Content Include="bin\Debug\Resource\pre.png" />
+    <Content Include="bin\Debug\Resource\right.png" />
+    <Content Include="bin\Debug\Resource\smaller.png" />
     <Content Include="Server.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

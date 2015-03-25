@@ -1011,7 +1011,6 @@
             // 
             // button6
             // 
-            this.button6.Image = global::MultiSpel.Properties.Resources.smaller;
             this.button6.Location = new System.Drawing.Point(301, 10);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(27, 24);
@@ -1020,7 +1019,6 @@
             // 
             // button5
             // 
-            this.button5.Image = global::MultiSpel.Properties.Resources.Biger;
             this.button5.Location = new System.Drawing.Point(268, 9);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(27, 24);
@@ -1029,7 +1027,6 @@
             // 
             // button4
             // 
-            this.button4.Image = global::MultiSpel.Properties.Resources.right;
             this.button4.Location = new System.Drawing.Point(164, 10);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(26, 23);
@@ -1038,7 +1035,6 @@
             // 
             // button3
             // 
-            this.button3.Image = global::MultiSpel.Properties.Resources.left;
             this.button3.Location = new System.Drawing.Point(132, 10);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 23);

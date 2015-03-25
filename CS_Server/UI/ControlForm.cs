@@ -17,8 +17,8 @@ namespace MultiSpel
 
     public partial class ControlForm : Form
     {
-        private CommunicateToClient communicateArmClient;
-        private CommunicateToClient communicateToClient;
+        private ClientSession communicateArmClient;
+        private ClientSession communicateToClient;
         private ClientPoint m_clientPoint;
         private ArmClient armClient;
         private NodeData nodeData;
@@ -67,7 +67,7 @@ namespace MultiSpel
         {
             InitializeComponent();
             armClient = client;
-            communicateArmClient = new CommunicateToClient(armClient);
+            communicateArmClient = new ClientSession(armClient);
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);  //应添加到窗体然后再设置picturebox焦点
             this.Focus();
             this.capture_panel.Visible = false;
@@ -79,7 +79,7 @@ namespace MultiSpel
             InitializeComponent();
             this.nodeData = node;
             this.armClient = client;
-            communicateArmClient = new CommunicateToClient(armClient);
+            communicateArmClient = new ClientSession(armClient);
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);  //应添加到窗体然后再设置picturebox焦点
             this.Focus();
             this.capture_panel.Visible = false;
@@ -98,7 +98,7 @@ namespace MultiSpel
         {
             InitializeComponent();
             m_clientPoint = cp;
-            communicateToClient = new CommunicateToClient(cp.client);
+            communicateToClient = new ClientSession(cp.client);
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);  //应添加到窗体然后再设置picturebox焦点
             this.Focus();
             this.capture_panel.Visible = false;
@@ -389,16 +389,13 @@ namespace MultiSpel
             //m_isTransformH264 = true;
             //ThreadPool.QueueUserWorkItem(new WaitCallback(transFromH264ToMp4), null);
 
-
             try
             {
                 while (isVideoing)
                 {
                     DateTime dt = DateTime.Now;
-
                     String path = System.Windows.Forms.Application.StartupPath; //获取当前执行文件的文件目录
                     Console.WriteLine(path);
-
                     fileName = "video\\";
                     fileName += "video_";
 
